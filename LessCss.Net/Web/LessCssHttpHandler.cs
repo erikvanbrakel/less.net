@@ -2,13 +2,13 @@
 
 namespace LessCss.Web
 {
-	class LessCssHttpHandler : IHttpHandler
+	public class LessCssHttpHandler : IHttpHandler
 	{
 		public void ProcessRequest(HttpContext context)
 		{
 			// our unprocessed filename   
 			string lessFile = context.Server.MapPath(context.Request.Url.LocalPath);
-			LessDocument document = LessDocument.FromFile(lessFile);
+			StyleDocument document = StyleDocument.FromFile(lessFile).Flatten().Merge();
 			context.Response.ContentType = "text/css";
 			context.Response.Write(document.ToCss());
 		}

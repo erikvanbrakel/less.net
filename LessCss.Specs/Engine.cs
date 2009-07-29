@@ -36,7 +36,7 @@ namespace LessCss.Specs
 		public static string Lessify(string name)
 		{
 			var filename = Path.Combine("less", name + ".less");
-			var document = LessDocument.FromFile(filename);
+			var document = StyleDocument.FromFile(filename);
 			return document.ToCss();
 		}
 
