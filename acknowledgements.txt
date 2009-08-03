@@ -1,0 +1,4 @@
+Special mentions go out to:
+- Alexis Sellier & Dmitry Fadeyev, they run the LESS ruby project.
+- trihus, the guy who made a antlr grammar file available here (http://www.antlr.org/grammar/1214945003224/csst3.g)
+  I based my initial LESS grammar on this grammar.

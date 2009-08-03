@@ -23,7 +23,7 @@ namespace LessCss
 	{
 		public List<StyleSelector> Selectors = new List<StyleSelector>();
 		public List<StyleProperty> Properties = new List<StyleProperty>();
-		public readonly List<StyleRule> Rules = new List<StyleRule>();
+		public List<StyleRule> Rules = new List<StyleRule>();
 
 		public string GetSelector()
 		{
@@ -32,15 +32,21 @@ namespace LessCss
 		public IEnumerable<StyleRule> Flatten()
 		{
 			var flatrules = Rules.SelectMany(r => r.Flatten());
-			var flatselector = GetSelector();
-			foreach(var rule in flatrules)
+			foreach(var selector in Selectors)
 			{
-			    rule.Selectors.ForEach(s => s.Name = flatselector + " " + s.Name);
-			    yield return rule;
+				var r = MemberwiseClone() as StyleRule;
+				r.Selectors = new List<StyleSelector> {selector};
+				r.Rules = new List<StyleRule>();
+				yield return r;
+
+				foreach(var rule in flatrules)
+				{
+					var rule2 = rule.MemberwiseClone() as StyleRule;
+					var selector2 = rule2.Selectors.First();
+					rule2.Selectors = new List<StyleSelector> {  new StyleSelector { Name = selector.Name + " " + selector2.Name} };
+					yield return rule2;
+				}
 			}
-			var current = MemberwiseClone() as StyleRule;
-			current.Rules.Clear();
-			yield return current;
 		}
 
 		public static StyleRule ParseTree(BaseTree tree)
@@ -56,8 +62,11 @@ namespace LessCss
 					case "RULE":
 						rule.Rules.Add(StyleRule.ParseTree(child));
 						break;
-					case "SELECTOR":
-						rule.Selectors.Add(StyleSelector.ParseTree(child));
+					case "SELECTORGROUP":
+						foreach (BaseTree selectorChild in child.Children)
+						{
+							rule.Selectors.Add(StyleSelector.ParseTree(selectorChild));
+						}
 						break;
 				}
 			}
@@ -81,10 +90,36 @@ namespace LessCss
 				sb.Append(selectorBuilder);
 				sb.Append(" {");
 				Properties.ForEach(p => sb.Append(p.ToCss() + " "));
-				sb.Append("}");
+				sb.AppendLine("}");
 			}
 			Rules.ForEach(r => sb.Append(r.ToCss(selectorBuilder + " ")));
 			return sb.ToString();
+		}
+
+		public bool Equals(StyleRule obj)
+		{
+			if (ReferenceEquals(null, obj)) return false;
+			if (ReferenceEquals(this, obj)) return true;
+			return obj.Selectors.SequenceEqual(Selectors) && obj.Properties.SequenceEqual(Properties) && obj.Rules.SequenceEqual(Rules);
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (ReferenceEquals(null, obj)) return false;
+			if (ReferenceEquals(this, obj)) return true;
+			if (obj.GetType() != typeof (StyleRule)) return false;
+			return Equals((StyleRule) obj);
+		}
+
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				int result = Selectors.GetHashCode();
+				result = (result*397) ^ Properties.GetHashCode();
+				result = (result*397) ^ Rules.GetHashCode();
+				return result;
+			}
 		}
 	}
 }

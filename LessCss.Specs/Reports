@@ -57,39 +57,177 @@
 		</style>
 	</head>
 	<body>
-		<h1>LessCss.Specs&nbsp;&nbsp;&nbsp;&nbsp;</h1><span class="count"><h2>1 concern, 1 context, 20 specifications, <span class="failure">1 failure</span>, <span class="notimplemented">19 not implemented specs</span> </h2><br></span><hr>
+		<h1>LessCss.Specs&nbsp;&nbsp;&nbsp;&nbsp;</h1><span class="count"><h2>1 concern, 1 context, 20 specifications, <span class="failure">18 failures</span>, <span class="notimplemented">2 not implemented specs</span> </h2><br></span><hr>
 <hr>
-<h2 class="concern"> specifications&nbsp;&nbsp;&nbsp;&nbsp;</h2><h3><span class="count">1 context, 20 specifications, <span class="failure">1 failure</span>, <span class="notimplemented">19 not implemented specs</span></span></h3>
+<h2 class="concern"> specifications&nbsp;&nbsp;&nbsp;&nbsp;</h2><h3><span class="count">1 context, 20 specifications, <span class="failure">18 failures</span>, <span class="notimplemented">2 not implemented specs</span></span></h3>
 
-<h3 class="context">Engine&nbsp;&nbsp;&nbsp;&nbsp;</h3><h4><span class="count">20 specifications, <span class="failure">1 failure</span>, <span class="notimplemented">19 not implemented specs</span></span></h4><ul>	<li>should parse css <div class="notimplemented">&lt;--NOT IMPLEMENTED</div><br/></li>
-	<li>should group selectors when it can <div class="notimplemented">&lt;--NOT IMPLEMENTED</div><br/></li>
-	<li>should parse css3 <div class="notimplemented">&lt;--NOT IMPLEMENTED</div><br/></li>
-	<li>should parse comments <div class="failure">&lt;--FAILED</div><br/><p class="exception_type">Machine.Specifications.ExceptionResult<pre class="exception_message">NUnit.Framework.AssertionException:   Expected string length 0 but was 153. Strings differ at index 0.
-  Expected: <string.Empty>
-  But was:  "#comments {\n  color: red;\n  background-color: orange;\n  font-..."
-  -----------^
-
-   bij NUnit.Framework.Assert.That(Object actual, Constraint constraint, String message, Object[] args)
-   bij NUnit.Framework.Assert.AreEqual(Object expected, Object actual, String message, Object[] args)
-   bij NUnit.Framework.Assert.AreEqual(Object expected, Object actual)
-   bij LessCss.Specs.Engine.<.ctor>b__0() in D:\development\LessCss.Net\LessCss.Specs\Engine.cs:regel 16
+<h3 class="context">EngineSpec&nbsp;&nbsp;&nbsp;&nbsp;</h3><h4><span class="count">20 specifications, <span class="failure">18 failures</span>, <span class="notimplemented">2 not implemented specs</span></span></h4><ul>	<li>should parse css <div class="failure">&lt;--FAILED</div><br/><p class="exception_type">Machine.Specifications.ExceptionResult<pre class="exception_message">Xunit.Sdk.EqualException: Assert.Equal() Failure
+Expected: LessCss.StyleDocument
+Actual:   LessCss.StyleDocument
+   bij Xunit.Assert.Equal[T](T expected, T actual, IComparer`1 comparer)
+   bij Xunit.Assert.Equal[T](T expected, T actual)
+   bij Machine.Specifications.XUnitShouldExtensionMethods.ShouldEqual[T](T actual, T expected) in D:\libs\mspec\Source\Machine.Specifications.XUnit\ExtensionMethods.cs:regel 47
+   bij LessCss.Specs.EngineSpec.<.ctor>b__0() in D:\development\LessCss.Net\LessCss.Specs\EngineSpec.cs:regel 12
    bij Machine.Specifications.Model.Specification.InvokeSpecificationField() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 75
    bij Machine.Specifications.Model.Specification.Verify() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 53</pre></p></li>
-	<li>should deal with whitespace <div class="notimplemented">&lt;--NOT IMPLEMENTED</div><br/></li>
-	<li>should parse nested rules <div class="notimplemented">&lt;--NOT IMPLEMENTED</div><br/></li>
-	<li>should parse variables <div class="notimplemented">&lt;--NOT IMPLEMENTED</div><br/></li>
-	<li>should parse operations <div class="notimplemented">&lt;--NOT IMPLEMENTED</div><br/></li>
-	<li>should manage scope <div class="notimplemented">&lt;--NOT IMPLEMENTED</div><br/></li>
-	<li>should parse parens <div class="notimplemented">&lt;--NOT IMPLEMENTED</div><br/></li>
-	<li>should parse strings <div class="notimplemented">&lt;--NOT IMPLEMENTED</div><br/></li>
-	<li>should parse accessors <div class="notimplemented">&lt;--NOT IMPLEMENTED</div><br/></li>
-	<li>should parse colors in hex <div class="notimplemented">&lt;--NOT IMPLEMENTED</div><br/></li>
-	<li>should parse mixins <div class="notimplemented">&lt;--NOT IMPLEMENTED</div><br/></li>
-	<li>should parse mixins with arguments <div class="notimplemented">&lt;--NOT IMPLEMENTED</div><br/></li>
-	<li>should evaluate variables lazily <div class="notimplemented">&lt;--NOT IMPLEMENTED</div><br/></li>
+	<li>should group selectors when it can <div class="failure">&lt;--FAILED</div><br/><p class="exception_type">Machine.Specifications.ExceptionResult<pre class="exception_message">Xunit.Sdk.EqualException: Assert.Equal() Failure
+Expected: LessCss.StyleDocument
+Actual:   LessCss.StyleDocument
+   bij Xunit.Assert.Equal[T](T expected, T actual, IComparer`1 comparer)
+   bij Xunit.Assert.Equal[T](T expected, T actual)
+   bij Machine.Specifications.XUnitShouldExtensionMethods.ShouldEqual[T](T actual, T expected) in D:\libs\mspec\Source\Machine.Specifications.XUnit\ExtensionMethods.cs:regel 47
+   bij LessCss.Specs.EngineSpec.<.ctor>b__1() in D:\development\LessCss.Net\LessCss.Specs\EngineSpec.cs:regel 13
+   bij Machine.Specifications.Model.Specification.InvokeSpecificationField() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 75
+   bij Machine.Specifications.Model.Specification.Verify() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 53</pre></p></li>
+	<li>should parse css3 <div class="failure">&lt;--FAILED</div><br/><p class="exception_type">Machine.Specifications.ExceptionResult<pre class="exception_message">Xunit.Sdk.EqualException: Assert.Equal() Failure
+Expected: LessCss.StyleDocument
+Actual:   LessCss.StyleDocument
+   bij Xunit.Assert.Equal[T](T expected, T actual, IComparer`1 comparer)
+   bij Xunit.Assert.Equal[T](T expected, T actual)
+   bij Machine.Specifications.XUnitShouldExtensionMethods.ShouldEqual[T](T actual, T expected) in D:\libs\mspec\Source\Machine.Specifications.XUnit\ExtensionMethods.cs:regel 47
+   bij LessCss.Specs.EngineSpec.<.ctor>b__2() in D:\development\LessCss.Net\LessCss.Specs\EngineSpec.cs:regel 14
+   bij Machine.Specifications.Model.Specification.InvokeSpecificationField() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 75
+   bij Machine.Specifications.Model.Specification.Verify() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 53</pre></p></li>
+	<li>should parse comments <div class="failure">&lt;--FAILED</div><br/><p class="exception_type">Machine.Specifications.ExceptionResult<pre class="exception_message">Xunit.Sdk.EqualException: Assert.Equal() Failure
+Expected: LessCss.StyleDocument
+Actual:   LessCss.StyleDocument
+   bij Xunit.Assert.Equal[T](T expected, T actual, IComparer`1 comparer)
+   bij Xunit.Assert.Equal[T](T expected, T actual)
+   bij Machine.Specifications.XUnitShouldExtensionMethods.ShouldEqual[T](T actual, T expected) in D:\libs\mspec\Source\Machine.Specifications.XUnit\ExtensionMethods.cs:regel 47
+   bij LessCss.Specs.EngineSpec.<.ctor>b__3() in D:\development\LessCss.Net\LessCss.Specs\EngineSpec.cs:regel 15
+   bij Machine.Specifications.Model.Specification.InvokeSpecificationField() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 75
+   bij Machine.Specifications.Model.Specification.Verify() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 53</pre></p></li>
+	<li>should deal with whitespace <div class="failure">&lt;--FAILED</div><br/><p class="exception_type">Machine.Specifications.ExceptionResult<pre class="exception_message">Xunit.Sdk.EqualException: Assert.Equal() Failure
+Expected: LessCss.StyleDocument
+Actual:   LessCss.StyleDocument
+   bij Xunit.Assert.Equal[T](T expected, T actual, IComparer`1 comparer)
+   bij Xunit.Assert.Equal[T](T expected, T actual)
+   bij Machine.Specifications.XUnitShouldExtensionMethods.ShouldEqual[T](T actual, T expected) in D:\libs\mspec\Source\Machine.Specifications.XUnit\ExtensionMethods.cs:regel 47
+   bij LessCss.Specs.EngineSpec.<.ctor>b__4() in D:\development\LessCss.Net\LessCss.Specs\EngineSpec.cs:regel 16
+   bij Machine.Specifications.Model.Specification.InvokeSpecificationField() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 75
+   bij Machine.Specifications.Model.Specification.Verify() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 53</pre></p></li>
+	<li>should parse nested rules <div class="failure">&lt;--FAILED</div><br/><p class="exception_type">Machine.Specifications.ExceptionResult<pre class="exception_message">Xunit.Sdk.EqualException: Assert.Equal() Failure
+Expected: LessCss.StyleDocument
+Actual:   LessCss.StyleDocument
+   bij Xunit.Assert.Equal[T](T expected, T actual, IComparer`1 comparer)
+   bij Xunit.Assert.Equal[T](T expected, T actual)
+   bij Machine.Specifications.XUnitShouldExtensionMethods.ShouldEqual[T](T actual, T expected) in D:\libs\mspec\Source\Machine.Specifications.XUnit\ExtensionMethods.cs:regel 47
+   bij LessCss.Specs.EngineSpec.<.ctor>b__5() in D:\development\LessCss.Net\LessCss.Specs\EngineSpec.cs:regel 17
+   bij Machine.Specifications.Model.Specification.InvokeSpecificationField() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 75
+   bij Machine.Specifications.Model.Specification.Verify() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 53</pre></p></li>
+	<li>should parse variables <div class="failure">&lt;--FAILED</div><br/><p class="exception_type">Machine.Specifications.ExceptionResult<pre class="exception_message">Xunit.Sdk.EqualException: Assert.Equal() Failure
+Expected: LessCss.StyleDocument
+Actual:   LessCss.StyleDocument
+   bij Xunit.Assert.Equal[T](T expected, T actual, IComparer`1 comparer)
+   bij Xunit.Assert.Equal[T](T expected, T actual)
+   bij Machine.Specifications.XUnitShouldExtensionMethods.ShouldEqual[T](T actual, T expected) in D:\libs\mspec\Source\Machine.Specifications.XUnit\ExtensionMethods.cs:regel 47
+   bij LessCss.Specs.EngineSpec.<.ctor>b__6() in D:\development\LessCss.Net\LessCss.Specs\EngineSpec.cs:regel 18
+   bij Machine.Specifications.Model.Specification.InvokeSpecificationField() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 75
+   bij Machine.Specifications.Model.Specification.Verify() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 53</pre></p></li>
+	<li>should parse operations <div class="failure">&lt;--FAILED</div><br/><p class="exception_type">Machine.Specifications.ExceptionResult<pre class="exception_message">Xunit.Sdk.EqualException: Assert.Equal() Failure
+Expected: LessCss.StyleDocument
+Actual:   LessCss.StyleDocument
+   bij Xunit.Assert.Equal[T](T expected, T actual, IComparer`1 comparer)
+   bij Xunit.Assert.Equal[T](T expected, T actual)
+   bij Machine.Specifications.XUnitShouldExtensionMethods.ShouldEqual[T](T actual, T expected) in D:\libs\mspec\Source\Machine.Specifications.XUnit\ExtensionMethods.cs:regel 47
+   bij LessCss.Specs.EngineSpec.<.ctor>b__7() in D:\development\LessCss.Net\LessCss.Specs\EngineSpec.cs:regel 19
+   bij Machine.Specifications.Model.Specification.InvokeSpecificationField() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 75
+   bij Machine.Specifications.Model.Specification.Verify() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 53</pre></p></li>
+	<li>should manage scope <div class="failure">&lt;--FAILED</div><br/><p class="exception_type">Machine.Specifications.ExceptionResult<pre class="exception_message">Xunit.Sdk.EqualException: Assert.Equal() Failure
+Expected: LessCss.StyleDocument
+Actual:   LessCss.StyleDocument
+   bij Xunit.Assert.Equal[T](T expected, T actual, IComparer`1 comparer)
+   bij Xunit.Assert.Equal[T](T expected, T actual)
+   bij Machine.Specifications.XUnitShouldExtensionMethods.ShouldEqual[T](T actual, T expected) in D:\libs\mspec\Source\Machine.Specifications.XUnit\ExtensionMethods.cs:regel 47
+   bij LessCss.Specs.EngineSpec.<.ctor>b__8() in D:\development\LessCss.Net\LessCss.Specs\EngineSpec.cs:regel 20
+   bij Machine.Specifications.Model.Specification.InvokeSpecificationField() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 75
+   bij Machine.Specifications.Model.Specification.Verify() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 53</pre></p></li>
+	<li>should parse parens <div class="failure">&lt;--FAILED</div><br/><p class="exception_type">Machine.Specifications.ExceptionResult<pre class="exception_message">System.IO.FileNotFoundException: Kan bestand D:\development\LessCss.Net\LessCss.Specs\bin\Debug\less\parens.less niet vinden.
+Bestandsnaam: D:\development\LessCss.Net\LessCss.Specs\bin\Debug\less\parens.less
+   bij System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   bij System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   bij System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   bij System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize)
+   bij System.IO.StreamReader..ctor(String path, Encoding encoding)
+   bij System.IO.File.ReadAllText(String path, Encoding encoding)
+   bij System.IO.File.ReadAllText(String path)
+   bij LessCss.StyleDocument.FromFile(String filename) in d:\development\LessCss.Net\LessCss.Net\StyleDocument.cs:regel 34
+   bij LessCss.Specs.SpecHelper.Lessify(String name) in D:\development\LessCss.Net\LessCss.Specs\Engine.cs:regel 10
+   bij LessCss.Specs.EngineSpec.<.ctor>b__9() in D:\development\LessCss.Net\LessCss.Specs\EngineSpec.cs:regel 21
+   bij Machine.Specifications.Model.Specification.InvokeSpecificationField() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 75
+   bij Machine.Specifications.Model.Specification.Verify() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 53</pre></p></li>
+	<li>should parse strings <div class="failure">&lt;--FAILED</div><br/><p class="exception_type">Machine.Specifications.ExceptionResult<pre class="exception_message">Xunit.Sdk.EqualException: Assert.Equal() Failure
+Expected: LessCss.StyleDocument
+Actual:   LessCss.StyleDocument
+   bij Xunit.Assert.Equal[T](T expected, T actual, IComparer`1 comparer)
+   bij Xunit.Assert.Equal[T](T expected, T actual)
+   bij Machine.Specifications.XUnitShouldExtensionMethods.ShouldEqual[T](T actual, T expected) in D:\libs\mspec\Source\Machine.Specifications.XUnit\ExtensionMethods.cs:regel 47
+   bij LessCss.Specs.EngineSpec.<.ctor>b__a() in D:\development\LessCss.Net\LessCss.Specs\EngineSpec.cs:regel 22
+   bij Machine.Specifications.Model.Specification.InvokeSpecificationField() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 75
+   bij Machine.Specifications.Model.Specification.Verify() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 53</pre></p></li>
+	<li>should parse accessors <div class="failure">&lt;--FAILED</div><br/><p class="exception_type">Machine.Specifications.ExceptionResult<pre class="exception_message">Xunit.Sdk.EqualException: Assert.Equal() Failure
+Expected: LessCss.StyleDocument
+Actual:   LessCss.StyleDocument
+   bij Xunit.Assert.Equal[T](T expected, T actual, IComparer`1 comparer)
+   bij Xunit.Assert.Equal[T](T expected, T actual)
+   bij Machine.Specifications.XUnitShouldExtensionMethods.ShouldEqual[T](T actual, T expected) in D:\libs\mspec\Source\Machine.Specifications.XUnit\ExtensionMethods.cs:regel 47
+   bij LessCss.Specs.EngineSpec.<.ctor>b__b() in D:\development\LessCss.Net\LessCss.Specs\EngineSpec.cs:regel 23
+   bij Machine.Specifications.Model.Specification.InvokeSpecificationField() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 75
+   bij Machine.Specifications.Model.Specification.Verify() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 53</pre></p></li>
+	<li>should parse colors in hex <div class="failure">&lt;--FAILED</div><br/><p class="exception_type">Machine.Specifications.ExceptionResult<pre class="exception_message">Xunit.Sdk.EqualException: Assert.Equal() Failure
+Expected: LessCss.StyleDocument
+Actual:   LessCss.StyleDocument
+   bij Xunit.Assert.Equal[T](T expected, T actual, IComparer`1 comparer)
+   bij Xunit.Assert.Equal[T](T expected, T actual)
+   bij Machine.Specifications.XUnitShouldExtensionMethods.ShouldEqual[T](T actual, T expected) in D:\libs\mspec\Source\Machine.Specifications.XUnit\ExtensionMethods.cs:regel 47
+   bij LessCss.Specs.EngineSpec.<.ctor>b__c() in D:\development\LessCss.Net\LessCss.Specs\EngineSpec.cs:regel 24
+   bij Machine.Specifications.Model.Specification.InvokeSpecificationField() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 75
+   bij Machine.Specifications.Model.Specification.Verify() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 53</pre></p></li>
+	<li>should parse mixins <div class="failure">&lt;--FAILED</div><br/><p class="exception_type">Machine.Specifications.ExceptionResult<pre class="exception_message">Xunit.Sdk.EqualException: Assert.Equal() Failure
+Expected: LessCss.StyleDocument
+Actual:   LessCss.StyleDocument
+   bij Xunit.Assert.Equal[T](T expected, T actual, IComparer`1 comparer)
+   bij Xunit.Assert.Equal[T](T expected, T actual)
+   bij Machine.Specifications.XUnitShouldExtensionMethods.ShouldEqual[T](T actual, T expected) in D:\libs\mspec\Source\Machine.Specifications.XUnit\ExtensionMethods.cs:regel 47
+   bij LessCss.Specs.EngineSpec.<.ctor>b__d() in D:\development\LessCss.Net\LessCss.Specs\EngineSpec.cs:regel 25
+   bij Machine.Specifications.Model.Specification.InvokeSpecificationField() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 75
+   bij Machine.Specifications.Model.Specification.Verify() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 53</pre></p></li>
+	<li>should parse mixins with arguments <div class="failure">&lt;--FAILED</div><br/><p class="exception_type">Machine.Specifications.ExceptionResult<pre class="exception_message">System.NullReferenceException: De objectverwijzing is niet op een exemplaar van een object ingesteld.
+   bij LessCss.StyleDocument.ParseTree(BaseTree tree) in d:\development\LessCss.Net\LessCss.Net\StyleDocument.cs:regel 50
+   bij LessCss.StyleDocument.FromString(String input) in d:\development\LessCss.Net\LessCss.Net\StyleDocument.cs:regel 44
+   bij LessCss.StyleDocument.FromFile(String filename) in d:\development\LessCss.Net\LessCss.Net\StyleDocument.cs:regel 34
+   bij LessCss.Specs.SpecHelper.Lessify(String name) in D:\development\LessCss.Net\LessCss.Specs\Engine.cs:regel 10
+   bij LessCss.Specs.EngineSpec.<.ctor>b__e() in D:\development\LessCss.Net\LessCss.Specs\EngineSpec.cs:regel 26
+   bij Machine.Specifications.Model.Specification.InvokeSpecificationField() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 75
+   bij Machine.Specifications.Model.Specification.Verify() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 53</pre></p></li>
+	<li>should evaluate variables lazily <div class="failure">&lt;--FAILED</div><br/><p class="exception_type">Machine.Specifications.ExceptionResult<pre class="exception_message">Xunit.Sdk.EqualException: Assert.Equal() Failure
+Expected: LessCss.StyleDocument
+Actual:   LessCss.StyleDocument
+   bij Xunit.Assert.Equal[T](T expected, T actual, IComparer`1 comparer)
+   bij Xunit.Assert.Equal[T](T expected, T actual)
+   bij Machine.Specifications.XUnitShouldExtensionMethods.ShouldEqual[T](T actual, T expected) in D:\libs\mspec\Source\Machine.Specifications.XUnit\ExtensionMethods.cs:regel 47
+   bij LessCss.Specs.EngineSpec.<.ctor>b__f() in D:\development\LessCss.Net\LessCss.Specs\EngineSpec.cs:regel 27
+   bij Machine.Specifications.Model.Specification.InvokeSpecificationField() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 75
+   bij Machine.Specifications.Model.Specification.Verify() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 53</pre></p></li>
 	<li>should handle custom functions <div class="notimplemented">&lt;--NOT IMPLEMENTED</div><br/></li>
-	<li>should work with import <div class="notimplemented">&lt;--NOT IMPLEMENTED</div><br/></li>
-	<li>should parse a big file <div class="notimplemented">&lt;--NOT IMPLEMENTED</div><br/></li>
+	<li>should work with import <div class="failure">&lt;--FAILED</div><br/><p class="exception_type">Machine.Specifications.ExceptionResult<pre class="exception_message">Xunit.Sdk.EqualException: Assert.Equal() Failure
+Expected: LessCss.StyleDocument
+Actual:   LessCss.StyleDocument
+   bij Xunit.Assert.Equal[T](T expected, T actual, IComparer`1 comparer)
+   bij Xunit.Assert.Equal[T](T expected, T actual)
+   bij Machine.Specifications.XUnitShouldExtensionMethods.ShouldEqual[T](T actual, T expected) in D:\libs\mspec\Source\Machine.Specifications.XUnit\ExtensionMethods.cs:regel 47
+   bij LessCss.Specs.EngineSpec.<.ctor>b__10() in D:\development\LessCss.Net\LessCss.Specs\EngineSpec.cs:regel 29
+   bij Machine.Specifications.Model.Specification.InvokeSpecificationField() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 75
+   bij Machine.Specifications.Model.Specification.Verify() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 53</pre></p></li>
+	<li>should parse a big file <div class="failure">&lt;--FAILED</div><br/><p class="exception_type">Machine.Specifications.ExceptionResult<pre class="exception_message">Xunit.Sdk.EqualException: Assert.Equal() Failure
+Expected: LessCss.StyleDocument
+Actual:   LessCss.StyleDocument
+   bij Xunit.Assert.Equal[T](T expected, T actual, IComparer`1 comparer)
+   bij Xunit.Assert.Equal[T](T expected, T actual)
+   bij Machine.Specifications.XUnitShouldExtensionMethods.ShouldEqual[T](T actual, T expected) in D:\libs\mspec\Source\Machine.Specifications.XUnit\ExtensionMethods.cs:regel 47
+   bij LessCss.Specs.EngineSpec.<.ctor>b__11() in D:\development\LessCss.Net\LessCss.Specs\EngineSpec.cs:regel 30
+   bij Machine.Specifications.Model.Specification.InvokeSpecificationField() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 75
+   bij Machine.Specifications.Model.Specification.Verify() in D:\libs\mspec\Source\Machine.Specifications\Model\Specification.cs:regel 53</pre></p></li>
 	<li>should handle complex operations <div class="notimplemented">&lt;--NOT IMPLEMENTED</div><br/></li>
 </ul>
 

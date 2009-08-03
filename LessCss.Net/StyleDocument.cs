@@ -12,6 +12,7 @@
  * limitations under the License. 
  * File: StyleDocument.cs
  */
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -46,21 +47,33 @@ namespace LessCss
 		private static StyleDocument ParseTree(BaseTree tree)
 		{
 			var document = new StyleDocument();
-			foreach (BaseTree child in tree.Children)
+			if (tree.IsNil)
 			{
-				switch (child.Text)
+				foreach (BaseTree child in tree.Children)
 				{
-					case "VAR":
-						var variable = StyleVariable.ParseTree(child);
-						document.AddVariable(variable);
-						break;
-					case "RULE":
-						var rule = StyleRule.ParseTree(child);
-						document.AddRule(rule);
-						break;
+					ParseTree(child, document);
 				}
 			}
+			else
+			{
+				ParseTree(tree, document);
+			}
 			return document;
+		}
+
+		private static void ParseTree(BaseTree child, StyleDocument document)
+		{
+			switch (child.Text)
+			{
+				case "VAR":
+					var variable = StyleVariable.ParseTree(child);
+					document.AddVariable(variable);
+					break;
+				case "RULE":
+					var rule = StyleRule.ParseTree(child);
+					document.AddRule(rule);
+					break;
+			}
 		}
 
 		private void AddVariable(StyleVariable variable)
@@ -76,7 +89,7 @@ namespace LessCss
 		public string ToCss()
 		{
 			var sb = new StringBuilder();
-			Rules.ForEach(r => sb.AppendLine(r.ToCss()));
+			Rules.ForEach(r => sb.Append(r.ToCss()));
 			return sb.ToString();
 		}
 
@@ -96,10 +109,51 @@ namespace LessCss
 				var rule = new StyleRule();
 				rule.Selectors.Add(new StyleSelector { Name = selectorGroup.Key });
 				rule.Properties.AddRange(selectorGroup.SelectMany(r => r.Properties).Distinct());
-				newRules.Add(rule);
+				if(rule.Properties.Count > 0)
+					newRules.Add(rule);
 			}
-			doc.Rules = newRules;
+
+			doc.Rules = GroupRules(newRules).ToList();
+
+			//doc.Rules = newRules;
 			return doc;
+		}
+
+		private IEnumerable<StyleRule> GroupRules(IEnumerable<StyleRule> input)
+		{
+			var list = input.ToList();
+			while (list.Count > 0)
+			{
+				var rule = list.First();
+				var rules = list.FindAll(r => rule.Properties.SequenceEqual(r.Properties));
+				list.RemoveAll(r => rule.Properties.SequenceEqual(r.Properties));
+				var newrule = new StyleRule {Properties = rule.Properties};
+				newrule.Selectors = rules.Select(r => r.Selectors.First()).ToList();
+				yield return newrule;
+			}			
+		}
+
+		public bool Equals(StyleDocument obj)
+		{
+			if (ReferenceEquals(null, obj)) return false;
+			if (ReferenceEquals(this, obj)) return true;
+			return obj.Variables.SequenceEqual(Variables) && obj.Rules.SequenceEqual(Rules);
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (ReferenceEquals(null, obj)) return false;
+			if (ReferenceEquals(this, obj)) return true;
+			if (obj.GetType() != typeof (StyleDocument)) return false;
+			return Equals((StyleDocument) obj);
+		}
+
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				return (Variables.GetHashCode()*397) ^ Rules.GetHashCode();
+			}
 		}
 	}
 }
