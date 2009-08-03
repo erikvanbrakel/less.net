@@ -12,6 +12,7 @@
  * limitations under the License. 
  * File: StyleRule.cs
  */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,7 +53,11 @@ namespace LessCss
 		public static StyleRule ParseTree(BaseTree tree)
 		{
 			var rule = new StyleRule();
-			foreach(BaseTree child in tree.Children)
+			Console.Write(tree.ToStringTree());
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine();
+			foreach (BaseTree child in tree.Children)
 			{
 				switch(child.Text)
 				{
@@ -119,6 +124,24 @@ namespace LessCss
 				result = (result*397) ^ Properties.GetHashCode();
 				result = (result*397) ^ Rules.GetHashCode();
 				return result;
+			}
+		}
+
+		public void Evaluate(List<StyleVariable> variables)
+		{
+			var rule = MemberwiseClone() as StyleRule;
+			foreach(var property in Properties)
+			{
+				if(property is ComputedStyleProperty)
+				{
+					var key = ((ComputedStyleProperty) property).Key;
+					var variable = variables.Find(x => x.Name == key);
+					if(variable != null)
+					{
+						property.Value = variable.Value;
+					}
+				}
+
 			}
 		}
 	}

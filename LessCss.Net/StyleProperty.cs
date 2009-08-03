@@ -12,24 +12,60 @@
  * limitations under the License. 
  * File: StyleProperty.cs
  */
+using System;
+using System.Collections.Generic;
 using Antlr.Runtime.Tree;
 
 namespace LessCss
 {
+
+	public class StyleExpression
+	{
+		private string varname;
+		public static StyleExpression ParseTree(BaseTree tree)
+		{
+			var expression = new StyleExpression();
+			expression.varname = tree.GetChild(0).Text;
+			return expression;
+		}
+
+		public string Eval(List<StyleVariable> a)
+		{
+			var variable = a.Find(v => v.Name == varname);
+			return variable == null ? "" : variable.Value;
+		}
+	}
+
+	public class ComputedStyleProperty : StyleProperty
+	{
+		public string Key;
+		public ComputedStyleProperty(ITree tree)
+		{
+			Name = tree.GetChild(0).Text;
+			Key = tree.GetChild(1).GetChild(0).Text;
+		}
+	}
 	public class StyleProperty
 	{
-		public string Name;
-		public string Value;
+		public string Name = string.Empty;
+		public string Value = string.Empty;
 
 		public static StyleProperty ParseTree(BaseTree tree)
 		{
 			var property = new StyleProperty {Name = ((BaseTree) tree.Children[0]).Text};
 
+			var val = "";
 			for(var i=1; i<tree.Children.Count;i++)
 			{
 				var node = (BaseTree)tree.Children[i];
-				property.Value += " " + node.Text;
+				if(node.Text == "EXPRESSION")
+				{
+					return new ComputedStyleProperty(tree);
+				}
+				val += " " + node.Text;
 			}
+
+			property.Value = val;
 
 			return property;
 		}

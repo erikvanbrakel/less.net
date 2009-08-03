@@ -25,11 +25,8 @@ namespace LessCss
 		{
 			var variable = new StyleVariable { Name = ((BaseTree)tree.Children[0]).Text };
 
-			for (var i = 1; i < tree.Children.Count; i++)
-			{
-				var node = (BaseTree)tree.Children[i];
-				variable.Value += " " + node.Text;
-			}
+			var node = tree.GetChild(1).GetChild(0);
+			variable.Value = node.Text;
 
 			return variable;
 		}

@@ -12,7 +12,6 @@
  * limitations under the License. 
  * File: StyleDocument.cs
  */
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -29,6 +28,15 @@ namespace LessCss
 
 		private StyleDocument() { }
 
+		public StyleDocument Evaluate()
+		{
+			var doc = MemberwiseClone() as StyleDocument;
+			foreach(var r in doc.Rules)
+			{
+				r.Evaluate(Variables);
+			}
+			return doc;
+		}
 		public static StyleDocument FromFile(string filename)
 		{
 			return FromString(File.ReadAllText(filename));
