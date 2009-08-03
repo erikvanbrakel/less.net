@@ -1,7 +1,0 @@
-syntax:glob
-*.suo
-*.user
-*.resharper
-_ReSharper.*
-obj
-bin

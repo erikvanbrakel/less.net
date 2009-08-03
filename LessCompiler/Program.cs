@@ -7,8 +7,8 @@ namespace LessCompiler
 	{
 		static void Main(string[] args)
 		{
-			var testcase = "css";
-			var less = getLess(testcase).Flatten().Merge();
+			var testcase = "comments";
+			var less = getLess(testcase).Evaluate().Flatten().Merge();
 			var css = getCss(testcase).Flatten().Merge();
 
 			Console.WriteLine(less.ToCss());
