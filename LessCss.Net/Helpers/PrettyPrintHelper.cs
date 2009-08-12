@@ -16,7 +16,7 @@ namespace LessCss.Helpers
 
 		public static string PrettyPrint(this StyleProperty property)
 		{
-			return string.Format("{0}: {1}", property.Name, property.Value);
+			return string.Format("{0}: {1}", property.Name, property.Values);
 		}
 
 		public static string PrettyPrint(this StyleRule rule)

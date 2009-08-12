@@ -12,23 +12,41 @@
  * limitations under the License. 
  * File: StyleVariable.cs
  */
+using System.Collections.Generic;
 using Antlr.Runtime.Tree;
+using LessCss.Expression;
 
 namespace LessCss
 {
 	public class StyleVariable
 	{
 		public string Name;
-		public string Value;
+		public StyleExpression Value;
 
-		public static StyleVariable ParseTree(BaseTree tree)
+		public static StyleVariable ParseTree(ITree tree)
 		{
-			var variable = new StyleVariable { Name = ((BaseTree)tree.Children[0]).Text };
-
-			var node = tree.GetChild(1).GetChild(0);
-			variable.Value = node.Text;
-
+			var name = tree.GetChild(0).Text;
+			var variable = new StyleVariable {Name = name};
+			switch(tree.GetChild(1).Text)
+			{
+				case "LITERAL":
+					variable.Value = new LiteralExpression(tree.GetChild(1));
+					break;
+				default:
+					variable.Value = StyleExpression.ParseExpression(tree.GetChild(1).GetChild(0));
+					break;
+			}
 			return variable;
+		}
+
+		public string Eval(List<StyleVariable> a)
+		{
+			return Value.Eval(a);
+		}
+
+		public void Reduce(List<StyleVariable> variables)
+		{
+			Value = Value.Reduce(variables);
 		}
 	}
 }

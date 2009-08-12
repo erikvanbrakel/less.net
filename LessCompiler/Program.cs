@@ -7,24 +7,24 @@ namespace LessCompiler
 	{
 		static void Main(string[] args)
 		{
-			var testcase = "comments";
-			var less = getLess(testcase).Evaluate().Flatten().Merge();
-			var css = getCss(testcase).Flatten().Merge();
+			var testcase = "mixins";
+			var less = getLess(testcase).Evaluate().Flatten().Mixin().Merge();
+			var css = getCss(testcase).Evaluate().Flatten().Merge();
 
 			Console.WriteLine(less.ToCss());
-			Console.WriteLine(css.ToCss());
-			Console.Write(less.Equals(css));
+			//Console.WriteLine(css.ToCss());
+			//Console.WriteLine(less.ToCss().Equals(css.ToCss()));
 			Console.ReadKey();
 		}
 
 		private static StyleDocument getLess(string s)
 		{
-			return StyleDocument.FromFile(string.Format(@"D:\development\LessCss.Net\LessCss.Specs\less\{0}.less", s));
+			return StyleDocument.FromFile(string.Format(@"D:\development\Less.Net\LessCss.Specs\less\{0}.less", s));
 		}
 
 		private static StyleDocument getCss(string s)
 		{
-			return StyleDocument.FromFile(string.Format(@"D:\development\LessCss.Net\LessCss.Specs\css\{0}.css", s));
+			return StyleDocument.FromFile(string.Format(@"D:\development\Less.Net\LessCss.Specs\css\{0}.css", s));
 		}
 	}
 }

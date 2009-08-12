@@ -12,74 +12,54 @@
  * limitations under the License. 
  * File: StyleProperty.cs
  */
-using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using Antlr.Runtime.Tree;
+using LessCss.Expression;
 
 namespace LessCss
 {
-
-	public class StyleExpression
-	{
-		private string varname;
-		public static StyleExpression ParseTree(BaseTree tree)
-		{
-			var expression = new StyleExpression();
-			expression.varname = tree.GetChild(0).Text;
-			return expression;
-		}
-
-		public string Eval(List<StyleVariable> a)
-		{
-			var variable = a.Find(v => v.Name == varname);
-			return variable == null ? "" : variable.Value;
-		}
-	}
-
-	public class ComputedStyleProperty : StyleProperty
-	{
-		public string Key;
-		public ComputedStyleProperty(ITree tree)
-		{
-			Name = tree.GetChild(0).Text;
-			Key = tree.GetChild(1).GetChild(0).Text;
-		}
-	}
 	public class StyleProperty
 	{
 		public string Name = string.Empty;
-		public string Value = string.Empty;
+		public List<StyleExpression> Values = new List<StyleExpression>();
 
 		public static StyleProperty ParseTree(BaseTree tree)
 		{
 			var property = new StyleProperty {Name = ((BaseTree) tree.Children[0]).Text};
 
-			var val = "";
-			for(var i=1; i<tree.Children.Count;i++)
+			for(var i=1; i<tree.ChildCount;i++)
 			{
-				var node = (BaseTree)tree.Children[i];
-				if(node.Text == "EXPRESSION")
+				var node = tree.GetChild(i);
+				if(node.Text == "EXPR")
 				{
-					return new ComputedStyleProperty(tree);
+					property.Values.Add(StyleExpression.ParseExpression(node.GetChild(0)));
 				}
-				val += " " + node.Text;
+				else
+				{
+					property.Values.Add(new LiteralExpression(node.Text));
+				}
 			}
-
-			property.Value = val;
 
 			return property;
 		}
 
-		public string ToCss()
+		public virtual string ToCss(List<StyleVariable> variables)
 		{
-			return string.Format("{0}:{1};",Name, Value);
+			var output = new StringBuilder();
+			output.Append(Name);
+			output.Append(":");
+			output.Append(string.Join(" ", Values.Select(v => v.Reduce(variables).ToString()).ToArray()));
+			output.Append(";");
+			return output.ToString();
 		}
 
 		public bool Equals(StyleProperty obj)
 		{
 			if (ReferenceEquals(null, obj)) return false;
 			if (ReferenceEquals(this, obj)) return true;
-			return Equals(obj.Name, Name) && Equals(obj.Value, Value);
+			return Equals(obj.Name, Name) && obj.Values.SequenceEqual(Values);
 		}
 
 		public override bool Equals(object obj)
@@ -94,7 +74,7 @@ namespace LessCss
 		{
 			unchecked
 			{
-				return (Name.GetHashCode()*397) ^ Value.GetHashCode();
+				return (Name.GetHashCode()*397) ^ Values.GetHashCode();
 			}
 		}
 	}

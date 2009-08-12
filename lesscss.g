@@ -3,114 +3,126 @@ options {
 	output=AST;
 	ASTLabelType=CommonTree;
 	language=CSharp;
-	k=4;}
+	}
 
 
 tokens {
-	SELECTOR;
 	VAR;
-	TAG;
-	ATTRIB;
-	ATTRIBEQUAL;
 	RULE;
-	PARENTOF;
-	PRECEDEDS;
-	ID;
-	CLASS;
-	PSEUDO;
-	HASVALUE;
-	BEGINSWITH;
 	PROPERTY;
-	LESS;
+	SELECTORGROUP;
+	SELECTOR;
+	FONTDEFINITION;
+	CLASS;
+	TAG;
+	ID;
+	WILDCARD;
+	EXPR;
+	CONSTANT;
+	LITERAL;
+	MIXIN;
 }
-lessCss 
-	: cssRule* -> ^(LESS cssRule*)
-	;
 
-fragment cssRule
-	:	 variable | ruleset;
-variable
-	: '@' IDENT ':' expr ';' -> ^( VAR IDENT expr)
-	;
-ruleset
- 	: selectors '{' rulesetLine* '}' -> ^( RULE selectors rulesetLine* )
+lessCss
+	: (lessLine)+
 	;
 	
-fragment rulesetLine 
-	:	ruleset | property;
-	
-selectors
-	: selector (',' selector)* -> ^(SELECTOR selector+)
+
+fragment variable
+	: '@' IDENT ':' (literal -> IDENT ^(LITERAL literal) | additiveExpression -> IDENT ^(EXPR additiveExpression)) ';'
 	;
-	
-selector 
-	: elem selectorOperation* attrib* ->  elem selectorOperation* attrib*
+fragment lessLine
+	: ruleset | mediadefinition | (variable -> ^(VAR variable))
 	;
 
-selectorOperation
-	: selectop? elem -> selectop* elem
+
+	
+fragment literal
+	: (STRING | IDENT) (',' (STRING | IDENT))*
 	;
 
-fragment selectop
-	: '>' -> PARENTOF
-        | '+'  -> PRECEDEDS
+fragment varname 
+	: '@' IDENT -> IDENT
 	;
+
+
+fragment expression
+	: 	additiveExpression -> ^(EXPR additiveExpression)
+	;
+
+fragment additiveExpression
+	:	multiplicativeExpression ( ('+'|'-')^ multiplicativeExpression )*
+	;
+
+fragment multiplicativeExpression 
+	:	primaryExpression ( ('*'|'/')^ primaryExpression)*
+	;
+
+fragment primaryExpression
+	:	'('! additiveExpression ')'!
+	|	value 
+	;
+
+fragment value	
+	: 	varname -> ^(VAR varname)
+	|	numeric -> ^(CONSTANT numeric)
+	;
+	
+fragment numeric
+	:	(NUM UNIT?) | COLOR
+	;
+	
+fragment mediadefinition
+	: ('@media' media '{' lessCss '}') 
+	;
+fragment ruleset 
+	: selectors '{' ruleContents* '}' -> ^(RULE selectors ruleContents*)
+	;
+	
+fragment ruleContents
+	: property -> ^(PROPERTY property) | ((selectors ';') -> ^(MIXIN selectors)) | ruleset;
+
+fragment media 	: 'all'|'braille'|'embossed'|'handheld'|'print'|'projection'|'screen'|'speech'|'tty'|'tv';
+
+fragment selectors
+	: selectorGrouping (',' selectorGrouping)* -> ^(SELECTORGROUP selectorGrouping+)
+	;
+	
+fragment selectorGrouping
+	: (selectorOps? selector)+ -> ^(SELECTOR selector+)
+	;
+	
 
 fragment property
-	: declaration ';' ->  declaration
+	: IDENT ':' propval+ ';' -> IDENT propval+
 	;
+
+fragment propval
+	: literal | additiveExpression -> ^(EXPR additiveExpression);
+fragment selector
+	: IDENT | SelectorClass | SelectorID
+	;
+
 	
-fragment elem
-	: IDENT -> ^( TAG IDENT )
-	| '#' IDENT -> ^( ID IDENT )
-	| '.' IDENT -> ^( CLASS IDENT )
+fragment selectorOps 
+	: '>' | '+'
 	;
 
-pseudo
-	: (':'|'::') IDENT -> ^( PSEUDO IDENT )
-	| (':'|'::') function -> ^( PSEUDO function )
+			
+val 
+	:	IDENT '(' (STRING | (NUM UNIT?) | COLOR) (',' (STRING|(NUM UNIT?)|COLOR))* ')'
+	|	IDENT
+	|	STRING
+	|	(NUM UNIT?)
+	|	COLOR
 	;
 
-attrib
-	: '[' IDENT (attribRelate (STRING | IDENT))? ']' -> ^( ATTRIB IDENT (attribRelate STRING* IDENT*)? )
-	;
-	
-attribRelate
-	: '='  -> ATTRIBEQUAL
-	| '~=' -> HASVALUE
-	| '|=' -> BEGINSWITH
-	;	
-  
-declaration
-	: IDENT ':' args -> ^( PROPERTY IDENT args )
+SelectorClass 
+	: '.' IDENT
 	;
 
-
-expr
-	: (NUM unit?)
-	| IDENT
-	| COLOR
-	| STRING
-	| function
-	;
-
-unit
-	: ('%'|'px'|'cm'|'mm'|'in'|'pt'|'pc'|'em'|'ex'|'deg'|'rad'|'grad'|'ms'|'s'|'hz'|'khz')
-	;
-	
-args
-	: expr (','? expr)* -> expr*
-	;
-
-function
-	: IDENT '(' args? ')' -> IDENT '(' args* ')'
-	;
-
-IDENT
-	:	('_' | 'a'..'z'| 'A'..'Z' | '\u0100'..'\ufffe' ) 
-		('_' | '-' | 'a'..'z'| 'A'..'Z' | '\u0100'..'\ufffe' | '0'..'9')*
-	|	'-' ('_' | 'a'..'z'| 'A'..'Z' | '\u0100'..'\ufffe' ) 
-		('_' | '-' | 'a'..'z'| 'A'..'Z' | '\u0100'..'\ufffe' | '0'..'9')*
+SelectorID
+	: '#' IDENT
 	;
 
 // string literals
@@ -119,28 +131,38 @@ STRING
 	|	'\'' (~('\''|'\n'|'\r'))* '\''
 	;
 
+UNIT
+	: ('%'|'px'|'cm'|'mm'|'in'|'pt'|'pc'|'em'|'ex'|'deg'|'rad'|'grad'|'ms'|'s'|'hz'|'khz')
+	;
+	
 NUM
-	:	'-' (('0'..'9')* '.')? ('0'..'9')+
-	|	(('0'..'9')* '.')? ('0'..'9')+
+	:	('-' (('0'..'9')* '.')? ('0'..'9')+
+	|	(('0'..'9')* '.')? ('0'..'9')+)
 	;
 
 COLOR
 	:	'#' ('0'..'9'|'a'..'f'|'A'..'F')+
 	;
 
-// Single-line comments
+		
+IDENT
+	:	('_' | 'a'..'z'| 'A'..'Z' ) 
+		('_' | '-' | 'a'..'z'| 'A'..'Z' | '0'..'9')*
+	|	'-' ('_' | 'a'..'z'| 'A'..'Z' ) 
+		('_' | '-' | 'a'..'z'| 'A'..'Z' | '0'..'9')*
+	;
+
+// Ignore whitespace and comments
+
 SL_COMMENT
 	:	'//'
 		(~('\n'|'\r'))* ('\n'|'\r'('\n')?)
 		{$channel=HIDDEN;}
 	;
 	
-// multiple-line comments
 COMMENT
-	:	'/*' .* '*/' { $channel = HIDDEN; }
+	:	'/*' .* '*/' { $channel=HIDDEN; }
 	;
 
-// Whitespace -- ignored
-WS	: ( ' ' | '\t' | '\r' | '\n' | '\f' )+ { $channel = HIDDEN; }
+WS	: ( ' ' | '\t' | '\r' | '\n' | '\f' )+ { $channel=HIDDEN; }
 	;
-

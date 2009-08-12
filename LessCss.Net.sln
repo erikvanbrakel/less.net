@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LessCss.Specs", "LessCss.Sp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LessCompiler", "LessCompiler\LessCompiler.csproj", "{84AD4D8E-7916-4D13-B4F8-43D433C098F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LessCss.Tests", "LessCss.Tests\LessCss.Tests.csproj", "{7568640A-8509-409F-9703-C4A3F600B9F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{84AD4D8E-7916-4D13-B4F8-43D433C098F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84AD4D8E-7916-4D13-B4F8-43D433C098F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84AD4D8E-7916-4D13-B4F8-43D433C098F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7568640A-8509-409F-9703-C4A3F600B9F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7568640A-8509-409F-9703-C4A3F600B9F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7568640A-8509-409F-9703-C4A3F600B9F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7568640A-8509-409F-9703-C4A3F600B9F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

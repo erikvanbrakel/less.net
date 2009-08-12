@@ -5,15 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5A7B0F49-D30C-451F-A368-95C56FE73C63}</ProjectGuid>
+    <ProjectGuid>{7568640A-8509-409F-9703-C4A3F600B9F5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LessCss</RootNamespace>
-    <AssemblyName>LessCss.Net</AssemblyName>
+    <RootNamespace>LessCss.Tests</RootNamespace>
+    <AssemblyName>LessCss.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>
-    </StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,41 +31,40 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime, Version=3.1.3.42154, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
+    <Reference Include="nunit.framework, Version=2.5.1.9189, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\libs\antlr\bin\net-2.0\Antlr3.Runtime.dll</HintPath>
+      <HintPath>..\..\..\libs\nunitex\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="NUnitEx, Version=1.0.4.0, Culture=neutral, PublicKeyToken=57e34ad207e9e5a3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\libs\nunitex\NUnitEx.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ECalcLexer.cs" />
-    <Compile Include="ECalcParser.cs" />
-    <Compile Include="Expression\AddExpression.cs" />
-    <Compile Include="Expression\CompoundStyleExpression.cs" />
-    <Compile Include="Expression\ConstantExpression.cs" />
-    <Compile Include="Expression\DivisionExpression.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="Helpers\PrettyPrintHelper.cs" />
-    <Compile Include="lesscssLexer.cs" />
-    <Compile Include="lesscssParser.cs" />
-    <Compile Include="Expression\MultiplyExpression.cs" />
-    <Compile Include="StyleDocument.cs" />
-    <Compile Include="Expression\StyleExpression.cs" />
-    <Compile Include="StyleProperty.cs" />
-    <Compile Include="StyleRule.cs" />
-    <Compile Include="StyleSelector.cs" />
-    <Compile Include="StyleValue.cs" />
-    <Compile Include="StyleVariable.cs" />
+    <Compile Include="StyleNumberTest.cs" />
+    <Compile Include="StyleNumberTest.Div.cs" />
+    <Compile Include="StyleNumberTest.Sub.cs" />
+    <Compile Include="StyleNumberTest.Mul.cs" />
+    <Compile Include="StyleNumberTest.Add.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Expression\SubtractExpression.cs" />
-    <Compile Include="Expression\VarExpression.cs" />
-    <Compile Include="Web\LessCssHttpHandler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LessCss.Net\LessCss.Net.csproj">
+      <Project>{5A7B0F49-D30C-451F-A368-95C56FE73C63}</Project>
+      <Name>LessCss.Net</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

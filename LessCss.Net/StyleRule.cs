@@ -25,6 +25,7 @@ namespace LessCss
 		public List<StyleSelector> Selectors = new List<StyleSelector>();
 		public List<StyleProperty> Properties = new List<StyleProperty>();
 		public List<StyleRule> Rules = new List<StyleRule>();
+		public List<StyleSelector> Mixins = new List<StyleSelector>();
 
 		public string GetSelector()
 		{
@@ -53,10 +54,7 @@ namespace LessCss
 		public static StyleRule ParseTree(BaseTree tree)
 		{
 			var rule = new StyleRule();
-			Console.Write(tree.ToStringTree());
-			Console.WriteLine();
-			Console.WriteLine();
-			Console.WriteLine();
+
 			foreach (BaseTree child in tree.Children)
 			{
 				switch(child.Text)
@@ -73,17 +71,29 @@ namespace LessCss
 							rule.Selectors.Add(StyleSelector.ParseTree(selectorChild));
 						}
 						break;
+					case "MIXIN":
+						rule.Mixins.AddRange(ParseMixins(child));
+						break;
 				}
 			}
 			return rule;
 		}
 
-		public string ToCss()
+		private static IEnumerable<StyleSelector> ParseMixins(BaseTree child)
 		{
-			return ToCss(string.Empty);
+			foreach(BaseTree selectorgroup in child.Children)
+			{
+				foreach(BaseTree selector in selectorgroup.Children)
+					yield return StyleSelector.ParseTree(selector);
+			}
+		}
+
+		public string ToCss(List<StyleVariable> variables)
+		{
+			return ToCss(string.Empty, variables);
 		}
 		
-		private string ToCss(string parentSelectors)
+		private string ToCss(string parentSelectors, List<StyleVariable> variables)
 		{
 			var sb = new StringBuilder();
 			var selectorBuilder = new StringBuilder();
@@ -94,10 +104,10 @@ namespace LessCss
 			{
 				sb.Append(selectorBuilder);
 				sb.Append(" {");
-				Properties.ForEach(p => sb.Append(p.ToCss() + " "));
+				Properties.ForEach(p => sb.Append(p.ToCss(variables) + " "));
 				sb.AppendLine("}");
 			}
-			Rules.ForEach(r => sb.Append(r.ToCss(selectorBuilder + " ")));
+			Rules.ForEach(r => sb.Append(r.ToCss(selectorBuilder + " ", variables)));
 			return sb.ToString();
 		}
 
@@ -124,24 +134,6 @@ namespace LessCss
 				result = (result*397) ^ Properties.GetHashCode();
 				result = (result*397) ^ Rules.GetHashCode();
 				return result;
-			}
-		}
-
-		public void Evaluate(List<StyleVariable> variables)
-		{
-			var rule = MemberwiseClone() as StyleRule;
-			foreach(var property in Properties)
-			{
-				if(property is ComputedStyleProperty)
-				{
-					var key = ((ComputedStyleProperty) property).Key;
-					var variable = variables.Find(x => x.Name == key);
-					if(variable != null)
-					{
-						property.Value = variable.Value;
-					}
-				}
-
 			}
 		}
 	}

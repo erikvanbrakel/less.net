@@ -12,12 +12,14 @@
  * limitations under the License. 
  * File: StyleDocument.cs
  */
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using Antlr.Runtime;
 using Antlr.Runtime.Tree;
+using LessCss.Expression;
 
 namespace LessCss
 {
@@ -31,9 +33,12 @@ namespace LessCss
 		public StyleDocument Evaluate()
 		{
 			var doc = MemberwiseClone() as StyleDocument;
-			foreach(var r in doc.Rules)
+
+			// minimize vars //
+
+			while(!Variables.All(v=>v.Value is ConstantExpression || v.Value is LiteralExpression))
 			{
-				r.Evaluate(Variables);
+				Variables.ForEach(v => v.Reduce(Variables));
 			}
 			return doc;
 		}
@@ -49,39 +54,10 @@ namespace LessCss
 			var parser = new lesscssParser(new CommonTokenStream(lexer));
 			var root = parser.lessCss();
 
-			return ParseTree((BaseTree)root.Tree);
-		}
+			var doc = new StyleDocument();
+			doc.Load((BaseTree)root.Tree);
 
-		private static StyleDocument ParseTree(BaseTree tree)
-		{
-			var document = new StyleDocument();
-			if (tree.IsNil)
-			{
-				foreach (BaseTree child in tree.Children)
-				{
-					ParseTree(child, document);
-				}
-			}
-			else
-			{
-				ParseTree(tree, document);
-			}
-			return document;
-		}
-
-		private static void ParseTree(BaseTree child, StyleDocument document)
-		{
-			switch (child.Text)
-			{
-				case "VAR":
-					var variable = StyleVariable.ParseTree(child);
-					document.AddVariable(variable);
-					break;
-				case "RULE":
-					var rule = StyleRule.ParseTree(child);
-					document.AddRule(rule);
-					break;
-			}
+			return doc;
 		}
 
 		private void AddVariable(StyleVariable variable)
@@ -97,7 +73,7 @@ namespace LessCss
 		public string ToCss()
 		{
 			var sb = new StringBuilder();
-			Rules.ForEach(r => sb.Append(r.ToCss()));
+			Rules.ForEach(r => sb.Append(r.ToCss(Variables)));
 			return sb.ToString();
 		}
 
@@ -123,7 +99,6 @@ namespace LessCss
 
 			doc.Rules = GroupRules(newRules).ToList();
 
-			//doc.Rules = newRules;
 			return doc;
 		}
 
@@ -162,6 +137,46 @@ namespace LessCss
 			{
 				return (Variables.GetHashCode()*397) ^ Rules.GetHashCode();
 			}
+		}
+
+		private void Load(BaseTree tree)
+		{
+			if (tree.IsNil)
+			{
+				foreach (BaseTree child in tree.Children)
+				{
+					Load(child);
+				}
+			}
+			else
+			{
+				switch (tree.Text)
+				{
+					case "VAR":
+						var variable = StyleVariable.ParseTree(tree);
+						AddVariable(variable);
+						break;
+					case "RULE":
+						var rule = StyleRule.ParseTree(tree);
+						AddRule(rule);
+						break;
+				}
+			}			
+		}
+
+		public StyleDocument Mixin()
+		{
+			foreach(var rule in Rules)
+			{
+				foreach (var mixin in rule.Mixins)
+				{
+					StyleSelector mixin1 = mixin;
+					var mixinrule = Rules.Find(r => r.Selectors.Exists(s => s.Name == mixin1.Name));
+					rule.Properties.AddRange(mixinrule.Properties);
+				}
+				rule.Mixins.Clear();
+			}
+			return this;
 		}
 	}
 }
