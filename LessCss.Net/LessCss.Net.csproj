@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ECalcLexer.cs" />
+    <Compile Include="ECalcParser.cs" />
     <Compile Include="Expression\AddExpression.cs" />
     <Compile Include="Expression\CompoundStyleExpression.cs" />
     <Compile Include="Expression\ConstantExpression.cs" />

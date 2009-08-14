@@ -7,13 +7,13 @@ namespace LessCompiler
 	{
 		static void Main(string[] args)
 		{
-			var testcase = "operations";
+			var testcase = "mixins";
 			var less = getLess(testcase).Evaluate().Flatten().Mixin().Merge();
 			var css = getCss(testcase).Evaluate().Flatten().Merge();
 
 			Console.WriteLine(less.ToCss());
 			//Console.WriteLine(css.ToCss());
-			Console.WriteLine(less.Equals(css));
+			//Console.WriteLine(less.ToCss().Equals(css.ToCss()));
 			Console.ReadKey();
 		}
 
