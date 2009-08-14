@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<project 
+  name="LessCss.Net" 
+  default="compile">
+
+  <property name="debug" value="true" />
+  <property name="buildNumber" value="0.0.0.1" />
+
+  <target name="clean" description="remove build artifacts">
+    <delete dir="build" if="${directory::exists('build')}" />
+  </target>
+
+  <target name="init">
+    <mkdir dir="build" />
+  </target>
+ 
+  <target name="compile" depends="clean,init" description="Compiles the application">
+    <asminfo output="AssemblyInfo.cs" language="CSharp">
+      <imports>
+        <import namespace="System" />
+        <import namespace="System.Reflection" />
+        <import namespace="System.Runtime.InteropServices" />
+      </imports>
+      <attributes>
+        <attribute type="AssemblyVersionAttribute" value="${buildNumber}" />
+        <attribute type="AssemblyTitleAttribute" value="Less.Net" />
+        <attribute type="AssemblyCopyrightAttribute" value="Copyright © Erik van Brakel 2009" />
+      </attributes>
+    </asminfo>
+    <copy file="acknowledgements.txt" tofile="build\acknowledgements.txt" />
+    
+    <csc target="library" output="build\${project::get-name()}.dll" debug="${debug}">
+      <sources>
+        <include name="src\LessCss.Net\**\*.cs" />
+        <include name="AssemblyInfo.cs" />
+        <exclude name="src\**\AssemblyInfo.cs" />
+      </sources>
+      <references>
+        <include name="dependencies\Antlr3.Runtime.dll" />
+      </references>
+    </csc>
+    <delete file="AssemblyInfo.cs" />
+  </target>
+</project>

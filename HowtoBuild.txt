@@ -1,0 +1,2 @@
+To build LessCss.NET just run build.bat. 
+The compiled assemblies will be put into the /build/ directory.
