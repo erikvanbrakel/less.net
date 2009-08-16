@@ -23,22 +23,6 @@ namespace LessCss
 		public string Name;
 		public StyleExpression Value;
 
-		public static StyleVariable ParseTree(ITree tree)
-		{
-			var name = tree.GetChild(0).Text;
-			var variable = new StyleVariable {Name = name};
-			switch(tree.GetChild(1).Text)
-			{
-				case "LITERAL":
-					variable.Value = new LiteralExpression(tree.GetChild(1));
-					break;
-				default:
-					variable.Value = StyleExpression.ParseExpression(tree.GetChild(1).GetChild(0));
-					break;
-			}
-			return variable;
-		}
-
 		public string Eval(List<StyleVariable> a)
 		{
 			return Value.Eval(a);

@@ -21,13 +21,6 @@ namespace LessCss
 	{
 		public string Name { get; set; }
 
-		public static StyleSelector ParseTree(ITree _tree)
-		{
-			var tree = (BaseTree)_tree;
-			var tokens = tree.Children.Cast<BaseTree>().Select(c => c.Text).ToArray();
-			return new StyleSelector {Name = string.Join(" ", tokens)};
-		}
-
 		public string ToCss()
 		{
 			return Name;

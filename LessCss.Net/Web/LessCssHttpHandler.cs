@@ -1,4 +1,6 @@
-﻿using System.Web;
+﻿using System.IO;
+using System.Web;
+using LessCss.Loaders;
 
 namespace LessCss.Web
 {
@@ -6,9 +8,10 @@ namespace LessCss.Web
 	{
 		public void ProcessRequest(HttpContext context)
 		{
+			var loader = new LessDocumentLoader();
 			// our unprocessed filename   
 			string lessFile = context.Server.MapPath(context.Request.Url.LocalPath);
-			StyleDocument document = StyleDocument.FromFile(lessFile).Flatten().Merge();
+			StyleDocument document = loader.LoadFromString(File.ReadAllText(lessFile)).Flatten().Merge();
 			context.Response.ContentType = "text/css";
 			context.Response.Write(document.ToCss());
 		}

@@ -51,43 +51,6 @@ namespace LessCss
 			}
 		}
 
-		public static StyleRule ParseTree(BaseTree tree)
-		{
-			var rule = new StyleRule();
-
-			foreach (BaseTree child in tree.Children)
-			{
-				switch(child.Text)
-				{
-					case "PROPERTY":
-						rule.Properties.Add(StyleProperty.ParseTree(child));
-						break;
-					case "RULE":
-						rule.Rules.Add(StyleRule.ParseTree(child));
-						break;
-					case "SELECTORGROUP":
-						foreach (BaseTree selectorChild in child.Children)
-						{
-							rule.Selectors.Add(StyleSelector.ParseTree(selectorChild));
-						}
-						break;
-					case "MIXIN":
-						rule.Mixins.AddRange(ParseMixins(child));
-						break;
-				}
-			}
-			return rule;
-		}
-
-		private static IEnumerable<StyleSelector> ParseMixins(BaseTree child)
-		{
-			foreach(BaseTree selectorgroup in child.Children)
-			{
-				foreach(BaseTree selector in selectorgroup.Children)
-					yield return StyleSelector.ParseTree(selector);
-			}
-		}
-
 		public string ToCss(List<StyleVariable> variables)
 		{
 			return ToCss(string.Empty, variables);

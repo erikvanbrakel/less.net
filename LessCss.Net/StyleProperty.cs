@@ -25,26 +25,6 @@ namespace LessCss
 		public string Name = string.Empty;
 		public List<StyleExpression> Values = new List<StyleExpression>();
 
-		public static StyleProperty ParseTree(BaseTree tree)
-		{
-			var property = new StyleProperty {Name = ((BaseTree) tree.Children[0]).Text};
-
-			for(var i=1; i<tree.ChildCount;i++)
-			{
-				var node = tree.GetChild(i);
-				if(node.Text == "EXPR")
-				{
-					property.Values.Add(StyleExpression.ParseExpression(node.GetChild(0)));
-				}
-				else
-				{
-					property.Values.Add(new LiteralExpression(node.Text));
-				}
-			}
-
-			return property;
-		}
-
 		public virtual string ToCss(List<StyleVariable> variables)
 		{
 			var output = new StringBuilder();

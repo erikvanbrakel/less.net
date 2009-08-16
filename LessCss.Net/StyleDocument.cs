@@ -28,7 +28,7 @@ namespace LessCss
 		internal readonly List<StyleVariable> Variables = new List<StyleVariable>();
 		public List<StyleRule> Rules = new List<StyleRule>();
 
-		private StyleDocument() { }
+		public StyleDocument() { }
 
 		public StyleDocument Evaluate()
 		{
@@ -42,30 +42,13 @@ namespace LessCss
 			}
 			return doc;
 		}
-		public static StyleDocument FromFile(string filename)
-		{
-			return FromString(File.ReadAllText(filename));
-		}
 
-		public static StyleDocument FromString(string input)
-		{
-			var stream = new ANTLRStringStream(input);
-			var lexer = new lesscssLexer(stream);
-			var parser = new lesscssParser(new CommonTokenStream(lexer));
-			var root = parser.lessCss();
-
-			var doc = new StyleDocument();
-			doc.Load((BaseTree)root.Tree);
-
-			return doc;
-		}
-
-		private void AddVariable(StyleVariable variable)
+		public void AddVariable(StyleVariable variable)
 		{
 			Variables.Add(variable);
 		}
 
-		private void AddRule(StyleRule rule)
+		public void AddRule(StyleRule rule)
 		{
 			Rules.Add(rule);
 		}
@@ -141,27 +124,7 @@ namespace LessCss
 
 		private void Load(BaseTree tree)
 		{
-			if (tree.IsNil)
-			{
-				foreach (BaseTree child in tree.Children)
-				{
-					Load(child);
-				}
-			}
-			else
-			{
-				switch (tree.Text)
-				{
-					case "VAR":
-						var variable = StyleVariable.ParseTree(tree);
-						AddVariable(variable);
-						break;
-					case "RULE":
-						var rule = StyleRule.ParseTree(tree);
-						AddRule(rule);
-						break;
-				}
-			}			
+
 		}
 
 		public StyleDocument Mixin()
