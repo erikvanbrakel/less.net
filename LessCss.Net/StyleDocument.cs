@@ -93,8 +93,11 @@ namespace LessCss
 				var rule = list.First();
 				var rules = list.FindAll(r => rule.Properties.SequenceEqual(r.Properties));
 				list.RemoveAll(r => rule.Properties.SequenceEqual(r.Properties));
-				var newrule = new StyleRule {Properties = rule.Properties};
-				newrule.Selectors = rules.Select(r => r.Selectors.First()).ToList();
+				var newrule = new StyleRule
+				              	{
+				              		Properties = rule.Properties,
+				              		Selectors = rules.Select(r => r.Selectors.First()).ToList()
+				              	};
 				yield return newrule;
 			}			
 		}
@@ -120,11 +123,6 @@ namespace LessCss
 			{
 				return (Variables.GetHashCode()*397) ^ Rules.GetHashCode();
 			}
-		}
-
-		private void Load(BaseTree tree)
-		{
-
 		}
 
 		public StyleDocument Mixin()

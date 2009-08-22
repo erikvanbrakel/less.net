@@ -1,5 +1,9 @@
-// $ANTLR 3.1.2 D:\\lesscss.g 2009-08-14 02:31:19
+// $ANTLR 3.1.2 D:\\development\\Less.Net\\lesscss.g 2009-08-22 06:00:27
 
+// The variable 'variable' is assigned but its value is never used.
+#pragma warning disable 168, 219
+// Unreachable code detected.
+#pragma warning disable 162
 
 using System;
 using Antlr.Runtime;
@@ -11,7 +15,7 @@ using Stack 		= Antlr.Runtime.Collections.StackList;
 
 using Antlr.Runtime.Tree;
 
-public class lesscssParser : Parser 
+public partial class lesscssParser : Parser
 {
     public static readonly string[] tokenNames = new string[] 
 	{
@@ -33,15 +37,11 @@ public class lesscssParser : Parser
 		"CONSTANT", 
 		"LITERAL", 
 		"MIXIN", 
+		"COLOR", 
 		"IDENT", 
 		"STRING", 
-		"MINUS", 
 		"NUM", 
 		"UNIT", 
-		"COLOR", 
-		"SelectorClass", 
-		"SelectorID", 
-		"HEXDIGIT", 
 		"SL_COMMENT", 
 		"COMMENT", 
 		"WS", 
@@ -50,6 +50,7 @@ public class lesscssParser : Parser
 		"';'", 
 		"','", 
 		"'+'", 
+		"'-'", 
 		"'*'", 
 		"'/'", 
 		"'('", 
@@ -67,22 +68,25 @@ public class lesscssParser : Parser
 		"'speech'", 
 		"'tty'", 
 		"'tv'", 
-		"'>'"
+		"'#'", 
+		"'.'"
     };
 
     public const int SELECTORGROUP = 7;
     public const int CLASS = 10;
+    public const int T__29 = 29;
+    public const int T__28 = 28;
+    public const int T__27 = 27;
+    public const int T__26 = 26;
     public const int ID = 12;
     public const int EOF = -1;
-    public const int COLOR = 23;
-    public const int T__51 = 51;
+    public const int COLOR = 18;
     public const int SELECTOR = 8;
     public const int EXPR = 14;
-    public const int T__52 = 52;
     public const int WILDCARD = 13;
-    public const int IDENT = 18;
+    public const int IDENT = 19;
     public const int VAR = 4;
-    public const int COMMENT = 28;
+    public const int COMMENT = 24;
     public const int T__50 = 50;
     public const int T__42 = 42;
     public const int T__43 = 43;
@@ -96,7 +100,6 @@ public class lesscssParser : Parser
     public const int T__48 = 48;
     public const int T__49 = 49;
     public const int LITERAL = 16;
-    public const int MINUS = 20;
     public const int NUM = 21;
     public const int TAG = 11;
     public const int T__30 = 30;
@@ -104,7 +107,7 @@ public class lesscssParser : Parser
     public const int UNIT = 22;
     public const int T__32 = 32;
     public const int MIXIN = 17;
-    public const int WS = 29;
+    public const int WS = 25;
     public const int T__33 = 33;
     public const int FONTDEFINITION = 9;
     public const int T__34 = 34;
@@ -114,12 +117,9 @@ public class lesscssParser : Parser
     public const int PROPERTY = 6;
     public const int T__38 = 38;
     public const int T__39 = 39;
-    public const int SelectorID = 25;
-    public const int SL_COMMENT = 27;
+    public const int SL_COMMENT = 23;
     public const int CONSTANT = 15;
-    public const int SelectorClass = 24;
-    public const int STRING = 19;
-    public const int HEXDIGIT = 26;
+    public const int STRING = 20;
 
     // delegates
     // delegators
@@ -135,7 +135,7 @@ public class lesscssParser : Parser
             InitializeCyclicDFAs();
 
              
-       }
+        }
         
     protected ITreeAdaptor adaptor = new CommonTreeAdaptor();
 
@@ -152,7 +152,7 @@ public class lesscssParser : Parser
     }
 
     override public string GrammarFileName {
-		get { return "D:\\lesscss.g"; }
+		get { return "D:\\development\\Less.Net\\lesscss.g"; }
     }
 
 
@@ -167,7 +167,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "lessCss"
-    // D:\\lesscss.g:26:1: lessCss : ( lessLine )+ ;
+    // D:\\development\\Less.Net\\lesscss.g:27:1: lessCss : ( lessLine )+ ;
     public lesscssParser.lessCss_return lessCss() // throws RecognitionException [1]
     {   
         lesscssParser.lessCss_return retval = new lesscssParser.lessCss_return();
@@ -175,25 +175,25 @@ public class lesscssParser : Parser
 
         CommonTree root_0 = null;
 
-        lesscssParser.lessLine_return lessLine1 = null;
+        lesscssParser.lessLine_return lessLine1 = default(lesscssParser.lessLine_return);
 
 
 
         try 
     	{
-            // D:\\lesscss.g:27:2: ( ( lessLine )+ )
-            // D:\\lesscss.g:27:4: ( lessLine )+
+            // D:\\development\\Less.Net\\lesscss.g:28:2: ( ( lessLine )+ )
+            // D:\\development\\Less.Net\\lesscss.g:28:4: ( lessLine )+
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	// D:\\lesscss.g:27:4: ( lessLine )+
+            	// D:\\development\\Less.Net\\lesscss.g:28:4: ( lessLine )+
             	int cnt1 = 0;
             	do 
             	{
             	    int alt1 = 2;
             	    int LA1_0 = input.LA(1);
 
-            	    if ( (LA1_0 == IDENT || (LA1_0 >= SelectorClass && LA1_0 <= SelectorID) || LA1_0 == 30 || LA1_0 == 34 || LA1_0 == 39 || LA1_0 == 52) )
+            	    if ( (LA1_0 == IDENT || LA1_0 == 26 || LA1_0 == 36 || (LA1_0 >= 49 && LA1_0 <= 50)) )
             	    {
             	        alt1 = 1;
             	    }
@@ -202,9 +202,9 @@ public class lesscssParser : Parser
             	    switch (alt1) 
             		{
             			case 1 :
-            			    // D:\\lesscss.g:27:5: lessLine
+            			    // D:\\development\\Less.Net\\lesscss.g:28:5: lessLine
             			    {
-            			    	PushFollow(FOLLOW_lessLine_in_lessCss97);
+            			    	PushFollow(FOLLOW_lessLine_in_lessCss101);
             			    	lessLine1 = lessLine();
             			    	state.followingStackPointer--;
 
@@ -259,7 +259,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "variable"
-    // D:\\lesscss.g:31:10: fragment variable : '@' IDENT ':' ( additiveExpression -> IDENT ^( EXPR additiveExpression ) | literal -> IDENT ^( LITERAL literal ) ) ';' ;
+    // D:\\development\\Less.Net\\lesscss.g:32:10: fragment variable : '@' IDENT ':' ( literal -> ^( VAR IDENT ^( LITERAL literal ) ) | expression -> ^( VAR IDENT expression ) ) ';' ;
     public lesscssParser.variable_return variable() // throws RecognitionException [1]
     {   
         lesscssParser.variable_return retval = new lesscssParser.variable_return();
@@ -271,9 +271,9 @@ public class lesscssParser : Parser
         IToken IDENT3 = null;
         IToken char_literal4 = null;
         IToken char_literal7 = null;
-        lesscssParser.additiveExpression_return additiveExpression5 = null;
+        lesscssParser.literal_return literal5 = default(lesscssParser.literal_return);
 
-        lesscssParser.literal_return literal6 = null;
+        lesscssParser.expression_return expression6 = default(lesscssParser.expression_return);
 
 
         CommonTree char_literal2_tree=null;
@@ -281,34 +281,34 @@ public class lesscssParser : Parser
         CommonTree char_literal4_tree=null;
         CommonTree char_literal7_tree=null;
         RewriteRuleTokenStream stream_IDENT = new RewriteRuleTokenStream(adaptor,"token IDENT");
-        RewriteRuleTokenStream stream_30 = new RewriteRuleTokenStream(adaptor,"token 30");
-        RewriteRuleTokenStream stream_32 = new RewriteRuleTokenStream(adaptor,"token 32");
-        RewriteRuleTokenStream stream_31 = new RewriteRuleTokenStream(adaptor,"token 31");
-        RewriteRuleSubtreeStream stream_additiveExpression = new RewriteRuleSubtreeStream(adaptor,"rule additiveExpression");
+        RewriteRuleTokenStream stream_26 = new RewriteRuleTokenStream(adaptor,"token 26");
+        RewriteRuleTokenStream stream_27 = new RewriteRuleTokenStream(adaptor,"token 27");
+        RewriteRuleTokenStream stream_28 = new RewriteRuleTokenStream(adaptor,"token 28");
+        RewriteRuleSubtreeStream stream_expression = new RewriteRuleSubtreeStream(adaptor,"rule expression");
         RewriteRuleSubtreeStream stream_literal = new RewriteRuleSubtreeStream(adaptor,"rule literal");
         try 
     	{
-            // D:\\lesscss.g:32:2: ( '@' IDENT ':' ( additiveExpression -> IDENT ^( EXPR additiveExpression ) | literal -> IDENT ^( LITERAL literal ) ) ';' )
-            // D:\\lesscss.g:32:4: '@' IDENT ':' ( additiveExpression -> IDENT ^( EXPR additiveExpression ) | literal -> IDENT ^( LITERAL literal ) ) ';'
+            // D:\\development\\Less.Net\\lesscss.g:33:2: ( '@' IDENT ':' ( literal -> ^( VAR IDENT ^( LITERAL literal ) ) | expression -> ^( VAR IDENT expression ) ) ';' )
+            // D:\\development\\Less.Net\\lesscss.g:33:4: '@' IDENT ':' ( literal -> ^( VAR IDENT ^( LITERAL literal ) ) | expression -> ^( VAR IDENT expression ) ) ';'
             {
-            	char_literal2=(IToken)Match(input,30,FOLLOW_30_in_variable114);  
-            	stream_30.Add(char_literal2);
+            	char_literal2=(IToken)Match(input,26,FOLLOW_26_in_variable118);  
+            	stream_26.Add(char_literal2);
 
-            	IDENT3=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_variable116);  
+            	IDENT3=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_variable120);  
             	stream_IDENT.Add(IDENT3);
 
-            	char_literal4=(IToken)Match(input,31,FOLLOW_31_in_variable118);  
-            	stream_31.Add(char_literal4);
+            	char_literal4=(IToken)Match(input,27,FOLLOW_27_in_variable122);  
+            	stream_27.Add(char_literal4);
 
-            	// D:\\lesscss.g:32:18: ( additiveExpression -> IDENT ^( EXPR additiveExpression ) | literal -> IDENT ^( LITERAL literal ) )
+            	// D:\\development\\Less.Net\\lesscss.g:33:18: ( literal -> ^( VAR IDENT ^( LITERAL literal ) ) | expression -> ^( VAR IDENT expression ) )
             	int alt2 = 2;
             	int LA2_0 = input.LA(1);
 
-            	if ( (LA2_0 == NUM || LA2_0 == COLOR || LA2_0 == 30 || LA2_0 == 37) )
+            	if ( ((LA2_0 >= IDENT && LA2_0 <= STRING)) )
             	{
             	    alt2 = 1;
             	}
-            	else if ( ((LA2_0 >= IDENT && LA2_0 <= STRING)) )
+            	else if ( (LA2_0 == COLOR || LA2_0 == NUM || LA2_0 == 26 || LA2_0 == 34) )
             	{
             	    alt2 = 2;
             	}
@@ -322,17 +322,17 @@ public class lesscssParser : Parser
             	switch (alt2) 
             	{
             	    case 1 :
-            	        // D:\\lesscss.g:32:19: additiveExpression
+            	        // D:\\development\\Less.Net\\lesscss.g:33:19: literal
             	        {
-            	        	PushFollow(FOLLOW_additiveExpression_in_variable121);
-            	        	additiveExpression5 = additiveExpression();
+            	        	PushFollow(FOLLOW_literal_in_variable125);
+            	        	literal5 = literal();
             	        	state.followingStackPointer--;
 
-            	        	stream_additiveExpression.Add(additiveExpression5.Tree);
+            	        	stream_literal.Add(literal5.Tree);
 
 
             	        	// AST REWRITE
-            	        	// elements:          IDENT, additiveExpression
+            	        	// elements:          IDENT, literal
             	        	// token labels:      
             	        	// rule labels:       retval
             	        	// token list labels: 
@@ -342,15 +342,23 @@ public class lesscssParser : Parser
             	        	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
             	        	root_0 = (CommonTree)adaptor.GetNilNode();
-            	        	// 32:38: -> IDENT ^( EXPR additiveExpression )
+            	        	// 33:27: -> ^( VAR IDENT ^( LITERAL literal ) )
             	        	{
-            	        	    adaptor.AddChild(root_0, stream_IDENT.NextNode());
-            	        	    // D:\\lesscss.g:32:47: ^( EXPR additiveExpression )
+            	        	    // D:\\development\\Less.Net\\lesscss.g:33:30: ^( VAR IDENT ^( LITERAL literal ) )
             	        	    {
             	        	    CommonTree root_1 = (CommonTree)adaptor.GetNilNode();
-            	        	    root_1 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(EXPR, "EXPR"), root_1);
+            	        	    root_1 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(VAR, "VAR"), root_1);
 
-            	        	    adaptor.AddChild(root_1, stream_additiveExpression.NextTree());
+            	        	    adaptor.AddChild(root_1, stream_IDENT.NextNode());
+            	        	    // D:\\development\\Less.Net\\lesscss.g:33:42: ^( LITERAL literal )
+            	        	    {
+            	        	    CommonTree root_2 = (CommonTree)adaptor.GetNilNode();
+            	        	    root_2 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(LITERAL, "LITERAL"), root_2);
+
+            	        	    adaptor.AddChild(root_2, stream_literal.NextTree());
+
+            	        	    adaptor.AddChild(root_1, root_2);
+            	        	    }
 
             	        	    adaptor.AddChild(root_0, root_1);
             	        	    }
@@ -361,17 +369,17 @@ public class lesscssParser : Parser
             	        }
             	        break;
             	    case 2 :
-            	        // D:\\lesscss.g:32:76: literal
+            	        // D:\\development\\Less.Net\\lesscss.g:33:64: expression
             	        {
-            	        	PushFollow(FOLLOW_literal_in_variable135);
-            	        	literal6 = literal();
+            	        	PushFollow(FOLLOW_expression_in_variable143);
+            	        	expression6 = expression();
             	        	state.followingStackPointer--;
 
-            	        	stream_literal.Add(literal6.Tree);
+            	        	stream_expression.Add(expression6.Tree);
 
 
             	        	// AST REWRITE
-            	        	// elements:          literal, IDENT
+            	        	// elements:          IDENT, expression
             	        	// token labels:      
             	        	// rule labels:       retval
             	        	// token list labels: 
@@ -381,15 +389,15 @@ public class lesscssParser : Parser
             	        	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
             	        	root_0 = (CommonTree)adaptor.GetNilNode();
-            	        	// 32:84: -> IDENT ^( LITERAL literal )
+            	        	// 33:75: -> ^( VAR IDENT expression )
             	        	{
-            	        	    adaptor.AddChild(root_0, stream_IDENT.NextNode());
-            	        	    // D:\\lesscss.g:32:93: ^( LITERAL literal )
+            	        	    // D:\\development\\Less.Net\\lesscss.g:33:78: ^( VAR IDENT expression )
             	        	    {
             	        	    CommonTree root_1 = (CommonTree)adaptor.GetNilNode();
-            	        	    root_1 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(LITERAL, "LITERAL"), root_1);
+            	        	    root_1 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(VAR, "VAR"), root_1);
 
-            	        	    adaptor.AddChild(root_1, stream_literal.NextTree());
+            	        	    adaptor.AddChild(root_1, stream_IDENT.NextNode());
+            	        	    adaptor.AddChild(root_1, stream_expression.NextTree());
 
             	        	    adaptor.AddChild(root_0, root_1);
             	        	    }
@@ -402,8 +410,8 @@ public class lesscssParser : Parser
 
             	}
 
-            	char_literal7=(IToken)Match(input,32,FOLLOW_32_in_variable148);  
-            	stream_32.Add(char_literal7);
+            	char_literal7=(IToken)Match(input,28,FOLLOW_28_in_variable156);  
+            	stream_28.Add(char_literal7);
 
 
             }
@@ -439,7 +447,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "lessLine"
-    // D:\\lesscss.g:34:10: fragment lessLine : ( ruleset | mediadefinition | ( variable -> ^( VAR variable ) ) );
+    // D:\\development\\Less.Net\\lesscss.g:37:10: fragment lessLine : ( ruleset -> ^( ruleset ) | mediadefinition -> ^( mediadefinition ) | variable -> ^( variable ) );
     public lesscssParser.lessLine_return lessLine() // throws RecognitionException [1]
     {   
         lesscssParser.lessLine_return retval = new lesscssParser.lessLine_return();
@@ -447,35 +455,35 @@ public class lesscssParser : Parser
 
         CommonTree root_0 = null;
 
-        lesscssParser.ruleset_return ruleset8 = null;
+        lesscssParser.ruleset_return ruleset8 = default(lesscssParser.ruleset_return);
 
-        lesscssParser.mediadefinition_return mediadefinition9 = null;
+        lesscssParser.mediadefinition_return mediadefinition9 = default(lesscssParser.mediadefinition_return);
 
-        lesscssParser.variable_return variable10 = null;
+        lesscssParser.variable_return variable10 = default(lesscssParser.variable_return);
 
 
+        RewriteRuleSubtreeStream stream_ruleset = new RewriteRuleSubtreeStream(adaptor,"rule ruleset");
+        RewriteRuleSubtreeStream stream_mediadefinition = new RewriteRuleSubtreeStream(adaptor,"rule mediadefinition");
         RewriteRuleSubtreeStream stream_variable = new RewriteRuleSubtreeStream(adaptor,"rule variable");
         try 
     	{
-            // D:\\lesscss.g:35:2: ( ruleset | mediadefinition | ( variable -> ^( VAR variable ) ) )
+            // D:\\development\\Less.Net\\lesscss.g:38:2: ( ruleset -> ^( ruleset ) | mediadefinition -> ^( mediadefinition ) | variable -> ^( variable ) )
             int alt3 = 3;
             switch ( input.LA(1) ) 
             {
             case IDENT:
-            case SelectorClass:
-            case SelectorID:
-            case 34:
-            case 52:
+            case 49:
+            case 50:
             	{
                 alt3 = 1;
                 }
                 break;
-            case 39:
+            case 36:
             	{
                 alt3 = 2;
                 }
                 break;
-            case 30:
+            case 26:
             	{
                 alt3 = 3;
                 }
@@ -490,73 +498,111 @@ public class lesscssParser : Parser
             switch (alt3) 
             {
                 case 1 :
-                    // D:\\lesscss.g:35:4: ruleset
+                    // D:\\development\\Less.Net\\lesscss.g:38:4: ruleset
                     {
-                    	root_0 = (CommonTree)adaptor.GetNilNode();
-
-                    	PushFollow(FOLLOW_ruleset_in_lessLine160);
+                    	PushFollow(FOLLOW_ruleset_in_lessLine172);
                     	ruleset8 = ruleset();
                     	state.followingStackPointer--;
 
-                    	adaptor.AddChild(root_0, ruleset8.Tree);
+                    	stream_ruleset.Add(ruleset8.Tree);
 
+
+                    	// AST REWRITE
+                    	// elements:          ruleset
+                    	// token labels:      
+                    	// rule labels:       retval
+                    	// token list labels: 
+                    	// rule list labels:  
+                    	// wildcard labels: 
+                    	retval.Tree = root_0;
+                    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
+
+                    	root_0 = (CommonTree)adaptor.GetNilNode();
+                    	// 38:12: -> ^( ruleset )
+                    	{
+                    	    // D:\\development\\Less.Net\\lesscss.g:38:15: ^( ruleset )
+                    	    {
+                    	    CommonTree root_1 = (CommonTree)adaptor.GetNilNode();
+                    	    root_1 = (CommonTree)adaptor.BecomeRoot(stream_ruleset.NextNode(), root_1);
+
+                    	    adaptor.AddChild(root_0, root_1);
+                    	    }
+
+                    	}
+
+                    	retval.Tree = root_0;retval.Tree = root_0;
                     }
                     break;
                 case 2 :
-                    // D:\\lesscss.g:35:14: mediadefinition
+                    // D:\\development\\Less.Net\\lesscss.g:38:28: mediadefinition
                     {
-                    	root_0 = (CommonTree)adaptor.GetNilNode();
-
-                    	PushFollow(FOLLOW_mediadefinition_in_lessLine164);
+                    	PushFollow(FOLLOW_mediadefinition_in_lessLine182);
                     	mediadefinition9 = mediadefinition();
                     	state.followingStackPointer--;
 
-                    	adaptor.AddChild(root_0, mediadefinition9.Tree);
+                    	stream_mediadefinition.Add(mediadefinition9.Tree);
 
+
+                    	// AST REWRITE
+                    	// elements:          mediadefinition
+                    	// token labels:      
+                    	// rule labels:       retval
+                    	// token list labels: 
+                    	// rule list labels:  
+                    	// wildcard labels: 
+                    	retval.Tree = root_0;
+                    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
+
+                    	root_0 = (CommonTree)adaptor.GetNilNode();
+                    	// 38:44: -> ^( mediadefinition )
+                    	{
+                    	    // D:\\development\\Less.Net\\lesscss.g:38:47: ^( mediadefinition )
+                    	    {
+                    	    CommonTree root_1 = (CommonTree)adaptor.GetNilNode();
+                    	    root_1 = (CommonTree)adaptor.BecomeRoot(stream_mediadefinition.NextNode(), root_1);
+
+                    	    adaptor.AddChild(root_0, root_1);
+                    	    }
+
+                    	}
+
+                    	retval.Tree = root_0;retval.Tree = root_0;
                     }
                     break;
                 case 3 :
-                    // D:\\lesscss.g:35:32: ( variable -> ^( VAR variable ) )
+                    // D:\\development\\Less.Net\\lesscss.g:38:68: variable
                     {
-                    	// D:\\lesscss.g:35:32: ( variable -> ^( VAR variable ) )
-                    	// D:\\lesscss.g:35:33: variable
+                    	PushFollow(FOLLOW_variable_in_lessLine192);
+                    	variable10 = variable();
+                    	state.followingStackPointer--;
+
+                    	stream_variable.Add(variable10.Tree);
+
+
+                    	// AST REWRITE
+                    	// elements:          variable
+                    	// token labels:      
+                    	// rule labels:       retval
+                    	// token list labels: 
+                    	// rule list labels:  
+                    	// wildcard labels: 
+                    	retval.Tree = root_0;
+                    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
+
+                    	root_0 = (CommonTree)adaptor.GetNilNode();
+                    	// 38:77: -> ^( variable )
                     	{
-                    		PushFollow(FOLLOW_variable_in_lessLine169);
-                    		variable10 = variable();
-                    		state.followingStackPointer--;
+                    	    // D:\\development\\Less.Net\\lesscss.g:38:80: ^( variable )
+                    	    {
+                    	    CommonTree root_1 = (CommonTree)adaptor.GetNilNode();
+                    	    root_1 = (CommonTree)adaptor.BecomeRoot(stream_variable.NextNode(), root_1);
 
-                    		stream_variable.Add(variable10.Tree);
+                    	    adaptor.AddChild(root_0, root_1);
+                    	    }
 
-
-                    		// AST REWRITE
-                    		// elements:          variable
-                    		// token labels:      
-                    		// rule labels:       retval
-                    		// token list labels: 
-                    		// rule list labels:  
-                    		// wildcard labels: 
-                    		retval.Tree = root_0;
-                    		RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
-
-                    		root_0 = (CommonTree)adaptor.GetNilNode();
-                    		// 35:42: -> ^( VAR variable )
-                    		{
-                    		    // D:\\lesscss.g:35:45: ^( VAR variable )
-                    		    {
-                    		    CommonTree root_1 = (CommonTree)adaptor.GetNilNode();
-                    		    root_1 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(VAR, "VAR"), root_1);
-
-                    		    adaptor.AddChild(root_1, stream_variable.NextTree());
-
-                    		    adaptor.AddChild(root_0, root_1);
-                    		    }
-
-                    		}
-
-                    		retval.Tree = root_0;retval.Tree = root_0;
                     	}
 
-
+                    	retval.Tree = root_0;retval.Tree = root_0;
                     }
                     break;
 
@@ -592,7 +638,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "literal"
-    // D:\\lesscss.g:40:10: fragment literal : ( STRING | IDENT ) ( ',' ( STRING | IDENT ) )* ;
+    // D:\\development\\Less.Net\\lesscss.g:43:10: fragment literal : ( STRING | IDENT ) ( ',' ( STRING | IDENT ) )* ;
     public lesscssParser.literal_return literal() // throws RecognitionException [1]
     {   
         lesscssParser.literal_return retval = new lesscssParser.literal_return();
@@ -610,8 +656,8 @@ public class lesscssParser : Parser
 
         try 
     	{
-            // D:\\lesscss.g:41:2: ( ( STRING | IDENT ) ( ',' ( STRING | IDENT ) )* )
-            // D:\\lesscss.g:41:4: ( STRING | IDENT ) ( ',' ( STRING | IDENT ) )*
+            // D:\\development\\Less.Net\\lesscss.g:44:2: ( ( STRING | IDENT ) ( ',' ( STRING | IDENT ) )* )
+            // D:\\development\\Less.Net\\lesscss.g:44:4: ( STRING | IDENT ) ( ',' ( STRING | IDENT ) )*
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
@@ -628,13 +674,13 @@ public class lesscssParser : Parser
             	    throw mse;
             	}
 
-            	// D:\\lesscss.g:41:21: ( ',' ( STRING | IDENT ) )*
+            	// D:\\development\\Less.Net\\lesscss.g:44:21: ( ',' ( STRING | IDENT ) )*
             	do 
             	{
             	    int alt4 = 2;
             	    int LA4_0 = input.LA(1);
 
-            	    if ( (LA4_0 == 33) )
+            	    if ( (LA4_0 == 29) )
             	    {
             	        alt4 = 1;
             	    }
@@ -643,9 +689,9 @@ public class lesscssParser : Parser
             	    switch (alt4) 
             		{
             			case 1 :
-            			    // D:\\lesscss.g:41:22: ',' ( STRING | IDENT )
+            			    // D:\\development\\Less.Net\\lesscss.g:44:22: ',' ( STRING | IDENT )
             			    {
-            			    	char_literal12=(IToken)Match(input,33,FOLLOW_33_in_literal203); 
+            			    	char_literal12=(IToken)Match(input,29,FOLLOW_29_in_literal223); 
             			    		char_literal12_tree = (CommonTree)adaptor.Create(char_literal12);
             			    		adaptor.AddChild(root_0, char_literal12_tree);
 
@@ -708,7 +754,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "varname"
-    // D:\\lesscss.g:44:10: fragment varname : '@' IDENT -> IDENT ;
+    // D:\\development\\Less.Net\\lesscss.g:47:10: fragment varname : '@' IDENT -> IDENT ;
     public lesscssParser.varname_return varname() // throws RecognitionException [1]
     {   
         lesscssParser.varname_return retval = new lesscssParser.varname_return();
@@ -722,17 +768,17 @@ public class lesscssParser : Parser
         CommonTree char_literal14_tree=null;
         CommonTree IDENT15_tree=null;
         RewriteRuleTokenStream stream_IDENT = new RewriteRuleTokenStream(adaptor,"token IDENT");
-        RewriteRuleTokenStream stream_30 = new RewriteRuleTokenStream(adaptor,"token 30");
+        RewriteRuleTokenStream stream_26 = new RewriteRuleTokenStream(adaptor,"token 26");
 
         try 
     	{
-            // D:\\lesscss.g:45:2: ( '@' IDENT -> IDENT )
-            // D:\\lesscss.g:45:4: '@' IDENT
+            // D:\\development\\Less.Net\\lesscss.g:48:2: ( '@' IDENT -> IDENT )
+            // D:\\development\\Less.Net\\lesscss.g:48:4: '@' IDENT
             {
-            	char_literal14=(IToken)Match(input,30,FOLLOW_30_in_varname227);  
-            	stream_30.Add(char_literal14);
+            	char_literal14=(IToken)Match(input,26,FOLLOW_26_in_varname247);  
+            	stream_26.Add(char_literal14);
 
-            	IDENT15=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_varname229);  
+            	IDENT15=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_varname249);  
             	stream_IDENT.Add(IDENT15);
 
 
@@ -748,7 +794,7 @@ public class lesscssParser : Parser
             	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
             	root_0 = (CommonTree)adaptor.GetNilNode();
-            	// 45:14: -> IDENT
+            	// 48:14: -> IDENT
             	{
             	    adaptor.AddChild(root_0, stream_IDENT.NextNode());
 
@@ -788,7 +834,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "expression"
-    // D:\\lesscss.g:49:10: fragment expression : additiveExpression -> ^( EXPR additiveExpression ) ;
+    // D:\\development\\Less.Net\\lesscss.g:52:10: fragment expression : additiveExpression -> ^( EXPR ^( additiveExpression ) ) ;
     public lesscssParser.expression_return expression() // throws RecognitionException [1]
     {   
         lesscssParser.expression_return retval = new lesscssParser.expression_return();
@@ -796,16 +842,16 @@ public class lesscssParser : Parser
 
         CommonTree root_0 = null;
 
-        lesscssParser.additiveExpression_return additiveExpression16 = null;
+        lesscssParser.additiveExpression_return additiveExpression16 = default(lesscssParser.additiveExpression_return);
 
 
         RewriteRuleSubtreeStream stream_additiveExpression = new RewriteRuleSubtreeStream(adaptor,"rule additiveExpression");
         try 
     	{
-            // D:\\lesscss.g:50:2: ( additiveExpression -> ^( EXPR additiveExpression ) )
-            // D:\\lesscss.g:50:5: additiveExpression
+            // D:\\development\\Less.Net\\lesscss.g:53:2: ( additiveExpression -> ^( EXPR ^( additiveExpression ) ) )
+            // D:\\development\\Less.Net\\lesscss.g:53:5: additiveExpression
             {
-            	PushFollow(FOLLOW_additiveExpression_in_expression248);
+            	PushFollow(FOLLOW_additiveExpression_in_expression268);
             	additiveExpression16 = additiveExpression();
             	state.followingStackPointer--;
 
@@ -823,14 +869,20 @@ public class lesscssParser : Parser
             	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
             	root_0 = (CommonTree)adaptor.GetNilNode();
-            	// 50:24: -> ^( EXPR additiveExpression )
+            	// 53:24: -> ^( EXPR ^( additiveExpression ) )
             	{
-            	    // D:\\lesscss.g:50:27: ^( EXPR additiveExpression )
+            	    // D:\\development\\Less.Net\\lesscss.g:53:27: ^( EXPR ^( additiveExpression ) )
             	    {
             	    CommonTree root_1 = (CommonTree)adaptor.GetNilNode();
             	    root_1 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(EXPR, "EXPR"), root_1);
 
-            	    adaptor.AddChild(root_1, stream_additiveExpression.NextTree());
+            	    // D:\\development\\Less.Net\\lesscss.g:53:34: ^( additiveExpression )
+            	    {
+            	    CommonTree root_2 = (CommonTree)adaptor.GetNilNode();
+            	    root_2 = (CommonTree)adaptor.BecomeRoot(stream_additiveExpression.NextNode(), root_2);
+
+            	    adaptor.AddChild(root_1, root_2);
+            	    }
 
             	    adaptor.AddChild(root_0, root_1);
             	    }
@@ -871,7 +923,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "additiveExpression"
-    // D:\\lesscss.g:53:10: fragment additiveExpression : multiplicativeExpression ( ( '+' | MINUS ) multiplicativeExpression )* ;
+    // D:\\development\\Less.Net\\lesscss.g:56:10: fragment additiveExpression : multiplicativeExpression ( ( '+' | '-' ) multiplicativeExpression )* ;
     public lesscssParser.additiveExpression_return additiveExpression() // throws RecognitionException [1]
     {   
         lesscssParser.additiveExpression_return retval = new lesscssParser.additiveExpression_return();
@@ -880,32 +932,32 @@ public class lesscssParser : Parser
         CommonTree root_0 = null;
 
         IToken set18 = null;
-        lesscssParser.multiplicativeExpression_return multiplicativeExpression17 = null;
+        lesscssParser.multiplicativeExpression_return multiplicativeExpression17 = default(lesscssParser.multiplicativeExpression_return);
 
-        lesscssParser.multiplicativeExpression_return multiplicativeExpression19 = null;
+        lesscssParser.multiplicativeExpression_return multiplicativeExpression19 = default(lesscssParser.multiplicativeExpression_return);
 
 
         CommonTree set18_tree=null;
 
         try 
     	{
-            // D:\\lesscss.g:54:2: ( multiplicativeExpression ( ( '+' | MINUS ) multiplicativeExpression )* )
-            // D:\\lesscss.g:54:4: multiplicativeExpression ( ( '+' | MINUS ) multiplicativeExpression )*
+            // D:\\development\\Less.Net\\lesscss.g:57:2: ( multiplicativeExpression ( ( '+' | '-' ) multiplicativeExpression )* )
+            // D:\\development\\Less.Net\\lesscss.g:57:4: multiplicativeExpression ( ( '+' | '-' ) multiplicativeExpression )*
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_multiplicativeExpression_in_additiveExpression269);
+            	PushFollow(FOLLOW_multiplicativeExpression_in_additiveExpression291);
             	multiplicativeExpression17 = multiplicativeExpression();
             	state.followingStackPointer--;
 
             	adaptor.AddChild(root_0, multiplicativeExpression17.Tree);
-            	// D:\\lesscss.g:54:29: ( ( '+' | MINUS ) multiplicativeExpression )*
+            	// D:\\development\\Less.Net\\lesscss.g:57:29: ( ( '+' | '-' ) multiplicativeExpression )*
             	do 
             	{
             	    int alt5 = 2;
             	    int LA5_0 = input.LA(1);
 
-            	    if ( (LA5_0 == MINUS || LA5_0 == 34) )
+            	    if ( ((LA5_0 >= 30 && LA5_0 <= 31)) )
             	    {
             	        alt5 = 1;
             	    }
@@ -914,11 +966,11 @@ public class lesscssParser : Parser
             	    switch (alt5) 
             		{
             			case 1 :
-            			    // D:\\lesscss.g:54:31: ( '+' | MINUS ) multiplicativeExpression
+            			    // D:\\development\\Less.Net\\lesscss.g:57:31: ( '+' | '-' ) multiplicativeExpression
             			    {
             			    	set18=(IToken)input.LT(1);
             			    	set18 = (IToken)input.LT(1);
-            			    	if ( input.LA(1) == MINUS || input.LA(1) == 34 ) 
+            			    	if ( (input.LA(1) >= 30 && input.LA(1) <= 31) ) 
             			    	{
             			    	    input.Consume();
             			    	    root_0 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(set18), root_0);
@@ -930,7 +982,7 @@ public class lesscssParser : Parser
             			    	    throw mse;
             			    	}
 
-            			    	PushFollow(FOLLOW_multiplicativeExpression_in_additiveExpression280);
+            			    	PushFollow(FOLLOW_multiplicativeExpression_in_additiveExpression302);
             			    	multiplicativeExpression19 = multiplicativeExpression();
             			    	state.followingStackPointer--;
 
@@ -981,7 +1033,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "multiplicativeExpression"
-    // D:\\lesscss.g:58:10: fragment multiplicativeExpression : primaryExpression ( ( '*' | '/' ) primaryExpression )* ;
+    // D:\\development\\Less.Net\\lesscss.g:60:10: fragment multiplicativeExpression : primaryExpression ( ( '*' | '/' ) primaryExpression )* ;
     public lesscssParser.multiplicativeExpression_return multiplicativeExpression() // throws RecognitionException [1]
     {   
         lesscssParser.multiplicativeExpression_return retval = new lesscssParser.multiplicativeExpression_return();
@@ -990,32 +1042,32 @@ public class lesscssParser : Parser
         CommonTree root_0 = null;
 
         IToken set21 = null;
-        lesscssParser.primaryExpression_return primaryExpression20 = null;
+        lesscssParser.primaryExpression_return primaryExpression20 = default(lesscssParser.primaryExpression_return);
 
-        lesscssParser.primaryExpression_return primaryExpression22 = null;
+        lesscssParser.primaryExpression_return primaryExpression22 = default(lesscssParser.primaryExpression_return);
 
 
         CommonTree set21_tree=null;
 
         try 
     	{
-            // D:\\lesscss.g:59:2: ( primaryExpression ( ( '*' | '/' ) primaryExpression )* )
-            // D:\\lesscss.g:59:4: primaryExpression ( ( '*' | '/' ) primaryExpression )*
+            // D:\\development\\Less.Net\\lesscss.g:61:2: ( primaryExpression ( ( '*' | '/' ) primaryExpression )* )
+            // D:\\development\\Less.Net\\lesscss.g:61:4: primaryExpression ( ( '*' | '/' ) primaryExpression )*
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_primaryExpression_in_multiplicativeExpression305);
+            	PushFollow(FOLLOW_primaryExpression_in_multiplicativeExpression319);
             	primaryExpression20 = primaryExpression();
             	state.followingStackPointer--;
 
             	adaptor.AddChild(root_0, primaryExpression20.Tree);
-            	// D:\\lesscss.g:59:22: ( ( '*' | '/' ) primaryExpression )*
+            	// D:\\development\\Less.Net\\lesscss.g:61:22: ( ( '*' | '/' ) primaryExpression )*
             	do 
             	{
             	    int alt6 = 2;
             	    int LA6_0 = input.LA(1);
 
-            	    if ( ((LA6_0 >= 35 && LA6_0 <= 36)) )
+            	    if ( ((LA6_0 >= 32 && LA6_0 <= 33)) )
             	    {
             	        alt6 = 1;
             	    }
@@ -1024,11 +1076,11 @@ public class lesscssParser : Parser
             	    switch (alt6) 
             		{
             			case 1 :
-            			    // D:\\lesscss.g:59:24: ( '*' | '/' ) primaryExpression
+            			    // D:\\development\\Less.Net\\lesscss.g:61:24: ( '*' | '/' ) primaryExpression
             			    {
             			    	set21=(IToken)input.LT(1);
             			    	set21 = (IToken)input.LT(1);
-            			    	if ( (input.LA(1) >= 35 && input.LA(1) <= 36) ) 
+            			    	if ( (input.LA(1) >= 32 && input.LA(1) <= 33) ) 
             			    	{
             			    	    input.Consume();
             			    	    root_0 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(set21), root_0);
@@ -1040,7 +1092,7 @@ public class lesscssParser : Parser
             			    	    throw mse;
             			    	}
 
-            			    	PushFollow(FOLLOW_primaryExpression_in_multiplicativeExpression316);
+            			    	PushFollow(FOLLOW_primaryExpression_in_multiplicativeExpression330);
             			    	primaryExpression22 = primaryExpression();
             			    	state.followingStackPointer--;
 
@@ -1091,7 +1143,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "primaryExpression"
-    // D:\\lesscss.g:62:10: fragment primaryExpression : ( '(' additiveExpression ')' | value );
+    // D:\\development\\Less.Net\\lesscss.g:64:10: fragment primaryExpression : ( '(' additiveExpression ')' | value );
     public lesscssParser.primaryExpression_return primaryExpression() // throws RecognitionException [1]
     {   
         lesscssParser.primaryExpression_return retval = new lesscssParser.primaryExpression_return();
@@ -1101,9 +1153,9 @@ public class lesscssParser : Parser
 
         IToken char_literal23 = null;
         IToken char_literal25 = null;
-        lesscssParser.additiveExpression_return additiveExpression24 = null;
+        lesscssParser.additiveExpression_return additiveExpression24 = default(lesscssParser.additiveExpression_return);
 
-        lesscssParser.value_return value26 = null;
+        lesscssParser.value_return value26 = default(lesscssParser.value_return);
 
 
         CommonTree char_literal23_tree=null;
@@ -1111,15 +1163,15 @@ public class lesscssParser : Parser
 
         try 
     	{
-            // D:\\lesscss.g:63:2: ( '(' additiveExpression ')' | value )
+            // D:\\development\\Less.Net\\lesscss.g:65:2: ( '(' additiveExpression ')' | value )
             int alt7 = 2;
             int LA7_0 = input.LA(1);
 
-            if ( (LA7_0 == 37) )
+            if ( (LA7_0 == 34) )
             {
                 alt7 = 1;
             }
-            else if ( (LA7_0 == NUM || LA7_0 == COLOR || LA7_0 == 30) )
+            else if ( (LA7_0 == COLOR || LA7_0 == NUM || LA7_0 == 26) )
             {
                 alt7 = 2;
             }
@@ -1133,26 +1185,26 @@ public class lesscssParser : Parser
             switch (alt7) 
             {
                 case 1 :
-                    // D:\\lesscss.g:63:4: '(' additiveExpression ')'
+                    // D:\\development\\Less.Net\\lesscss.g:65:4: '(' additiveExpression ')'
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	char_literal23=(IToken)Match(input,37,FOLLOW_37_in_primaryExpression331); 
-                    	PushFollow(FOLLOW_additiveExpression_in_primaryExpression334);
+                    	char_literal23=(IToken)Match(input,34,FOLLOW_34_in_primaryExpression345); 
+                    	PushFollow(FOLLOW_additiveExpression_in_primaryExpression348);
                     	additiveExpression24 = additiveExpression();
                     	state.followingStackPointer--;
 
                     	adaptor.AddChild(root_0, additiveExpression24.Tree);
-                    	char_literal25=(IToken)Match(input,38,FOLLOW_38_in_primaryExpression336); 
+                    	char_literal25=(IToken)Match(input,35,FOLLOW_35_in_primaryExpression350); 
 
                     }
                     break;
                 case 2 :
-                    // D:\\lesscss.g:64:4: value
+                    // D:\\development\\Less.Net\\lesscss.g:66:4: value
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_value_in_primaryExpression342);
+                    	PushFollow(FOLLOW_value_in_primaryExpression356);
                     	value26 = value();
                     	state.followingStackPointer--;
 
@@ -1193,7 +1245,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "value"
-    // D:\\lesscss.g:67:10: fragment value : ( varname -> ^( VAR varname ) | numeric -> ^( CONSTANT numeric ) );
+    // D:\\development\\Less.Net\\lesscss.g:69:10: fragment value : ( varname -> ^( VAR varname ) | numeric -> ^( CONSTANT numeric ) );
     public lesscssParser.value_return value() // throws RecognitionException [1]
     {   
         lesscssParser.value_return retval = new lesscssParser.value_return();
@@ -1201,24 +1253,24 @@ public class lesscssParser : Parser
 
         CommonTree root_0 = null;
 
-        lesscssParser.varname_return varname27 = null;
+        lesscssParser.varname_return varname27 = default(lesscssParser.varname_return);
 
-        lesscssParser.numeric_return numeric28 = null;
+        lesscssParser.numeric_return numeric28 = default(lesscssParser.numeric_return);
 
 
         RewriteRuleSubtreeStream stream_numeric = new RewriteRuleSubtreeStream(adaptor,"rule numeric");
         RewriteRuleSubtreeStream stream_varname = new RewriteRuleSubtreeStream(adaptor,"rule varname");
         try 
     	{
-            // D:\\lesscss.g:68:2: ( varname -> ^( VAR varname ) | numeric -> ^( CONSTANT numeric ) )
+            // D:\\development\\Less.Net\\lesscss.g:70:2: ( varname -> ^( VAR varname ) | numeric -> ^( CONSTANT numeric ) )
             int alt8 = 2;
             int LA8_0 = input.LA(1);
 
-            if ( (LA8_0 == 30) )
+            if ( (LA8_0 == 26) )
             {
                 alt8 = 1;
             }
-            else if ( (LA8_0 == NUM || LA8_0 == COLOR) )
+            else if ( (LA8_0 == COLOR || LA8_0 == NUM) )
             {
                 alt8 = 2;
             }
@@ -1232,9 +1284,9 @@ public class lesscssParser : Parser
             switch (alt8) 
             {
                 case 1 :
-                    // D:\\lesscss.g:68:5: varname
+                    // D:\\development\\Less.Net\\lesscss.g:70:5: varname
                     {
-                    	PushFollow(FOLLOW_varname_in_value358);
+                    	PushFollow(FOLLOW_varname_in_value372);
                     	varname27 = varname();
                     	state.followingStackPointer--;
 
@@ -1252,9 +1304,9 @@ public class lesscssParser : Parser
                     	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
                     	root_0 = (CommonTree)adaptor.GetNilNode();
-                    	// 68:13: -> ^( VAR varname )
+                    	// 70:13: -> ^( VAR varname )
                     	{
-                    	    // D:\\lesscss.g:68:16: ^( VAR varname )
+                    	    // D:\\development\\Less.Net\\lesscss.g:70:16: ^( VAR varname )
                     	    {
                     	    CommonTree root_1 = (CommonTree)adaptor.GetNilNode();
                     	    root_1 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(VAR, "VAR"), root_1);
@@ -1270,9 +1322,9 @@ public class lesscssParser : Parser
                     }
                     break;
                 case 2 :
-                    // D:\\lesscss.g:69:4: numeric
+                    // D:\\development\\Less.Net\\lesscss.g:71:4: numeric
                     {
-                    	PushFollow(FOLLOW_numeric_in_value372);
+                    	PushFollow(FOLLOW_numeric_in_value385);
                     	numeric28 = numeric();
                     	state.followingStackPointer--;
 
@@ -1290,9 +1342,9 @@ public class lesscssParser : Parser
                     	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
                     	root_0 = (CommonTree)adaptor.GetNilNode();
-                    	// 69:12: -> ^( CONSTANT numeric )
+                    	// 71:12: -> ^( CONSTANT numeric )
                     	{
-                    	    // D:\\lesscss.g:69:15: ^( CONSTANT numeric )
+                    	    // D:\\development\\Less.Net\\lesscss.g:71:15: ^( CONSTANT numeric )
                     	    {
                     	    CommonTree root_1 = (CommonTree)adaptor.GetNilNode();
                     	    root_1 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(CONSTANT, "CONSTANT"), root_1);
@@ -1340,7 +1392,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "numeric"
-    // D:\\lesscss.g:72:1: numeric : ( ( NUM ( UNIT )? ) | COLOR );
+    // D:\\development\\Less.Net\\lesscss.g:74:10: fragment numeric : ( ( NUM ( UNIT )? ) | COLOR );
     public lesscssParser.numeric_return numeric() // throws RecognitionException [1]
     {   
         lesscssParser.numeric_return retval = new lesscssParser.numeric_return();
@@ -1358,7 +1410,7 @@ public class lesscssParser : Parser
 
         try 
     	{
-            // D:\\lesscss.g:73:2: ( ( NUM ( UNIT )? ) | COLOR )
+            // D:\\development\\Less.Net\\lesscss.g:75:2: ( ( NUM ( UNIT )? ) | COLOR )
             int alt10 = 2;
             int LA10_0 = input.LA(1);
 
@@ -1380,18 +1432,18 @@ public class lesscssParser : Parser
             switch (alt10) 
             {
                 case 1 :
-                    // D:\\lesscss.g:73:4: ( NUM ( UNIT )? )
+                    // D:\\development\\Less.Net\\lesscss.g:75:4: ( NUM ( UNIT )? )
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	// D:\\lesscss.g:73:4: ( NUM ( UNIT )? )
-                    	// D:\\lesscss.g:73:5: NUM ( UNIT )?
+                    	// D:\\development\\Less.Net\\lesscss.g:75:4: ( NUM ( UNIT )? )
+                    	// D:\\development\\Less.Net\\lesscss.g:75:5: NUM ( UNIT )?
                     	{
-                    		NUM29=(IToken)Match(input,NUM,FOLLOW_NUM_in_numeric393); 
+                    		NUM29=(IToken)Match(input,NUM,FOLLOW_NUM_in_numeric408); 
                     			NUM29_tree = (CommonTree)adaptor.Create(NUM29);
                     			adaptor.AddChild(root_0, NUM29_tree);
 
-                    		// D:\\lesscss.g:73:9: ( UNIT )?
+                    		// D:\\development\\Less.Net\\lesscss.g:75:9: ( UNIT )?
                     		int alt9 = 2;
                     		int LA9_0 = input.LA(1);
 
@@ -1402,9 +1454,9 @@ public class lesscssParser : Parser
                     		switch (alt9) 
                     		{
                     		    case 1 :
-                    		        // D:\\lesscss.g:73:9: UNIT
+                    		        // D:\\development\\Less.Net\\lesscss.g:75:9: UNIT
                     		        {
-                    		        	UNIT30=(IToken)Match(input,UNIT,FOLLOW_UNIT_in_numeric395); 
+                    		        	UNIT30=(IToken)Match(input,UNIT,FOLLOW_UNIT_in_numeric410); 
                     		        		UNIT30_tree = (CommonTree)adaptor.Create(UNIT30);
                     		        		adaptor.AddChild(root_0, UNIT30_tree);
 
@@ -1421,11 +1473,11 @@ public class lesscssParser : Parser
                     }
                     break;
                 case 2 :
-                    // D:\\lesscss.g:74:4: COLOR
+                    // D:\\development\\Less.Net\\lesscss.g:75:18: COLOR
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	COLOR31=(IToken)Match(input,COLOR,FOLLOW_COLOR_in_numeric402); 
+                    	COLOR31=(IToken)Match(input,COLOR,FOLLOW_COLOR_in_numeric416); 
                     		COLOR31_tree = (CommonTree)adaptor.Create(COLOR31);
                     		adaptor.AddChild(root_0, COLOR31_tree);
 
@@ -1465,7 +1517,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "mediadefinition"
-    // D:\\lesscss.g:77:10: fragment mediadefinition : ( '@media' media '{' lessCss '}' ) ;
+    // D:\\development\\Less.Net\\lesscss.g:78:10: fragment mediadefinition : ( '@media' media '{' lessCss '}' ) ;
     public lesscssParser.mediadefinition_return mediadefinition() // throws RecognitionException [1]
     {   
         lesscssParser.mediadefinition_return retval = new lesscssParser.mediadefinition_return();
@@ -1476,9 +1528,9 @@ public class lesscssParser : Parser
         IToken string_literal32 = null;
         IToken char_literal34 = null;
         IToken char_literal36 = null;
-        lesscssParser.media_return media33 = null;
+        lesscssParser.media_return media33 = default(lesscssParser.media_return);
 
-        lesscssParser.lessCss_return lessCss35 = null;
+        lesscssParser.lessCss_return lessCss35 = default(lesscssParser.lessCss_return);
 
 
         CommonTree string_literal32_tree=null;
@@ -1487,33 +1539,33 @@ public class lesscssParser : Parser
 
         try 
     	{
-            // D:\\lesscss.g:78:2: ( ( '@media' media '{' lessCss '}' ) )
-            // D:\\lesscss.g:78:4: ( '@media' media '{' lessCss '}' )
+            // D:\\development\\Less.Net\\lesscss.g:79:2: ( ( '@media' media '{' lessCss '}' ) )
+            // D:\\development\\Less.Net\\lesscss.g:79:4: ( '@media' media '{' lessCss '}' )
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	// D:\\lesscss.g:78:4: ( '@media' media '{' lessCss '}' )
-            	// D:\\lesscss.g:78:5: '@media' media '{' lessCss '}'
+            	// D:\\development\\Less.Net\\lesscss.g:79:4: ( '@media' media '{' lessCss '}' )
+            	// D:\\development\\Less.Net\\lesscss.g:79:5: '@media' media '{' lessCss '}'
             	{
-            		string_literal32=(IToken)Match(input,39,FOLLOW_39_in_mediadefinition418); 
+            		string_literal32=(IToken)Match(input,36,FOLLOW_36_in_mediadefinition431); 
             			string_literal32_tree = (CommonTree)adaptor.Create(string_literal32);
             			adaptor.AddChild(root_0, string_literal32_tree);
 
-            		PushFollow(FOLLOW_media_in_mediadefinition420);
+            		PushFollow(FOLLOW_media_in_mediadefinition433);
             		media33 = media();
             		state.followingStackPointer--;
 
             		adaptor.AddChild(root_0, media33.Tree);
-            		char_literal34=(IToken)Match(input,40,FOLLOW_40_in_mediadefinition422); 
+            		char_literal34=(IToken)Match(input,37,FOLLOW_37_in_mediadefinition435); 
             			char_literal34_tree = (CommonTree)adaptor.Create(char_literal34);
             			adaptor.AddChild(root_0, char_literal34_tree);
 
-            		PushFollow(FOLLOW_lessCss_in_mediadefinition424);
+            		PushFollow(FOLLOW_lessCss_in_mediadefinition437);
             		lessCss35 = lessCss();
             		state.followingStackPointer--;
 
             		adaptor.AddChild(root_0, lessCss35.Tree);
-            		char_literal36=(IToken)Match(input,41,FOLLOW_41_in_mediadefinition426); 
+            		char_literal36=(IToken)Match(input,38,FOLLOW_38_in_mediadefinition439); 
             			char_literal36_tree = (CommonTree)adaptor.Create(char_literal36);
             			adaptor.AddChild(root_0, char_literal36_tree);
 
@@ -1554,7 +1606,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "ruleset"
-    // D:\\lesscss.g:80:10: fragment ruleset : selectors '{' ( ruleContents )* '}' -> ^( RULE selectors ( ruleContents )* ) ;
+    // D:\\development\\Less.Net\\lesscss.g:81:10: fragment ruleset : selectors '{' ( ruleContents )* '}' -> ^( RULE selectors ( ruleContents )* ) ;
     public lesscssParser.ruleset_return ruleset() // throws RecognitionException [1]
     {   
         lesscssParser.ruleset_return retval = new lesscssParser.ruleset_return();
@@ -1564,37 +1616,37 @@ public class lesscssParser : Parser
 
         IToken char_literal38 = null;
         IToken char_literal40 = null;
-        lesscssParser.selectors_return selectors37 = null;
+        lesscssParser.selectors_return selectors37 = default(lesscssParser.selectors_return);
 
-        lesscssParser.ruleContents_return ruleContents39 = null;
+        lesscssParser.ruleContents_return ruleContents39 = default(lesscssParser.ruleContents_return);
 
 
         CommonTree char_literal38_tree=null;
         CommonTree char_literal40_tree=null;
-        RewriteRuleTokenStream stream_41 = new RewriteRuleTokenStream(adaptor,"token 41");
-        RewriteRuleTokenStream stream_40 = new RewriteRuleTokenStream(adaptor,"token 40");
+        RewriteRuleTokenStream stream_37 = new RewriteRuleTokenStream(adaptor,"token 37");
+        RewriteRuleTokenStream stream_38 = new RewriteRuleTokenStream(adaptor,"token 38");
         RewriteRuleSubtreeStream stream_ruleContents = new RewriteRuleSubtreeStream(adaptor,"rule ruleContents");
         RewriteRuleSubtreeStream stream_selectors = new RewriteRuleSubtreeStream(adaptor,"rule selectors");
         try 
     	{
-            // D:\\lesscss.g:81:2: ( selectors '{' ( ruleContents )* '}' -> ^( RULE selectors ( ruleContents )* ) )
-            // D:\\lesscss.g:81:4: selectors '{' ( ruleContents )* '}'
+            // D:\\development\\Less.Net\\lesscss.g:82:2: ( selectors '{' ( ruleContents )* '}' -> ^( RULE selectors ( ruleContents )* ) )
+            // D:\\development\\Less.Net\\lesscss.g:82:4: selectors '{' ( ruleContents )* '}'
             {
-            	PushFollow(FOLLOW_selectors_in_ruleset441);
+            	PushFollow(FOLLOW_selectors_in_ruleset454);
             	selectors37 = selectors();
             	state.followingStackPointer--;
 
             	stream_selectors.Add(selectors37.Tree);
-            	char_literal38=(IToken)Match(input,40,FOLLOW_40_in_ruleset443);  
-            	stream_40.Add(char_literal38);
+            	char_literal38=(IToken)Match(input,37,FOLLOW_37_in_ruleset456);  
+            	stream_37.Add(char_literal38);
 
-            	// D:\\lesscss.g:81:18: ( ruleContents )*
+            	// D:\\development\\Less.Net\\lesscss.g:82:18: ( ruleContents )*
             	do 
             	{
             	    int alt11 = 2;
             	    int LA11_0 = input.LA(1);
 
-            	    if ( (LA11_0 == IDENT || (LA11_0 >= SelectorClass && LA11_0 <= SelectorID) || LA11_0 == 34 || LA11_0 == 52) )
+            	    if ( (LA11_0 == IDENT || (LA11_0 >= 49 && LA11_0 <= 50)) )
             	    {
             	        alt11 = 1;
             	    }
@@ -1603,9 +1655,9 @@ public class lesscssParser : Parser
             	    switch (alt11) 
             		{
             			case 1 :
-            			    // D:\\lesscss.g:81:18: ruleContents
+            			    // D:\\development\\Less.Net\\lesscss.g:82:18: ruleContents
             			    {
-            			    	PushFollow(FOLLOW_ruleContents_in_ruleset445);
+            			    	PushFollow(FOLLOW_ruleContents_in_ruleset458);
             			    	ruleContents39 = ruleContents();
             			    	state.followingStackPointer--;
 
@@ -1622,13 +1674,13 @@ public class lesscssParser : Parser
             	loop11:
             		;	// Stops C# compiler whining that label 'loop11' has no statements
 
-            	char_literal40=(IToken)Match(input,41,FOLLOW_41_in_ruleset448);  
-            	stream_41.Add(char_literal40);
+            	char_literal40=(IToken)Match(input,38,FOLLOW_38_in_ruleset461);  
+            	stream_38.Add(char_literal40);
 
 
 
             	// AST REWRITE
-            	// elements:          ruleContents, selectors
+            	// elements:          selectors, ruleContents
             	// token labels:      
             	// rule labels:       retval
             	// token list labels: 
@@ -1638,15 +1690,15 @@ public class lesscssParser : Parser
             	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
             	root_0 = (CommonTree)adaptor.GetNilNode();
-            	// 81:36: -> ^( RULE selectors ( ruleContents )* )
+            	// 82:36: -> ^( RULE selectors ( ruleContents )* )
             	{
-            	    // D:\\lesscss.g:81:39: ^( RULE selectors ( ruleContents )* )
+            	    // D:\\development\\Less.Net\\lesscss.g:82:39: ^( RULE selectors ( ruleContents )* )
             	    {
             	    CommonTree root_1 = (CommonTree)adaptor.GetNilNode();
             	    root_1 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(RULE, "RULE"), root_1);
 
             	    adaptor.AddChild(root_1, stream_selectors.NextTree());
-            	    // D:\\lesscss.g:81:56: ( ruleContents )*
+            	    // D:\\development\\Less.Net\\lesscss.g:82:56: ( ruleContents )*
             	    while ( stream_ruleContents.HasNext() )
             	    {
             	        adaptor.AddChild(root_1, stream_ruleContents.NextTree());
@@ -1693,7 +1745,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "ruleContents"
-    // D:\\lesscss.g:84:10: fragment ruleContents : ( property -> ^( PROPERTY property ) | ( ( selectors ';' ) -> ^( MIXIN selectors ) ) | ruleset );
+    // D:\\development\\Less.Net\\lesscss.g:85:10: fragment ruleContents : ( property | mixin | ruleset );
     public lesscssParser.ruleContents_return ruleContents() // throws RecognitionException [1]
     {   
         lesscssParser.ruleContents_return retval = new lesscssParser.ruleContents_return();
@@ -1701,126 +1753,57 @@ public class lesscssParser : Parser
 
         CommonTree root_0 = null;
 
-        IToken char_literal43 = null;
-        lesscssParser.property_return property41 = null;
+        lesscssParser.property_return property41 = default(lesscssParser.property_return);
 
-        lesscssParser.selectors_return selectors42 = null;
+        lesscssParser.mixin_return mixin42 = default(lesscssParser.mixin_return);
 
-        lesscssParser.ruleset_return ruleset44 = null;
+        lesscssParser.ruleset_return ruleset43 = default(lesscssParser.ruleset_return);
 
 
-        CommonTree char_literal43_tree=null;
-        RewriteRuleTokenStream stream_32 = new RewriteRuleTokenStream(adaptor,"token 32");
-        RewriteRuleSubtreeStream stream_selectors = new RewriteRuleSubtreeStream(adaptor,"rule selectors");
-        RewriteRuleSubtreeStream stream_property = new RewriteRuleSubtreeStream(adaptor,"rule property");
+
         try 
     	{
-            // D:\\lesscss.g:85:2: ( property -> ^( PROPERTY property ) | ( ( selectors ';' ) -> ^( MIXIN selectors ) ) | ruleset )
+            // D:\\development\\Less.Net\\lesscss.g:86:2: ( property | mixin | ruleset )
             int alt12 = 3;
             alt12 = dfa12.Predict(input);
             switch (alt12) 
             {
                 case 1 :
-                    // D:\\lesscss.g:85:4: property
+                    // D:\\development\\Less.Net\\lesscss.g:86:4: property
                     {
-                    	PushFollow(FOLLOW_property_in_ruleContents473);
+                    	root_0 = (CommonTree)adaptor.GetNilNode();
+
+                    	PushFollow(FOLLOW_property_in_ruleContents486);
                     	property41 = property();
                     	state.followingStackPointer--;
 
-                    	stream_property.Add(property41.Tree);
+                    	adaptor.AddChild(root_0, property41.Tree);
 
-
-                    	// AST REWRITE
-                    	// elements:          property
-                    	// token labels:      
-                    	// rule labels:       retval
-                    	// token list labels: 
-                    	// rule list labels:  
-                    	// wildcard labels: 
-                    	retval.Tree = root_0;
-                    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
-
-                    	root_0 = (CommonTree)adaptor.GetNilNode();
-                    	// 85:13: -> ^( PROPERTY property )
-                    	{
-                    	    // D:\\lesscss.g:85:16: ^( PROPERTY property )
-                    	    {
-                    	    CommonTree root_1 = (CommonTree)adaptor.GetNilNode();
-                    	    root_1 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(PROPERTY, "PROPERTY"), root_1);
-
-                    	    adaptor.AddChild(root_1, stream_property.NextTree());
-
-                    	    adaptor.AddChild(root_0, root_1);
-                    	    }
-
-                    	}
-
-                    	retval.Tree = root_0;retval.Tree = root_0;
                     }
                     break;
                 case 2 :
-                    // D:\\lesscss.g:85:39: ( ( selectors ';' ) -> ^( MIXIN selectors ) )
+                    // D:\\development\\Less.Net\\lesscss.g:86:15: mixin
                     {
-                    	// D:\\lesscss.g:85:39: ( ( selectors ';' ) -> ^( MIXIN selectors ) )
-                    	// D:\\lesscss.g:85:40: ( selectors ';' )
-                    	{
-                    		// D:\\lesscss.g:85:40: ( selectors ';' )
-                    		// D:\\lesscss.g:85:41: selectors ';'
-                    		{
-                    			PushFollow(FOLLOW_selectors_in_ruleContents487);
-                    			selectors42 = selectors();
-                    			state.followingStackPointer--;
+                    	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    			stream_selectors.Add(selectors42.Tree);
-                    			char_literal43=(IToken)Match(input,32,FOLLOW_32_in_ruleContents489);  
-                    			stream_32.Add(char_literal43);
+                    	PushFollow(FOLLOW_mixin_in_ruleContents490);
+                    	mixin42 = mixin();
+                    	state.followingStackPointer--;
 
-
-                    		}
-
-
-
-                    		// AST REWRITE
-                    		// elements:          selectors
-                    		// token labels:      
-                    		// rule labels:       retval
-                    		// token list labels: 
-                    		// rule list labels:  
-                    		// wildcard labels: 
-                    		retval.Tree = root_0;
-                    		RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
-
-                    		root_0 = (CommonTree)adaptor.GetNilNode();
-                    		// 85:56: -> ^( MIXIN selectors )
-                    		{
-                    		    // D:\\lesscss.g:85:59: ^( MIXIN selectors )
-                    		    {
-                    		    CommonTree root_1 = (CommonTree)adaptor.GetNilNode();
-                    		    root_1 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(MIXIN, "MIXIN"), root_1);
-
-                    		    adaptor.AddChild(root_1, stream_selectors.NextTree());
-
-                    		    adaptor.AddChild(root_0, root_1);
-                    		    }
-
-                    		}
-
-                    		retval.Tree = root_0;retval.Tree = root_0;
-                    	}
-
+                    	adaptor.AddChild(root_0, mixin42.Tree);
 
                     }
                     break;
                 case 3 :
-                    // D:\\lesscss.g:85:81: ruleset
+                    // D:\\development\\Less.Net\\lesscss.g:86:23: ruleset
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_ruleset_in_ruleContents503);
-                    	ruleset44 = ruleset();
+                    	PushFollow(FOLLOW_ruleset_in_ruleContents494);
+                    	ruleset43 = ruleset();
                     	state.followingStackPointer--;
 
-                    	adaptor.AddChild(root_0, ruleset44.Tree);
+                    	adaptor.AddChild(root_0, ruleset43.Tree);
 
                     }
                     break;
@@ -1846,6 +1829,88 @@ public class lesscssParser : Parser
     }
     // $ANTLR end "ruleContents"
 
+    public class mixin_return : ParserRuleReturnScope
+    {
+        private CommonTree tree;
+        override public object Tree
+        {
+        	get { return tree; }
+        	set { tree = (CommonTree) value; }
+        }
+    };
+
+    // $ANTLR start "mixin"
+    // D:\\development\\Less.Net\\lesscss.g:88:10: fragment mixin : selectors ';' -> MIXIN selectors ;
+    public lesscssParser.mixin_return mixin() // throws RecognitionException [1]
+    {   
+        lesscssParser.mixin_return retval = new lesscssParser.mixin_return();
+        retval.Start = input.LT(1);
+
+        CommonTree root_0 = null;
+
+        IToken char_literal45 = null;
+        lesscssParser.selectors_return selectors44 = default(lesscssParser.selectors_return);
+
+
+        CommonTree char_literal45_tree=null;
+        RewriteRuleTokenStream stream_28 = new RewriteRuleTokenStream(adaptor,"token 28");
+        RewriteRuleSubtreeStream stream_selectors = new RewriteRuleSubtreeStream(adaptor,"rule selectors");
+        try 
+    	{
+            // D:\\development\\Less.Net\\lesscss.g:89:2: ( selectors ';' -> MIXIN selectors )
+            // D:\\development\\Less.Net\\lesscss.g:89:4: selectors ';'
+            {
+            	PushFollow(FOLLOW_selectors_in_mixin505);
+            	selectors44 = selectors();
+            	state.followingStackPointer--;
+
+            	stream_selectors.Add(selectors44.Tree);
+            	char_literal45=(IToken)Match(input,28,FOLLOW_28_in_mixin507);  
+            	stream_28.Add(char_literal45);
+
+
+
+            	// AST REWRITE
+            	// elements:          selectors
+            	// token labels:      
+            	// rule labels:       retval
+            	// token list labels: 
+            	// rule list labels:  
+            	// wildcard labels: 
+            	retval.Tree = root_0;
+            	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
+
+            	root_0 = (CommonTree)adaptor.GetNilNode();
+            	// 89:18: -> MIXIN selectors
+            	{
+            	    adaptor.AddChild(root_0, (CommonTree)adaptor.Create(MIXIN, "MIXIN"));
+            	    adaptor.AddChild(root_0, stream_selectors.NextTree());
+
+            	}
+
+            	retval.Tree = root_0;retval.Tree = root_0;
+            }
+
+            retval.Stop = input.LT(-1);
+
+            	retval.Tree = (CommonTree)adaptor.RulePostProcessing(root_0);
+            	adaptor.SetTokenBoundaries(retval.Tree, (IToken) retval.Start, (IToken) retval.Stop);
+        }
+        catch (RecognitionException re) 
+    	{
+            ReportError(re);
+            Recover(input,re);
+    	// Conversion of the second argument necessary, but harmless
+    	retval.Tree = (CommonTree)adaptor.ErrorNode(input, (IToken) retval.Start, input.LT(-1), re);
+
+        }
+        finally 
+    	{
+        }
+        return retval;
+    }
+    // $ANTLR end "mixin"
+
     public class media_return : ParserRuleReturnScope
     {
         private CommonTree tree;
@@ -1857,7 +1922,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "media"
-    // D:\\lesscss.g:87:10: fragment media : ( 'all' | 'braille' | 'embossed' | 'handheld' | 'print' | 'projection' | 'screen' | 'speech' | 'tty' | 'tv' );
+    // D:\\development\\Less.Net\\lesscss.g:91:10: fragment media : ( 'all' | 'braille' | 'embossed' | 'handheld' | 'print' | 'projection' | 'screen' | 'speech' | 'tty' | 'tv' );
     public lesscssParser.media_return media() // throws RecognitionException [1]
     {   
         lesscssParser.media_return retval = new lesscssParser.media_return();
@@ -1865,22 +1930,22 @@ public class lesscssParser : Parser
 
         CommonTree root_0 = null;
 
-        IToken set45 = null;
+        IToken set46 = null;
 
-        CommonTree set45_tree=null;
+        CommonTree set46_tree=null;
 
         try 
     	{
-            // D:\\lesscss.g:87:17: ( 'all' | 'braille' | 'embossed' | 'handheld' | 'print' | 'projection' | 'screen' | 'speech' | 'tty' | 'tv' )
-            // D:\\lesscss.g:
+            // D:\\development\\Less.Net\\lesscss.g:91:17: ( 'all' | 'braille' | 'embossed' | 'handheld' | 'print' | 'projection' | 'screen' | 'speech' | 'tty' | 'tv' )
+            // D:\\development\\Less.Net\\lesscss.g:
             {
             	root_0 = (CommonTree)adaptor.GetNilNode();
 
-            	set45 = (IToken)input.LT(1);
-            	if ( (input.LA(1) >= 42 && input.LA(1) <= 51) ) 
+            	set46 = (IToken)input.LT(1);
+            	if ( (input.LA(1) >= 39 && input.LA(1) <= 48) ) 
             	{
             	    input.Consume();
-            	    adaptor.AddChild(root_0, (CommonTree)adaptor.Create(set45));
+            	    adaptor.AddChild(root_0, (CommonTree)adaptor.Create(set46));
             	    state.errorRecovery = false;
             	}
             	else 
@@ -1923,7 +1988,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "selectors"
-    // D:\\lesscss.g:89:10: fragment selectors : selectorGrouping ( ',' selectorGrouping )* -> ^( SELECTORGROUP ( selectorGrouping )+ ) ;
+    // D:\\development\\Less.Net\\lesscss.g:93:10: fragment selectors : selectorGrouping ( ',' selectorGrouping )* -> ( selectorGrouping )+ ;
     public lesscssParser.selectors_return selectors() // throws RecognitionException [1]
     {   
         lesscssParser.selectors_return retval = new lesscssParser.selectors_return();
@@ -1931,32 +1996,32 @@ public class lesscssParser : Parser
 
         CommonTree root_0 = null;
 
-        IToken char_literal47 = null;
-        lesscssParser.selectorGrouping_return selectorGrouping46 = null;
+        IToken char_literal48 = null;
+        lesscssParser.selectorGrouping_return selectorGrouping47 = default(lesscssParser.selectorGrouping_return);
 
-        lesscssParser.selectorGrouping_return selectorGrouping48 = null;
+        lesscssParser.selectorGrouping_return selectorGrouping49 = default(lesscssParser.selectorGrouping_return);
 
 
-        CommonTree char_literal47_tree=null;
-        RewriteRuleTokenStream stream_33 = new RewriteRuleTokenStream(adaptor,"token 33");
+        CommonTree char_literal48_tree=null;
+        RewriteRuleTokenStream stream_29 = new RewriteRuleTokenStream(adaptor,"token 29");
         RewriteRuleSubtreeStream stream_selectorGrouping = new RewriteRuleSubtreeStream(adaptor,"rule selectorGrouping");
         try 
     	{
-            // D:\\lesscss.g:90:2: ( selectorGrouping ( ',' selectorGrouping )* -> ^( SELECTORGROUP ( selectorGrouping )+ ) )
-            // D:\\lesscss.g:90:4: selectorGrouping ( ',' selectorGrouping )*
+            // D:\\development\\Less.Net\\lesscss.g:94:2: ( selectorGrouping ( ',' selectorGrouping )* -> ( selectorGrouping )+ )
+            // D:\\development\\Less.Net\\lesscss.g:94:4: selectorGrouping ( ',' selectorGrouping )*
             {
-            	PushFollow(FOLLOW_selectorGrouping_in_selectors543);
-            	selectorGrouping46 = selectorGrouping();
+            	PushFollow(FOLLOW_selectorGrouping_in_selectors554);
+            	selectorGrouping47 = selectorGrouping();
             	state.followingStackPointer--;
 
-            	stream_selectorGrouping.Add(selectorGrouping46.Tree);
-            	// D:\\lesscss.g:90:21: ( ',' selectorGrouping )*
+            	stream_selectorGrouping.Add(selectorGrouping47.Tree);
+            	// D:\\development\\Less.Net\\lesscss.g:94:21: ( ',' selectorGrouping )*
             	do 
             	{
             	    int alt13 = 2;
             	    int LA13_0 = input.LA(1);
 
-            	    if ( (LA13_0 == 33) )
+            	    if ( (LA13_0 == 29) )
             	    {
             	        alt13 = 1;
             	    }
@@ -1965,16 +2030,16 @@ public class lesscssParser : Parser
             	    switch (alt13) 
             		{
             			case 1 :
-            			    // D:\\lesscss.g:90:22: ',' selectorGrouping
+            			    // D:\\development\\Less.Net\\lesscss.g:94:22: ',' selectorGrouping
             			    {
-            			    	char_literal47=(IToken)Match(input,33,FOLLOW_33_in_selectors546);  
-            			    	stream_33.Add(char_literal47);
+            			    	char_literal48=(IToken)Match(input,29,FOLLOW_29_in_selectors557);  
+            			    	stream_29.Add(char_literal48);
 
-            			    	PushFollow(FOLLOW_selectorGrouping_in_selectors548);
-            			    	selectorGrouping48 = selectorGrouping();
+            			    	PushFollow(FOLLOW_selectorGrouping_in_selectors559);
+            			    	selectorGrouping49 = selectorGrouping();
             			    	state.followingStackPointer--;
 
-            			    	stream_selectorGrouping.Add(selectorGrouping48.Tree);
+            			    	stream_selectorGrouping.Add(selectorGrouping49.Tree);
 
             			    }
             			    break;
@@ -2000,25 +2065,17 @@ public class lesscssParser : Parser
             	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
             	root_0 = (CommonTree)adaptor.GetNilNode();
-            	// 90:45: -> ^( SELECTORGROUP ( selectorGrouping )+ )
+            	// 94:45: -> ( selectorGrouping )+
             	{
-            	    // D:\\lesscss.g:90:48: ^( SELECTORGROUP ( selectorGrouping )+ )
-            	    {
-            	    CommonTree root_1 = (CommonTree)adaptor.GetNilNode();
-            	    root_1 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(SELECTORGROUP, "SELECTORGROUP"), root_1);
-
             	    if ( !(stream_selectorGrouping.HasNext()) ) {
             	        throw new RewriteEarlyExitException();
             	    }
             	    while ( stream_selectorGrouping.HasNext() )
             	    {
-            	        adaptor.AddChild(root_1, stream_selectorGrouping.NextTree());
+            	        adaptor.AddChild(root_0, stream_selectorGrouping.NextTree());
 
             	    }
             	    stream_selectorGrouping.Reset();
-
-            	    adaptor.AddChild(root_0, root_1);
-            	    }
 
             	}
 
@@ -2056,7 +2113,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "selectorGrouping"
-    // D:\\lesscss.g:93:10: fragment selectorGrouping : ( ( selectorOps )? selector )+ -> ^( SELECTOR ( selector )+ ) ;
+    // D:\\development\\Less.Net\\lesscss.g:97:10: fragment selectorGrouping : ( selector )+ -> ^( SELECTOR ( selector )+ ) ;
     public lesscssParser.selectorGrouping_return selectorGrouping() // throws RecognitionException [1]
     {   
         lesscssParser.selectorGrouping_return retval = new lesscssParser.selectorGrouping_return();
@@ -2064,61 +2121,34 @@ public class lesscssParser : Parser
 
         CommonTree root_0 = null;
 
-        lesscssParser.selectorOps_return selectorOps49 = null;
-
-        lesscssParser.selector_return selector50 = null;
+        lesscssParser.selector_return selector50 = default(lesscssParser.selector_return);
 
 
         RewriteRuleSubtreeStream stream_selector = new RewriteRuleSubtreeStream(adaptor,"rule selector");
-        RewriteRuleSubtreeStream stream_selectorOps = new RewriteRuleSubtreeStream(adaptor,"rule selectorOps");
         try 
     	{
-            // D:\\lesscss.g:94:2: ( ( ( selectorOps )? selector )+ -> ^( SELECTOR ( selector )+ ) )
-            // D:\\lesscss.g:94:4: ( ( selectorOps )? selector )+
+            // D:\\development\\Less.Net\\lesscss.g:98:2: ( ( selector )+ -> ^( SELECTOR ( selector )+ ) )
+            // D:\\development\\Less.Net\\lesscss.g:98:4: ( selector )+
             {
-            	// D:\\lesscss.g:94:4: ( ( selectorOps )? selector )+
-            	int cnt15 = 0;
+            	// D:\\development\\Less.Net\\lesscss.g:98:4: ( selector )+
+            	int cnt14 = 0;
             	do 
             	{
-            	    int alt15 = 2;
-            	    int LA15_0 = input.LA(1);
+            	    int alt14 = 2;
+            	    int LA14_0 = input.LA(1);
 
-            	    if ( (LA15_0 == IDENT || (LA15_0 >= SelectorClass && LA15_0 <= SelectorID) || LA15_0 == 34 || LA15_0 == 52) )
+            	    if ( (LA14_0 == IDENT || (LA14_0 >= 49 && LA14_0 <= 50)) )
             	    {
-            	        alt15 = 1;
+            	        alt14 = 1;
             	    }
 
 
-            	    switch (alt15) 
+            	    switch (alt14) 
             		{
             			case 1 :
-            			    // D:\\lesscss.g:94:5: ( selectorOps )? selector
+            			    // D:\\development\\Less.Net\\lesscss.g:98:4: selector
             			    {
-            			    	// D:\\lesscss.g:94:5: ( selectorOps )?
-            			    	int alt14 = 2;
-            			    	int LA14_0 = input.LA(1);
-
-            			    	if ( (LA14_0 == 34 || LA14_0 == 52) )
-            			    	{
-            			    	    alt14 = 1;
-            			    	}
-            			    	switch (alt14) 
-            			    	{
-            			    	    case 1 :
-            			    	        // D:\\lesscss.g:94:5: selectorOps
-            			    	        {
-            			    	        	PushFollow(FOLLOW_selectorOps_in_selectorGrouping574);
-            			    	        	selectorOps49 = selectorOps();
-            			    	        	state.followingStackPointer--;
-
-            			    	        	stream_selectorOps.Add(selectorOps49.Tree);
-
-            			    	        }
-            			    	        break;
-
-            			    	}
-
-            			    	PushFollow(FOLLOW_selector_in_selectorGrouping577);
+            			    	PushFollow(FOLLOW_selector_in_selectorGrouping580);
             			    	selector50 = selector();
             			    	state.followingStackPointer--;
 
@@ -2128,16 +2158,16 @@ public class lesscssParser : Parser
             			    break;
 
             			default:
-            			    if ( cnt15 >= 1 ) goto loop15;
-            		            EarlyExitException eee15 =
-            		                new EarlyExitException(15, input);
-            		            throw eee15;
+            			    if ( cnt14 >= 1 ) goto loop14;
+            		            EarlyExitException eee14 =
+            		                new EarlyExitException(14, input);
+            		            throw eee14;
             	    }
-            	    cnt15++;
+            	    cnt14++;
             	} while (true);
 
-            	loop15:
-            		;	// Stops C# compiler whinging that label 'loop15' has no statements
+            	loop14:
+            		;	// Stops C# compiler whinging that label 'loop14' has no statements
 
 
 
@@ -2152,9 +2182,9 @@ public class lesscssParser : Parser
             	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
             	root_0 = (CommonTree)adaptor.GetNilNode();
-            	// 94:29: -> ^( SELECTOR ( selector )+ )
+            	// 98:14: -> ^( SELECTOR ( selector )+ )
             	{
-            	    // D:\\lesscss.g:94:32: ^( SELECTOR ( selector )+ )
+            	    // D:\\development\\Less.Net\\lesscss.g:98:17: ^( SELECTOR ( selector )+ )
             	    {
             	    CommonTree root_1 = (CommonTree)adaptor.GetNilNode();
             	    root_1 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(SELECTOR, "SELECTOR"), root_1);
@@ -2208,7 +2238,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "property"
-    // D:\\lesscss.g:98:10: fragment property : IDENT ':' ( propval )+ ';' -> IDENT ( propval )+ ;
+    // D:\\development\\Less.Net\\lesscss.g:102:10: fragment property : IDENT ':' ( propval )+ ';' -> ^( PROPERTY IDENT ( propval )+ ) ;
     public lesscssParser.property_return property() // throws RecognitionException [1]
     {   
         lesscssParser.property_return retval = new lesscssParser.property_return();
@@ -2219,46 +2249,46 @@ public class lesscssParser : Parser
         IToken IDENT51 = null;
         IToken char_literal52 = null;
         IToken char_literal54 = null;
-        lesscssParser.propval_return propval53 = null;
+        lesscssParser.propval_return propval53 = default(lesscssParser.propval_return);
 
 
         CommonTree IDENT51_tree=null;
         CommonTree char_literal52_tree=null;
         CommonTree char_literal54_tree=null;
         RewriteRuleTokenStream stream_IDENT = new RewriteRuleTokenStream(adaptor,"token IDENT");
-        RewriteRuleTokenStream stream_32 = new RewriteRuleTokenStream(adaptor,"token 32");
-        RewriteRuleTokenStream stream_31 = new RewriteRuleTokenStream(adaptor,"token 31");
+        RewriteRuleTokenStream stream_27 = new RewriteRuleTokenStream(adaptor,"token 27");
+        RewriteRuleTokenStream stream_28 = new RewriteRuleTokenStream(adaptor,"token 28");
         RewriteRuleSubtreeStream stream_propval = new RewriteRuleSubtreeStream(adaptor,"rule propval");
         try 
     	{
-            // D:\\lesscss.g:99:2: ( IDENT ':' ( propval )+ ';' -> IDENT ( propval )+ )
-            // D:\\lesscss.g:99:4: IDENT ':' ( propval )+ ';'
+            // D:\\development\\Less.Net\\lesscss.g:103:2: ( IDENT ':' ( propval )+ ';' -> ^( PROPERTY IDENT ( propval )+ ) )
+            // D:\\development\\Less.Net\\lesscss.g:103:4: IDENT ':' ( propval )+ ';'
             {
-            	IDENT51=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_property603);  
+            	IDENT51=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_property605);  
             	stream_IDENT.Add(IDENT51);
 
-            	char_literal52=(IToken)Match(input,31,FOLLOW_31_in_property605);  
-            	stream_31.Add(char_literal52);
+            	char_literal52=(IToken)Match(input,27,FOLLOW_27_in_property607);  
+            	stream_27.Add(char_literal52);
 
-            	// D:\\lesscss.g:99:14: ( propval )+
-            	int cnt16 = 0;
+            	// D:\\development\\Less.Net\\lesscss.g:103:14: ( propval )+
+            	int cnt15 = 0;
             	do 
             	{
-            	    int alt16 = 2;
-            	    int LA16_0 = input.LA(1);
+            	    int alt15 = 2;
+            	    int LA15_0 = input.LA(1);
 
-            	    if ( ((LA16_0 >= IDENT && LA16_0 <= STRING) || LA16_0 == NUM || LA16_0 == COLOR || LA16_0 == 30 || LA16_0 == 37) )
+            	    if ( ((LA15_0 >= COLOR && LA15_0 <= NUM) || LA15_0 == 26 || LA15_0 == 34) )
             	    {
-            	        alt16 = 1;
+            	        alt15 = 1;
             	    }
 
 
-            	    switch (alt16) 
+            	    switch (alt15) 
             		{
             			case 1 :
-            			    // D:\\lesscss.g:99:14: propval
+            			    // D:\\development\\Less.Net\\lesscss.g:103:14: propval
             			    {
-            			    	PushFollow(FOLLOW_propval_in_property607);
+            			    	PushFollow(FOLLOW_propval_in_property609);
             			    	propval53 = propval();
             			    	state.followingStackPointer--;
 
@@ -2268,19 +2298,19 @@ public class lesscssParser : Parser
             			    break;
 
             			default:
-            			    if ( cnt16 >= 1 ) goto loop16;
-            		            EarlyExitException eee16 =
-            		                new EarlyExitException(16, input);
-            		            throw eee16;
+            			    if ( cnt15 >= 1 ) goto loop15;
+            		            EarlyExitException eee15 =
+            		                new EarlyExitException(15, input);
+            		            throw eee15;
             	    }
-            	    cnt16++;
+            	    cnt15++;
             	} while (true);
 
-            	loop16:
-            		;	// Stops C# compiler whinging that label 'loop16' has no statements
+            	loop15:
+            		;	// Stops C# compiler whinging that label 'loop15' has no statements
 
-            	char_literal54=(IToken)Match(input,32,FOLLOW_32_in_property610);  
-            	stream_32.Add(char_literal54);
+            	char_literal54=(IToken)Match(input,28,FOLLOW_28_in_property612);  
+            	stream_28.Add(char_literal54);
 
 
 
@@ -2295,18 +2325,26 @@ public class lesscssParser : Parser
             	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
             	root_0 = (CommonTree)adaptor.GetNilNode();
-            	// 99:27: -> IDENT ( propval )+
+            	// 103:27: -> ^( PROPERTY IDENT ( propval )+ )
             	{
-            	    adaptor.AddChild(root_0, stream_IDENT.NextNode());
+            	    // D:\\development\\Less.Net\\lesscss.g:103:30: ^( PROPERTY IDENT ( propval )+ )
+            	    {
+            	    CommonTree root_1 = (CommonTree)adaptor.GetNilNode();
+            	    root_1 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(PROPERTY, "PROPERTY"), root_1);
+
+            	    adaptor.AddChild(root_1, stream_IDENT.NextNode());
             	    if ( !(stream_propval.HasNext()) ) {
             	        throw new RewriteEarlyExitException();
             	    }
             	    while ( stream_propval.HasNext() )
             	    {
-            	        adaptor.AddChild(root_0, stream_propval.NextTree());
+            	        adaptor.AddChild(root_1, stream_propval.NextTree());
 
             	    }
             	    stream_propval.Reset();
+
+            	    adaptor.AddChild(root_0, root_1);
+            	    }
 
             	}
 
@@ -2344,7 +2382,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "propval"
-    // D:\\lesscss.g:102:10: fragment propval : ( additiveExpression -> ^( EXPR additiveExpression ) | literal );
+    // D:\\development\\Less.Net\\lesscss.g:106:10: fragment propval : ( literal | additiveExpression -> ^( EXPR additiveExpression ) );
     public lesscssParser.propval_return propval() // throws RecognitionException [1]
     {   
         lesscssParser.propval_return retval = new lesscssParser.propval_return();
@@ -2352,43 +2390,56 @@ public class lesscssParser : Parser
 
         CommonTree root_0 = null;
 
-        lesscssParser.additiveExpression_return additiveExpression55 = null;
+        lesscssParser.literal_return literal55 = default(lesscssParser.literal_return);
 
-        lesscssParser.literal_return literal56 = null;
+        lesscssParser.additiveExpression_return additiveExpression56 = default(lesscssParser.additiveExpression_return);
 
 
         RewriteRuleSubtreeStream stream_additiveExpression = new RewriteRuleSubtreeStream(adaptor,"rule additiveExpression");
         try 
     	{
-            // D:\\lesscss.g:103:2: ( additiveExpression -> ^( EXPR additiveExpression ) | literal )
-            int alt17 = 2;
-            int LA17_0 = input.LA(1);
+            // D:\\development\\Less.Net\\lesscss.g:107:2: ( literal | additiveExpression -> ^( EXPR additiveExpression ) )
+            int alt16 = 2;
+            int LA16_0 = input.LA(1);
 
-            if ( (LA17_0 == NUM || LA17_0 == COLOR || LA17_0 == 30 || LA17_0 == 37) )
+            if ( ((LA16_0 >= IDENT && LA16_0 <= STRING)) )
             {
-                alt17 = 1;
+                alt16 = 1;
             }
-            else if ( ((LA17_0 >= IDENT && LA17_0 <= STRING)) )
+            else if ( (LA16_0 == COLOR || LA16_0 == NUM || LA16_0 == 26 || LA16_0 == 34) )
             {
-                alt17 = 2;
+                alt16 = 2;
             }
             else 
             {
-                NoViableAltException nvae_d17s0 =
-                    new NoViableAltException("", 17, 0, input);
+                NoViableAltException nvae_d16s0 =
+                    new NoViableAltException("", 16, 0, input);
 
-                throw nvae_d17s0;
+                throw nvae_d16s0;
             }
-            switch (alt17) 
+            switch (alt16) 
             {
                 case 1 :
-                    // D:\\lesscss.g:103:4: additiveExpression
+                    // D:\\development\\Less.Net\\lesscss.g:107:4: literal
                     {
-                    	PushFollow(FOLLOW_additiveExpression_in_propval630);
-                    	additiveExpression55 = additiveExpression();
+                    	root_0 = (CommonTree)adaptor.GetNilNode();
+
+                    	PushFollow(FOLLOW_literal_in_propval636);
+                    	literal55 = literal();
                     	state.followingStackPointer--;
 
-                    	stream_additiveExpression.Add(additiveExpression55.Tree);
+                    	adaptor.AddChild(root_0, literal55.Tree);
+
+                    }
+                    break;
+                case 2 :
+                    // D:\\development\\Less.Net\\lesscss.g:107:14: additiveExpression
+                    {
+                    	PushFollow(FOLLOW_additiveExpression_in_propval640);
+                    	additiveExpression56 = additiveExpression();
+                    	state.followingStackPointer--;
+
+                    	stream_additiveExpression.Add(additiveExpression56.Tree);
 
 
                     	// AST REWRITE
@@ -2402,9 +2453,9 @@ public class lesscssParser : Parser
                     	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
                     	root_0 = (CommonTree)adaptor.GetNilNode();
-                    	// 103:23: -> ^( EXPR additiveExpression )
+                    	// 107:33: -> ^( EXPR additiveExpression )
                     	{
-                    	    // D:\\lesscss.g:103:26: ^( EXPR additiveExpression )
+                    	    // D:\\development\\Less.Net\\lesscss.g:107:36: ^( EXPR additiveExpression )
                     	    {
                     	    CommonTree root_1 = (CommonTree)adaptor.GetNilNode();
                     	    root_1 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(EXPR, "EXPR"), root_1);
@@ -2417,19 +2468,6 @@ public class lesscssParser : Parser
                     	}
 
                     	retval.Tree = root_0;retval.Tree = root_0;
-                    }
-                    break;
-                case 2 :
-                    // D:\\lesscss.g:103:55: literal
-                    {
-                    	root_0 = (CommonTree)adaptor.GetNilNode();
-
-                    	PushFollow(FOLLOW_literal_in_propval642);
-                    	literal56 = literal();
-                    	state.followingStackPointer--;
-
-                    	adaptor.AddChild(root_0, literal56.Tree);
-
                     }
                     break;
 
@@ -2465,7 +2503,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "selector"
-    // D:\\lesscss.g:105:10: fragment selector : ( IDENT | SelectorClass | SelectorID );
+    // D:\\development\\Less.Net\\lesscss.g:109:10: fragment selector : ( IDENT -> ^( TAG IDENT ) | '#' IDENT -> ^( ID IDENT ) | '.' IDENT -> ^( CLASS IDENT ) );
     public lesscssParser.selector_return selector() // throws RecognitionException [1]
     {   
         lesscssParser.selector_return retval = new lesscssParser.selector_return();
@@ -2473,33 +2511,167 @@ public class lesscssParser : Parser
 
         CommonTree root_0 = null;
 
-        IToken set57 = null;
+        IToken IDENT57 = null;
+        IToken char_literal58 = null;
+        IToken IDENT59 = null;
+        IToken char_literal60 = null;
+        IToken IDENT61 = null;
 
-        CommonTree set57_tree=null;
+        CommonTree IDENT57_tree=null;
+        CommonTree char_literal58_tree=null;
+        CommonTree IDENT59_tree=null;
+        CommonTree char_literal60_tree=null;
+        CommonTree IDENT61_tree=null;
+        RewriteRuleTokenStream stream_49 = new RewriteRuleTokenStream(adaptor,"token 49");
+        RewriteRuleTokenStream stream_IDENT = new RewriteRuleTokenStream(adaptor,"token IDENT");
+        RewriteRuleTokenStream stream_50 = new RewriteRuleTokenStream(adaptor,"token 50");
 
         try 
     	{
-            // D:\\lesscss.g:106:2: ( IDENT | SelectorClass | SelectorID )
-            // D:\\lesscss.g:
+            // D:\\development\\Less.Net\\lesscss.g:110:2: ( IDENT -> ^( TAG IDENT ) | '#' IDENT -> ^( ID IDENT ) | '.' IDENT -> ^( CLASS IDENT ) )
+            int alt17 = 3;
+            switch ( input.LA(1) ) 
             {
-            	root_0 = (CommonTree)adaptor.GetNilNode();
-
-            	set57 = (IToken)input.LT(1);
-            	if ( input.LA(1) == IDENT || (input.LA(1) >= SelectorClass && input.LA(1) <= SelectorID) ) 
+            case IDENT:
             	{
-            	    input.Consume();
-            	    adaptor.AddChild(root_0, (CommonTree)adaptor.Create(set57));
-            	    state.errorRecovery = false;
-            	}
-            	else 
+                alt17 = 1;
+                }
+                break;
+            case 49:
             	{
-            	    MismatchedSetException mse = new MismatchedSetException(null,input);
-            	    throw mse;
-            	}
+                alt17 = 2;
+                }
+                break;
+            case 50:
+            	{
+                alt17 = 3;
+                }
+                break;
+            	default:
+            	    NoViableAltException nvae_d17s0 =
+            	        new NoViableAltException("", 17, 0, input);
 
-
+            	    throw nvae_d17s0;
             }
 
+            switch (alt17) 
+            {
+                case 1 :
+                    // D:\\development\\Less.Net\\lesscss.g:110:4: IDENT
+                    {
+                    	IDENT57=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_selector660);  
+                    	stream_IDENT.Add(IDENT57);
+
+
+
+                    	// AST REWRITE
+                    	// elements:          IDENT
+                    	// token labels:      
+                    	// rule labels:       retval
+                    	// token list labels: 
+                    	// rule list labels:  
+                    	// wildcard labels: 
+                    	retval.Tree = root_0;
+                    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
+
+                    	root_0 = (CommonTree)adaptor.GetNilNode();
+                    	// 110:10: -> ^( TAG IDENT )
+                    	{
+                    	    // D:\\development\\Less.Net\\lesscss.g:110:13: ^( TAG IDENT )
+                    	    {
+                    	    CommonTree root_1 = (CommonTree)adaptor.GetNilNode();
+                    	    root_1 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(TAG, "TAG"), root_1);
+
+                    	    adaptor.AddChild(root_1, stream_IDENT.NextNode());
+
+                    	    adaptor.AddChild(root_0, root_1);
+                    	    }
+
+                    	}
+
+                    	retval.Tree = root_0;retval.Tree = root_0;
+                    }
+                    break;
+                case 2 :
+                    // D:\\development\\Less.Net\\lesscss.g:110:28: '#' IDENT
+                    {
+                    	char_literal58=(IToken)Match(input,49,FOLLOW_49_in_selector672);  
+                    	stream_49.Add(char_literal58);
+
+                    	IDENT59=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_selector674);  
+                    	stream_IDENT.Add(IDENT59);
+
+
+
+                    	// AST REWRITE
+                    	// elements:          IDENT
+                    	// token labels:      
+                    	// rule labels:       retval
+                    	// token list labels: 
+                    	// rule list labels:  
+                    	// wildcard labels: 
+                    	retval.Tree = root_0;
+                    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
+
+                    	root_0 = (CommonTree)adaptor.GetNilNode();
+                    	// 110:38: -> ^( ID IDENT )
+                    	{
+                    	    // D:\\development\\Less.Net\\lesscss.g:110:41: ^( ID IDENT )
+                    	    {
+                    	    CommonTree root_1 = (CommonTree)adaptor.GetNilNode();
+                    	    root_1 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(ID, "ID"), root_1);
+
+                    	    adaptor.AddChild(root_1, stream_IDENT.NextNode());
+
+                    	    adaptor.AddChild(root_0, root_1);
+                    	    }
+
+                    	}
+
+                    	retval.Tree = root_0;retval.Tree = root_0;
+                    }
+                    break;
+                case 3 :
+                    // D:\\development\\Less.Net\\lesscss.g:110:55: '.' IDENT
+                    {
+                    	char_literal60=(IToken)Match(input,50,FOLLOW_50_in_selector686);  
+                    	stream_50.Add(char_literal60);
+
+                    	IDENT61=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_selector688);  
+                    	stream_IDENT.Add(IDENT61);
+
+
+
+                    	// AST REWRITE
+                    	// elements:          IDENT
+                    	// token labels:      
+                    	// rule labels:       retval
+                    	// token list labels: 
+                    	// rule list labels:  
+                    	// wildcard labels: 
+                    	retval.Tree = root_0;
+                    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
+
+                    	root_0 = (CommonTree)adaptor.GetNilNode();
+                    	// 110:65: -> ^( CLASS IDENT )
+                    	{
+                    	    // D:\\development\\Less.Net\\lesscss.g:110:68: ^( CLASS IDENT )
+                    	    {
+                    	    CommonTree root_1 = (CommonTree)adaptor.GetNilNode();
+                    	    root_1 = (CommonTree)adaptor.BecomeRoot((CommonTree)adaptor.Create(CLASS, "CLASS"), root_1);
+
+                    	    adaptor.AddChild(root_1, stream_IDENT.NextNode());
+
+                    	    adaptor.AddChild(root_0, root_1);
+                    	    }
+
+                    	}
+
+                    	retval.Tree = root_0;retval.Tree = root_0;
+                    }
+                    break;
+
+            }
             retval.Stop = input.LT(-1);
 
             	retval.Tree = (CommonTree)adaptor.RulePostProcessing(root_0);
@@ -2520,72 +2692,6 @@ public class lesscssParser : Parser
     }
     // $ANTLR end "selector"
 
-    public class selectorOps_return : ParserRuleReturnScope
-    {
-        private CommonTree tree;
-        override public object Tree
-        {
-        	get { return tree; }
-        	set { tree = (CommonTree) value; }
-        }
-    };
-
-    // $ANTLR start "selectorOps"
-    // D:\\lesscss.g:110:10: fragment selectorOps : ( '>' | '+' );
-    public lesscssParser.selectorOps_return selectorOps() // throws RecognitionException [1]
-    {   
-        lesscssParser.selectorOps_return retval = new lesscssParser.selectorOps_return();
-        retval.Start = input.LT(1);
-
-        CommonTree root_0 = null;
-
-        IToken set58 = null;
-
-        CommonTree set58_tree=null;
-
-        try 
-    	{
-            // D:\\lesscss.g:111:2: ( '>' | '+' )
-            // D:\\lesscss.g:
-            {
-            	root_0 = (CommonTree)adaptor.GetNilNode();
-
-            	set58 = (IToken)input.LT(1);
-            	if ( input.LA(1) == 34 || input.LA(1) == 52 ) 
-            	{
-            	    input.Consume();
-            	    adaptor.AddChild(root_0, (CommonTree)adaptor.Create(set58));
-            	    state.errorRecovery = false;
-            	}
-            	else 
-            	{
-            	    MismatchedSetException mse = new MismatchedSetException(null,input);
-            	    throw mse;
-            	}
-
-
-            }
-
-            retval.Stop = input.LT(-1);
-
-            	retval.Tree = (CommonTree)adaptor.RulePostProcessing(root_0);
-            	adaptor.SetTokenBoundaries(retval.Tree, (IToken) retval.Start, (IToken) retval.Stop);
-        }
-        catch (RecognitionException re) 
-    	{
-            ReportError(re);
-            Recover(input,re);
-    	// Conversion of the second argument necessary, but harmless
-    	retval.Tree = (CommonTree)adaptor.ErrorNode(input, (IToken) retval.Start, input.LT(-1), re);
-
-        }
-        finally 
-    	{
-        }
-        return retval;
-    }
-    // $ANTLR end "selectorOps"
-
     public class val_return : ParserRuleReturnScope
     {
         private CommonTree tree;
@@ -2597,7 +2703,7 @@ public class lesscssParser : Parser
     };
 
     // $ANTLR start "val"
-    // D:\\lesscss.g:115:1: val : ( IDENT '(' ( STRING | ( NUM ( UNIT )? ) | COLOR ) ( ',' ( STRING | ( NUM ( UNIT )? ) | COLOR ) )* ')' | IDENT | STRING | ( NUM ( UNIT )? ) | COLOR );
+    // D:\\development\\Less.Net\\lesscss.g:113:10: fragment val : ( IDENT '(' ( STRING | ( NUM ( UNIT )? ) ) ( ',' ( STRING | ( NUM ( UNIT )? ) ) )* ')' | IDENT | STRING | ( NUM ( UNIT )? ) | COLOR );
     public lesscssParser.val_return val() // throws RecognitionException [1]
     {   
         lesscssParser.val_return retval = new lesscssParser.val_return();
@@ -2605,45 +2711,41 @@ public class lesscssParser : Parser
 
         CommonTree root_0 = null;
 
-        IToken IDENT59 = null;
-        IToken char_literal60 = null;
-        IToken STRING61 = null;
-        IToken NUM62 = null;
-        IToken UNIT63 = null;
-        IToken COLOR64 = null;
-        IToken char_literal65 = null;
-        IToken STRING66 = null;
-        IToken NUM67 = null;
-        IToken UNIT68 = null;
-        IToken COLOR69 = null;
-        IToken char_literal70 = null;
-        IToken IDENT71 = null;
-        IToken STRING72 = null;
-        IToken NUM73 = null;
-        IToken UNIT74 = null;
-        IToken COLOR75 = null;
+        IToken IDENT62 = null;
+        IToken char_literal63 = null;
+        IToken STRING64 = null;
+        IToken NUM65 = null;
+        IToken UNIT66 = null;
+        IToken char_literal67 = null;
+        IToken STRING68 = null;
+        IToken NUM69 = null;
+        IToken UNIT70 = null;
+        IToken char_literal71 = null;
+        IToken IDENT72 = null;
+        IToken STRING73 = null;
+        IToken NUM74 = null;
+        IToken UNIT75 = null;
+        IToken COLOR76 = null;
 
-        CommonTree IDENT59_tree=null;
-        CommonTree char_literal60_tree=null;
-        CommonTree STRING61_tree=null;
-        CommonTree NUM62_tree=null;
-        CommonTree UNIT63_tree=null;
-        CommonTree COLOR64_tree=null;
-        CommonTree char_literal65_tree=null;
-        CommonTree STRING66_tree=null;
-        CommonTree NUM67_tree=null;
-        CommonTree UNIT68_tree=null;
-        CommonTree COLOR69_tree=null;
-        CommonTree char_literal70_tree=null;
-        CommonTree IDENT71_tree=null;
-        CommonTree STRING72_tree=null;
-        CommonTree NUM73_tree=null;
-        CommonTree UNIT74_tree=null;
-        CommonTree COLOR75_tree=null;
+        CommonTree IDENT62_tree=null;
+        CommonTree char_literal63_tree=null;
+        CommonTree STRING64_tree=null;
+        CommonTree NUM65_tree=null;
+        CommonTree UNIT66_tree=null;
+        CommonTree char_literal67_tree=null;
+        CommonTree STRING68_tree=null;
+        CommonTree NUM69_tree=null;
+        CommonTree UNIT70_tree=null;
+        CommonTree char_literal71_tree=null;
+        CommonTree IDENT72_tree=null;
+        CommonTree STRING73_tree=null;
+        CommonTree NUM74_tree=null;
+        CommonTree UNIT75_tree=null;
+        CommonTree COLOR76_tree=null;
 
         try 
     	{
-            // D:\\lesscss.g:116:2: ( IDENT '(' ( STRING | ( NUM ( UNIT )? ) | COLOR ) ( ',' ( STRING | ( NUM ( UNIT )? ) | COLOR ) )* ')' | IDENT | STRING | ( NUM ( UNIT )? ) | COLOR )
+            // D:\\development\\Less.Net\\lesscss.g:114:2: ( IDENT '(' ( STRING | ( NUM ( UNIT )? ) ) ( ',' ( STRING | ( NUM ( UNIT )? ) ) )* ')' | IDENT | STRING | ( NUM ( UNIT )? ) | COLOR )
             int alt24 = 5;
             switch ( input.LA(1) ) 
             {
@@ -2651,7 +2753,7 @@ public class lesscssParser : Parser
             	{
                 int LA24_1 = input.LA(2);
 
-                if ( (LA24_1 == 37) )
+                if ( (LA24_1 == 34) )
                 {
                     alt24 = 1;
                 }
@@ -2693,67 +2795,60 @@ public class lesscssParser : Parser
             switch (alt24) 
             {
                 case 1 :
-                    // D:\\lesscss.g:116:4: IDENT '(' ( STRING | ( NUM ( UNIT )? ) | COLOR ) ( ',' ( STRING | ( NUM ( UNIT )? ) | COLOR ) )* ')'
+                    // D:\\development\\Less.Net\\lesscss.g:114:4: IDENT '(' ( STRING | ( NUM ( UNIT )? ) ) ( ',' ( STRING | ( NUM ( UNIT )? ) ) )* ')'
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	IDENT59=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_val697); 
-                    		IDENT59_tree = (CommonTree)adaptor.Create(IDENT59);
-                    		adaptor.AddChild(root_0, IDENT59_tree);
+                    	IDENT62=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_val712); 
+                    		IDENT62_tree = (CommonTree)adaptor.Create(IDENT62);
+                    		adaptor.AddChild(root_0, IDENT62_tree);
 
-                    	char_literal60=(IToken)Match(input,37,FOLLOW_37_in_val699); 
-                    		char_literal60_tree = (CommonTree)adaptor.Create(char_literal60);
-                    		adaptor.AddChild(root_0, char_literal60_tree);
+                    	char_literal63=(IToken)Match(input,34,FOLLOW_34_in_val714); 
+                    		char_literal63_tree = (CommonTree)adaptor.Create(char_literal63);
+                    		adaptor.AddChild(root_0, char_literal63_tree);
 
-                    	// D:\\lesscss.g:116:14: ( STRING | ( NUM ( UNIT )? ) | COLOR )
-                    	int alt19 = 3;
-                    	switch ( input.LA(1) ) 
+                    	// D:\\development\\Less.Net\\lesscss.g:114:14: ( STRING | ( NUM ( UNIT )? ) )
+                    	int alt19 = 2;
+                    	int LA19_0 = input.LA(1);
+
+                    	if ( (LA19_0 == STRING) )
                     	{
-                    	case STRING:
-                    		{
                     	    alt19 = 1;
-                    	    }
-                    	    break;
-                    	case NUM:
-                    		{
-                    	    alt19 = 2;
-                    	    }
-                    	    break;
-                    	case COLOR:
-                    		{
-                    	    alt19 = 3;
-                    	    }
-                    	    break;
-                    		default:
-                    		    NoViableAltException nvae_d19s0 =
-                    		        new NoViableAltException("", 19, 0, input);
-
-                    		    throw nvae_d19s0;
                     	}
+                    	else if ( (LA19_0 == NUM) )
+                    	{
+                    	    alt19 = 2;
+                    	}
+                    	else 
+                    	{
+                    	    NoViableAltException nvae_d19s0 =
+                    	        new NoViableAltException("", 19, 0, input);
 
+                    	    throw nvae_d19s0;
+                    	}
                     	switch (alt19) 
                     	{
                     	    case 1 :
-                    	        // D:\\lesscss.g:116:15: STRING
+                    	        // D:\\development\\Less.Net\\lesscss.g:114:15: STRING
                     	        {
-                    	        	STRING61=(IToken)Match(input,STRING,FOLLOW_STRING_in_val702); 
-                    	        		STRING61_tree = (CommonTree)adaptor.Create(STRING61);
-                    	        		adaptor.AddChild(root_0, STRING61_tree);
+                    	        	STRING64=(IToken)Match(input,STRING,FOLLOW_STRING_in_val717); 
+                    	        		STRING64_tree = (CommonTree)adaptor.Create(STRING64);
+                    	        		adaptor.AddChild(root_0, STRING64_tree);
 
 
                     	        }
                     	        break;
                     	    case 2 :
-                    	        // D:\\lesscss.g:116:24: ( NUM ( UNIT )? )
+                    	        // D:\\development\\Less.Net\\lesscss.g:114:24: ( NUM ( UNIT )? )
                     	        {
-                    	        	// D:\\lesscss.g:116:24: ( NUM ( UNIT )? )
-                    	        	// D:\\lesscss.g:116:25: NUM ( UNIT )?
+                    	        	// D:\\development\\Less.Net\\lesscss.g:114:24: ( NUM ( UNIT )? )
+                    	        	// D:\\development\\Less.Net\\lesscss.g:114:25: NUM ( UNIT )?
                     	        	{
-                    	        		NUM62=(IToken)Match(input,NUM,FOLLOW_NUM_in_val707); 
-                    	        			NUM62_tree = (CommonTree)adaptor.Create(NUM62);
-                    	        			adaptor.AddChild(root_0, NUM62_tree);
+                    	        		NUM65=(IToken)Match(input,NUM,FOLLOW_NUM_in_val722); 
+                    	        			NUM65_tree = (CommonTree)adaptor.Create(NUM65);
+                    	        			adaptor.AddChild(root_0, NUM65_tree);
 
-                    	        		// D:\\lesscss.g:116:29: ( UNIT )?
+                    	        		// D:\\development\\Less.Net\\lesscss.g:114:29: ( UNIT )?
                     	        		int alt18 = 2;
                     	        		int LA18_0 = input.LA(1);
 
@@ -2764,11 +2859,11 @@ public class lesscssParser : Parser
                     	        		switch (alt18) 
                     	        		{
                     	        		    case 1 :
-                    	        		        // D:\\lesscss.g:116:29: UNIT
+                    	        		        // D:\\development\\Less.Net\\lesscss.g:114:29: UNIT
                     	        		        {
-                    	        		        	UNIT63=(IToken)Match(input,UNIT,FOLLOW_UNIT_in_val709); 
-                    	        		        		UNIT63_tree = (CommonTree)adaptor.Create(UNIT63);
-                    	        		        		adaptor.AddChild(root_0, UNIT63_tree);
+                    	        		        	UNIT66=(IToken)Match(input,UNIT,FOLLOW_UNIT_in_val724); 
+                    	        		        		UNIT66_tree = (CommonTree)adaptor.Create(UNIT66);
+                    	        		        		adaptor.AddChild(root_0, UNIT66_tree);
 
 
                     	        		        }
@@ -2782,26 +2877,16 @@ public class lesscssParser : Parser
 
                     	        }
                     	        break;
-                    	    case 3 :
-                    	        // D:\\lesscss.g:116:38: COLOR
-                    	        {
-                    	        	COLOR64=(IToken)Match(input,COLOR,FOLLOW_COLOR_in_val715); 
-                    	        		COLOR64_tree = (CommonTree)adaptor.Create(COLOR64);
-                    	        		adaptor.AddChild(root_0, COLOR64_tree);
-
-
-                    	        }
-                    	        break;
 
                     	}
 
-                    	// D:\\lesscss.g:116:45: ( ',' ( STRING | ( NUM ( UNIT )? ) | COLOR ) )*
+                    	// D:\\development\\Less.Net\\lesscss.g:114:37: ( ',' ( STRING | ( NUM ( UNIT )? ) ) )*
                     	do 
                     	{
                     	    int alt22 = 2;
                     	    int LA22_0 = input.LA(1);
 
-                    	    if ( (LA22_0 == 33) )
+                    	    if ( (LA22_0 == 29) )
                     	    {
                     	        alt22 = 1;
                     	    }
@@ -2810,61 +2895,54 @@ public class lesscssParser : Parser
                     	    switch (alt22) 
                     		{
                     			case 1 :
-                    			    // D:\\lesscss.g:116:46: ',' ( STRING | ( NUM ( UNIT )? ) | COLOR )
+                    			    // D:\\development\\Less.Net\\lesscss.g:114:38: ',' ( STRING | ( NUM ( UNIT )? ) )
                     			    {
-                    			    	char_literal65=(IToken)Match(input,33,FOLLOW_33_in_val719); 
-                    			    		char_literal65_tree = (CommonTree)adaptor.Create(char_literal65);
-                    			    		adaptor.AddChild(root_0, char_literal65_tree);
+                    			    	char_literal67=(IToken)Match(input,29,FOLLOW_29_in_val730); 
+                    			    		char_literal67_tree = (CommonTree)adaptor.Create(char_literal67);
+                    			    		adaptor.AddChild(root_0, char_literal67_tree);
 
-                    			    	// D:\\lesscss.g:116:50: ( STRING | ( NUM ( UNIT )? ) | COLOR )
-                    			    	int alt21 = 3;
-                    			    	switch ( input.LA(1) ) 
+                    			    	// D:\\development\\Less.Net\\lesscss.g:114:42: ( STRING | ( NUM ( UNIT )? ) )
+                    			    	int alt21 = 2;
+                    			    	int LA21_0 = input.LA(1);
+
+                    			    	if ( (LA21_0 == STRING) )
                     			    	{
-                    			    	case STRING:
-                    			    		{
                     			    	    alt21 = 1;
-                    			    	    }
-                    			    	    break;
-                    			    	case NUM:
-                    			    		{
-                    			    	    alt21 = 2;
-                    			    	    }
-                    			    	    break;
-                    			    	case COLOR:
-                    			    		{
-                    			    	    alt21 = 3;
-                    			    	    }
-                    			    	    break;
-                    			    		default:
-                    			    		    NoViableAltException nvae_d21s0 =
-                    			    		        new NoViableAltException("", 21, 0, input);
-
-                    			    		    throw nvae_d21s0;
                     			    	}
+                    			    	else if ( (LA21_0 == NUM) )
+                    			    	{
+                    			    	    alt21 = 2;
+                    			    	}
+                    			    	else 
+                    			    	{
+                    			    	    NoViableAltException nvae_d21s0 =
+                    			    	        new NoViableAltException("", 21, 0, input);
 
+                    			    	    throw nvae_d21s0;
+                    			    	}
                     			    	switch (alt21) 
                     			    	{
                     			    	    case 1 :
-                    			    	        // D:\\lesscss.g:116:51: STRING
+                    			    	        // D:\\development\\Less.Net\\lesscss.g:114:43: STRING
                     			    	        {
-                    			    	        	STRING66=(IToken)Match(input,STRING,FOLLOW_STRING_in_val722); 
-                    			    	        		STRING66_tree = (CommonTree)adaptor.Create(STRING66);
-                    			    	        		adaptor.AddChild(root_0, STRING66_tree);
+                    			    	        	STRING68=(IToken)Match(input,STRING,FOLLOW_STRING_in_val733); 
+                    			    	        		STRING68_tree = (CommonTree)adaptor.Create(STRING68);
+                    			    	        		adaptor.AddChild(root_0, STRING68_tree);
 
 
                     			    	        }
                     			    	        break;
                     			    	    case 2 :
-                    			    	        // D:\\lesscss.g:116:58: ( NUM ( UNIT )? )
+                    			    	        // D:\\development\\Less.Net\\lesscss.g:114:50: ( NUM ( UNIT )? )
                     			    	        {
-                    			    	        	// D:\\lesscss.g:116:58: ( NUM ( UNIT )? )
-                    			    	        	// D:\\lesscss.g:116:59: NUM ( UNIT )?
+                    			    	        	// D:\\development\\Less.Net\\lesscss.g:114:50: ( NUM ( UNIT )? )
+                    			    	        	// D:\\development\\Less.Net\\lesscss.g:114:51: NUM ( UNIT )?
                     			    	        	{
-                    			    	        		NUM67=(IToken)Match(input,NUM,FOLLOW_NUM_in_val725); 
-                    			    	        			NUM67_tree = (CommonTree)adaptor.Create(NUM67);
-                    			    	        			adaptor.AddChild(root_0, NUM67_tree);
+                    			    	        		NUM69=(IToken)Match(input,NUM,FOLLOW_NUM_in_val736); 
+                    			    	        			NUM69_tree = (CommonTree)adaptor.Create(NUM69);
+                    			    	        			adaptor.AddChild(root_0, NUM69_tree);
 
-                    			    	        		// D:\\lesscss.g:116:63: ( UNIT )?
+                    			    	        		// D:\\development\\Less.Net\\lesscss.g:114:55: ( UNIT )?
                     			    	        		int alt20 = 2;
                     			    	        		int LA20_0 = input.LA(1);
 
@@ -2875,11 +2953,11 @@ public class lesscssParser : Parser
                     			    	        		switch (alt20) 
                     			    	        		{
                     			    	        		    case 1 :
-                    			    	        		        // D:\\lesscss.g:116:63: UNIT
+                    			    	        		        // D:\\development\\Less.Net\\lesscss.g:114:55: UNIT
                     			    	        		        {
-                    			    	        		        	UNIT68=(IToken)Match(input,UNIT,FOLLOW_UNIT_in_val727); 
-                    			    	        		        		UNIT68_tree = (CommonTree)adaptor.Create(UNIT68);
-                    			    	        		        		adaptor.AddChild(root_0, UNIT68_tree);
+                    			    	        		        	UNIT70=(IToken)Match(input,UNIT,FOLLOW_UNIT_in_val738); 
+                    			    	        		        		UNIT70_tree = (CommonTree)adaptor.Create(UNIT70);
+                    			    	        		        		adaptor.AddChild(root_0, UNIT70_tree);
 
 
                     			    	        		        }
@@ -2889,16 +2967,6 @@ public class lesscssParser : Parser
 
 
                     			    	        	}
-
-
-                    			    	        }
-                    			    	        break;
-                    			    	    case 3 :
-                    			    	        // D:\\lesscss.g:116:70: COLOR
-                    			    	        {
-                    			    	        	COLOR69=(IToken)Match(input,COLOR,FOLLOW_COLOR_in_val731); 
-                    			    	        		COLOR69_tree = (CommonTree)adaptor.Create(COLOR69);
-                    			    	        		adaptor.AddChild(root_0, COLOR69_tree);
 
 
                     			    	        }
@@ -2918,50 +2986,50 @@ public class lesscssParser : Parser
                     	loop22:
                     		;	// Stops C# compiler whining that label 'loop22' has no statements
 
-                    	char_literal70=(IToken)Match(input,38,FOLLOW_38_in_val736); 
-                    		char_literal70_tree = (CommonTree)adaptor.Create(char_literal70);
-                    		adaptor.AddChild(root_0, char_literal70_tree);
+                    	char_literal71=(IToken)Match(input,35,FOLLOW_35_in_val745); 
+                    		char_literal71_tree = (CommonTree)adaptor.Create(char_literal71);
+                    		adaptor.AddChild(root_0, char_literal71_tree);
 
 
                     }
                     break;
                 case 2 :
-                    // D:\\lesscss.g:117:4: IDENT
+                    // D:\\development\\Less.Net\\lesscss.g:115:4: IDENT
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	IDENT71=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_val741); 
-                    		IDENT71_tree = (CommonTree)adaptor.Create(IDENT71);
-                    		adaptor.AddChild(root_0, IDENT71_tree);
+                    	IDENT72=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_val750); 
+                    		IDENT72_tree = (CommonTree)adaptor.Create(IDENT72);
+                    		adaptor.AddChild(root_0, IDENT72_tree);
 
 
                     }
                     break;
                 case 3 :
-                    // D:\\lesscss.g:118:4: STRING
+                    // D:\\development\\Less.Net\\lesscss.g:116:4: STRING
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	STRING72=(IToken)Match(input,STRING,FOLLOW_STRING_in_val746); 
-                    		STRING72_tree = (CommonTree)adaptor.Create(STRING72);
-                    		adaptor.AddChild(root_0, STRING72_tree);
+                    	STRING73=(IToken)Match(input,STRING,FOLLOW_STRING_in_val755); 
+                    		STRING73_tree = (CommonTree)adaptor.Create(STRING73);
+                    		adaptor.AddChild(root_0, STRING73_tree);
 
 
                     }
                     break;
                 case 4 :
-                    // D:\\lesscss.g:119:4: ( NUM ( UNIT )? )
+                    // D:\\development\\Less.Net\\lesscss.g:117:4: ( NUM ( UNIT )? )
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	// D:\\lesscss.g:119:4: ( NUM ( UNIT )? )
-                    	// D:\\lesscss.g:119:5: NUM ( UNIT )?
+                    	// D:\\development\\Less.Net\\lesscss.g:117:4: ( NUM ( UNIT )? )
+                    	// D:\\development\\Less.Net\\lesscss.g:117:5: NUM ( UNIT )?
                     	{
-                    		NUM73=(IToken)Match(input,NUM,FOLLOW_NUM_in_val752); 
-                    			NUM73_tree = (CommonTree)adaptor.Create(NUM73);
-                    			adaptor.AddChild(root_0, NUM73_tree);
+                    		NUM74=(IToken)Match(input,NUM,FOLLOW_NUM_in_val761); 
+                    			NUM74_tree = (CommonTree)adaptor.Create(NUM74);
+                    			adaptor.AddChild(root_0, NUM74_tree);
 
-                    		// D:\\lesscss.g:119:9: ( UNIT )?
+                    		// D:\\development\\Less.Net\\lesscss.g:117:9: ( UNIT )?
                     		int alt23 = 2;
                     		int LA23_0 = input.LA(1);
 
@@ -2972,11 +3040,11 @@ public class lesscssParser : Parser
                     		switch (alt23) 
                     		{
                     		    case 1 :
-                    		        // D:\\lesscss.g:119:9: UNIT
+                    		        // D:\\development\\Less.Net\\lesscss.g:117:9: UNIT
                     		        {
-                    		        	UNIT74=(IToken)Match(input,UNIT,FOLLOW_UNIT_in_val754); 
-                    		        		UNIT74_tree = (CommonTree)adaptor.Create(UNIT74);
-                    		        		adaptor.AddChild(root_0, UNIT74_tree);
+                    		        	UNIT75=(IToken)Match(input,UNIT,FOLLOW_UNIT_in_val763); 
+                    		        		UNIT75_tree = (CommonTree)adaptor.Create(UNIT75);
+                    		        		adaptor.AddChild(root_0, UNIT75_tree);
 
 
                     		        }
@@ -2991,13 +3059,13 @@ public class lesscssParser : Parser
                     }
                     break;
                 case 5 :
-                    // D:\\lesscss.g:120:4: COLOR
+                    // D:\\development\\Less.Net\\lesscss.g:118:4: COLOR
                     {
                     	root_0 = (CommonTree)adaptor.GetNilNode();
 
-                    	COLOR75=(IToken)Match(input,COLOR,FOLLOW_COLOR_in_val761); 
-                    		COLOR75_tree = (CommonTree)adaptor.Create(COLOR75);
-                    		adaptor.AddChild(root_0, COLOR75_tree);
+                    	COLOR76=(IToken)Match(input,COLOR,FOLLOW_COLOR_in_val770); 
+                    		COLOR76_tree = (CommonTree)adaptor.Create(COLOR76);
+                    		adaptor.AddChild(root_0, COLOR76_tree);
 
 
                     }
@@ -3034,34 +3102,42 @@ public class lesscssParser : Parser
 	}
 
     const string DFA12_eotS =
-        "\x0a\uffff";
+        "\x10\uffff";
     const string DFA12_eofS =
-        "\x0a\uffff";
+        "\x10\uffff";
     const string DFA12_minS =
-        "\x04\x12\x01\uffff\x01\x12\x02\uffff\x02\x12";
+        "\x04\x13\x01\uffff\x01\x13\x01\uffff\x01\x13\x01\uffff\x07\x13";
     const string DFA12_maxS =
-        "\x02\x34\x01\x19\x01\x34\x01\uffff\x01\x34\x02\uffff\x01\x19\x01"+
-        "\x34";
+        "\x02\x32\x02\x13\x01\uffff\x01\x32\x01\uffff\x01\x32\x01\uffff"+
+        "\x03\x32\x02\x13\x02\x32";
     const string DFA12_acceptS =
-        "\x04\uffff\x01\x01\x01\uffff\x01\x03\x01\x02\x02\uffff";
+        "\x04\uffff\x01\x01\x01\uffff\x01\x03\x01\uffff\x01\x02\x07\uffff";
     const string DFA12_specialS =
-        "\x0a\uffff}>";
+        "\x10\uffff}>";
     static readonly string[] DFA12_transitionS = {
-            "\x01\x01\x05\uffff\x02\x03\x08\uffff\x01\x02\x11\uffff\x01"+
-            "\x02",
-            "\x01\x03\x05\uffff\x02\x03\x05\uffff\x01\x04\x01\x07\x01\x05"+
-            "\x01\x02\x05\uffff\x01\x06\x0b\uffff\x01\x02",
-            "\x01\x03\x05\uffff\x02\x03",
-            "\x01\x03\x05\uffff\x02\x03\x06\uffff\x01\x07\x01\x05\x01\x02"+
-            "\x05\uffff\x01\x06\x0b\uffff\x01\x02",
+            "\x01\x01\x1d\uffff\x01\x02\x01\x03",
+            "\x01\x07\x07\uffff\x01\x04\x01\x08\x01\x05\x07\uffff\x01\x06"+
+            "\x0b\uffff\x01\x02\x01\x03",
+            "\x01\x09",
+            "\x01\x0a",
             "",
-            "\x01\x09\x05\uffff\x02\x09\x08\uffff\x01\x08\x11\uffff\x01"+
-            "\x08",
+            "\x01\x0b\x1d\uffff\x01\x0c\x01\x0d",
             "",
+            "\x01\x07\x08\uffff\x01\x08\x01\x05\x07\uffff\x01\x06\x0b\uffff"+
+            "\x01\x02\x01\x03",
             "",
-            "\x01\x09\x05\uffff\x02\x09",
-            "\x01\x09\x05\uffff\x02\x09\x06\uffff\x01\x07\x01\x05\x01\x08"+
-            "\x05\uffff\x01\x06\x0b\uffff\x01\x08"
+            "\x01\x07\x08\uffff\x01\x08\x01\x05\x07\uffff\x01\x06\x0b\uffff"+
+            "\x01\x02\x01\x03",
+            "\x01\x07\x08\uffff\x01\x08\x01\x05\x07\uffff\x01\x06\x0b\uffff"+
+            "\x01\x02\x01\x03",
+            "\x01\x0b\x08\uffff\x01\x08\x01\x05\x07\uffff\x01\x06\x0b\uffff"+
+            "\x01\x0c\x01\x0d",
+            "\x01\x0e",
+            "\x01\x0f",
+            "\x01\x0b\x08\uffff\x01\x08\x01\x05\x07\uffff\x01\x06\x0b\uffff"+
+            "\x01\x0c\x01\x0d",
+            "\x01\x0b\x08\uffff\x01\x08\x01\x05\x07\uffff\x01\x06\x0b\uffff"+
+            "\x01\x0c\x01\x0d"
     };
 
     static readonly short[] DFA12_eot = DFA.UnpackEncodedString(DFA12_eotS);
@@ -3090,87 +3166,88 @@ public class lesscssParser : Parser
 
         override public string Description
         {
-            get { return "84:10: fragment ruleContents : ( property -> ^( PROPERTY property ) | ( ( selectors ';' ) -> ^( MIXIN selectors ) ) | ruleset );"; }
+            get { return "85:10: fragment ruleContents : ( property | mixin | ruleset );"; }
         }
 
     }
 
  
 
-    public static readonly BitSet FOLLOW_lessLine_in_lessCss97 = new BitSet(new ulong[]{0x0010008443040002UL});
-    public static readonly BitSet FOLLOW_30_in_variable114 = new BitSet(new ulong[]{0x0000000000040000UL});
-    public static readonly BitSet FOLLOW_IDENT_in_variable116 = new BitSet(new ulong[]{0x0000000080000000UL});
-    public static readonly BitSet FOLLOW_31_in_variable118 = new BitSet(new ulong[]{0x0000002040AC0000UL});
-    public static readonly BitSet FOLLOW_additiveExpression_in_variable121 = new BitSet(new ulong[]{0x0000000100000000UL});
-    public static readonly BitSet FOLLOW_literal_in_variable135 = new BitSet(new ulong[]{0x0000000100000000UL});
-    public static readonly BitSet FOLLOW_32_in_variable148 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_ruleset_in_lessLine160 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_mediadefinition_in_lessLine164 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_variable_in_lessLine169 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_set_in_literal194 = new BitSet(new ulong[]{0x0000000200000002UL});
-    public static readonly BitSet FOLLOW_33_in_literal203 = new BitSet(new ulong[]{0x00000000000C0000UL});
-    public static readonly BitSet FOLLOW_set_in_literal205 = new BitSet(new ulong[]{0x0000000200000002UL});
-    public static readonly BitSet FOLLOW_30_in_varname227 = new BitSet(new ulong[]{0x0000000000040000UL});
-    public static readonly BitSet FOLLOW_IDENT_in_varname229 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_additiveExpression_in_expression248 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_multiplicativeExpression_in_additiveExpression269 = new BitSet(new ulong[]{0x0000000400100002UL});
-    public static readonly BitSet FOLLOW_set_in_additiveExpression273 = new BitSet(new ulong[]{0x0000002040A00000UL});
-    public static readonly BitSet FOLLOW_multiplicativeExpression_in_additiveExpression280 = new BitSet(new ulong[]{0x0000000400100002UL});
-    public static readonly BitSet FOLLOW_primaryExpression_in_multiplicativeExpression305 = new BitSet(new ulong[]{0x0000001800000002UL});
-    public static readonly BitSet FOLLOW_set_in_multiplicativeExpression309 = new BitSet(new ulong[]{0x0000002040A00000UL});
-    public static readonly BitSet FOLLOW_primaryExpression_in_multiplicativeExpression316 = new BitSet(new ulong[]{0x0000001800000002UL});
-    public static readonly BitSet FOLLOW_37_in_primaryExpression331 = new BitSet(new ulong[]{0x0000002040A00000UL});
-    public static readonly BitSet FOLLOW_additiveExpression_in_primaryExpression334 = new BitSet(new ulong[]{0x0000004000000000UL});
-    public static readonly BitSet FOLLOW_38_in_primaryExpression336 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_value_in_primaryExpression342 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_varname_in_value358 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_numeric_in_value372 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_NUM_in_numeric393 = new BitSet(new ulong[]{0x0000000000400002UL});
-    public static readonly BitSet FOLLOW_UNIT_in_numeric395 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_COLOR_in_numeric402 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_39_in_mediadefinition418 = new BitSet(new ulong[]{0x000FFC0000000000UL});
-    public static readonly BitSet FOLLOW_media_in_mediadefinition420 = new BitSet(new ulong[]{0x0000010000000000UL});
-    public static readonly BitSet FOLLOW_40_in_mediadefinition422 = new BitSet(new ulong[]{0x0010008443040000UL});
-    public static readonly BitSet FOLLOW_lessCss_in_mediadefinition424 = new BitSet(new ulong[]{0x0000020000000000UL});
-    public static readonly BitSet FOLLOW_41_in_mediadefinition426 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_selectors_in_ruleset441 = new BitSet(new ulong[]{0x0000010000000000UL});
-    public static readonly BitSet FOLLOW_40_in_ruleset443 = new BitSet(new ulong[]{0x0010020403040000UL});
-    public static readonly BitSet FOLLOW_ruleContents_in_ruleset445 = new BitSet(new ulong[]{0x0010020403040000UL});
-    public static readonly BitSet FOLLOW_41_in_ruleset448 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_property_in_ruleContents473 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_selectors_in_ruleContents487 = new BitSet(new ulong[]{0x0000000100000000UL});
-    public static readonly BitSet FOLLOW_32_in_ruleContents489 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_ruleset_in_ruleContents503 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_lessLine_in_lessCss101 = new BitSet(new ulong[]{0x0006001004080002UL});
+    public static readonly BitSet FOLLOW_26_in_variable118 = new BitSet(new ulong[]{0x0000000000080000UL});
+    public static readonly BitSet FOLLOW_IDENT_in_variable120 = new BitSet(new ulong[]{0x0000000008000000UL});
+    public static readonly BitSet FOLLOW_27_in_variable122 = new BitSet(new ulong[]{0x00000004043C0000UL});
+    public static readonly BitSet FOLLOW_literal_in_variable125 = new BitSet(new ulong[]{0x0000000010000000UL});
+    public static readonly BitSet FOLLOW_expression_in_variable143 = new BitSet(new ulong[]{0x0000000010000000UL});
+    public static readonly BitSet FOLLOW_28_in_variable156 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_ruleset_in_lessLine172 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_mediadefinition_in_lessLine182 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_variable_in_lessLine192 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_set_in_literal214 = new BitSet(new ulong[]{0x0000000020000002UL});
+    public static readonly BitSet FOLLOW_29_in_literal223 = new BitSet(new ulong[]{0x0000000000180000UL});
+    public static readonly BitSet FOLLOW_set_in_literal225 = new BitSet(new ulong[]{0x0000000020000002UL});
+    public static readonly BitSet FOLLOW_26_in_varname247 = new BitSet(new ulong[]{0x0000000000080000UL});
+    public static readonly BitSet FOLLOW_IDENT_in_varname249 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_additiveExpression_in_expression268 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_multiplicativeExpression_in_additiveExpression291 = new BitSet(new ulong[]{0x00000000C0000002UL});
+    public static readonly BitSet FOLLOW_set_in_additiveExpression295 = new BitSet(new ulong[]{0x00000004043C0000UL});
+    public static readonly BitSet FOLLOW_multiplicativeExpression_in_additiveExpression302 = new BitSet(new ulong[]{0x00000000C0000002UL});
+    public static readonly BitSet FOLLOW_primaryExpression_in_multiplicativeExpression319 = new BitSet(new ulong[]{0x0000000300000002UL});
+    public static readonly BitSet FOLLOW_set_in_multiplicativeExpression323 = new BitSet(new ulong[]{0x00000004043C0000UL});
+    public static readonly BitSet FOLLOW_primaryExpression_in_multiplicativeExpression330 = new BitSet(new ulong[]{0x0000000300000002UL});
+    public static readonly BitSet FOLLOW_34_in_primaryExpression345 = new BitSet(new ulong[]{0x00000004043C0000UL});
+    public static readonly BitSet FOLLOW_additiveExpression_in_primaryExpression348 = new BitSet(new ulong[]{0x0000000800000000UL});
+    public static readonly BitSet FOLLOW_35_in_primaryExpression350 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_value_in_primaryExpression356 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_varname_in_value372 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_numeric_in_value385 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_NUM_in_numeric408 = new BitSet(new ulong[]{0x0000000000400002UL});
+    public static readonly BitSet FOLLOW_UNIT_in_numeric410 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_COLOR_in_numeric416 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_36_in_mediadefinition431 = new BitSet(new ulong[]{0x0001FF8000000000UL});
+    public static readonly BitSet FOLLOW_media_in_mediadefinition433 = new BitSet(new ulong[]{0x0000002000000000UL});
+    public static readonly BitSet FOLLOW_37_in_mediadefinition435 = new BitSet(new ulong[]{0x0006001004080000UL});
+    public static readonly BitSet FOLLOW_lessCss_in_mediadefinition437 = new BitSet(new ulong[]{0x0000004000000000UL});
+    public static readonly BitSet FOLLOW_38_in_mediadefinition439 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_selectors_in_ruleset454 = new BitSet(new ulong[]{0x0000002000000000UL});
+    public static readonly BitSet FOLLOW_37_in_ruleset456 = new BitSet(new ulong[]{0x0006004000080000UL});
+    public static readonly BitSet FOLLOW_ruleContents_in_ruleset458 = new BitSet(new ulong[]{0x0006004000080000UL});
+    public static readonly BitSet FOLLOW_38_in_ruleset461 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_property_in_ruleContents486 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_mixin_in_ruleContents490 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_ruleset_in_ruleContents494 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_selectors_in_mixin505 = new BitSet(new ulong[]{0x0000000010000000UL});
+    public static readonly BitSet FOLLOW_28_in_mixin507 = new BitSet(new ulong[]{0x0000000000000002UL});
     public static readonly BitSet FOLLOW_set_in_media0 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_selectorGrouping_in_selectors543 = new BitSet(new ulong[]{0x0000000200000002UL});
-    public static readonly BitSet FOLLOW_33_in_selectors546 = new BitSet(new ulong[]{0x0010000403040000UL});
-    public static readonly BitSet FOLLOW_selectorGrouping_in_selectors548 = new BitSet(new ulong[]{0x0000000200000002UL});
-    public static readonly BitSet FOLLOW_selectorOps_in_selectorGrouping574 = new BitSet(new ulong[]{0x0010000403040000UL});
-    public static readonly BitSet FOLLOW_selector_in_selectorGrouping577 = new BitSet(new ulong[]{0x0010000403040002UL});
-    public static readonly BitSet FOLLOW_IDENT_in_property603 = new BitSet(new ulong[]{0x0000000080000000UL});
-    public static readonly BitSet FOLLOW_31_in_property605 = new BitSet(new ulong[]{0x0000002040AC0000UL});
-    public static readonly BitSet FOLLOW_propval_in_property607 = new BitSet(new ulong[]{0x0000002140AC0000UL});
-    public static readonly BitSet FOLLOW_32_in_property610 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_additiveExpression_in_propval630 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_literal_in_propval642 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_set_in_selector0 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_set_in_selectorOps0 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_IDENT_in_val697 = new BitSet(new ulong[]{0x0000002000000000UL});
-    public static readonly BitSet FOLLOW_37_in_val699 = new BitSet(new ulong[]{0x0000000000A80000UL});
-    public static readonly BitSet FOLLOW_STRING_in_val702 = new BitSet(new ulong[]{0x0000004200000000UL});
-    public static readonly BitSet FOLLOW_NUM_in_val707 = new BitSet(new ulong[]{0x0000004200400000UL});
-    public static readonly BitSet FOLLOW_UNIT_in_val709 = new BitSet(new ulong[]{0x0000004200000000UL});
-    public static readonly BitSet FOLLOW_COLOR_in_val715 = new BitSet(new ulong[]{0x0000004200000000UL});
-    public static readonly BitSet FOLLOW_33_in_val719 = new BitSet(new ulong[]{0x0000000000A80000UL});
-    public static readonly BitSet FOLLOW_STRING_in_val722 = new BitSet(new ulong[]{0x0000004200000000UL});
-    public static readonly BitSet FOLLOW_NUM_in_val725 = new BitSet(new ulong[]{0x0000004200400000UL});
-    public static readonly BitSet FOLLOW_UNIT_in_val727 = new BitSet(new ulong[]{0x0000004200000000UL});
-    public static readonly BitSet FOLLOW_COLOR_in_val731 = new BitSet(new ulong[]{0x0000004200000000UL});
-    public static readonly BitSet FOLLOW_38_in_val736 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_IDENT_in_val741 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_STRING_in_val746 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_NUM_in_val752 = new BitSet(new ulong[]{0x0000000000400002UL});
-    public static readonly BitSet FOLLOW_UNIT_in_val754 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_COLOR_in_val761 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_selectorGrouping_in_selectors554 = new BitSet(new ulong[]{0x0000000020000002UL});
+    public static readonly BitSet FOLLOW_29_in_selectors557 = new BitSet(new ulong[]{0x0006000000080000UL});
+    public static readonly BitSet FOLLOW_selectorGrouping_in_selectors559 = new BitSet(new ulong[]{0x0000000020000002UL});
+    public static readonly BitSet FOLLOW_selector_in_selectorGrouping580 = new BitSet(new ulong[]{0x0006000000080002UL});
+    public static readonly BitSet FOLLOW_IDENT_in_property605 = new BitSet(new ulong[]{0x0000000008000000UL});
+    public static readonly BitSet FOLLOW_27_in_property607 = new BitSet(new ulong[]{0x00000004043C0000UL});
+    public static readonly BitSet FOLLOW_propval_in_property609 = new BitSet(new ulong[]{0x00000004143C0000UL});
+    public static readonly BitSet FOLLOW_28_in_property612 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_literal_in_propval636 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_additiveExpression_in_propval640 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_IDENT_in_selector660 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_49_in_selector672 = new BitSet(new ulong[]{0x0000000000080000UL});
+    public static readonly BitSet FOLLOW_IDENT_in_selector674 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_50_in_selector686 = new BitSet(new ulong[]{0x0000000000080000UL});
+    public static readonly BitSet FOLLOW_IDENT_in_selector688 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_IDENT_in_val712 = new BitSet(new ulong[]{0x0000000400000000UL});
+    public static readonly BitSet FOLLOW_34_in_val714 = new BitSet(new ulong[]{0x0000000000300000UL});
+    public static readonly BitSet FOLLOW_STRING_in_val717 = new BitSet(new ulong[]{0x0000000820000000UL});
+    public static readonly BitSet FOLLOW_NUM_in_val722 = new BitSet(new ulong[]{0x0000000820400000UL});
+    public static readonly BitSet FOLLOW_UNIT_in_val724 = new BitSet(new ulong[]{0x0000000820000000UL});
+    public static readonly BitSet FOLLOW_29_in_val730 = new BitSet(new ulong[]{0x0000000000300000UL});
+    public static readonly BitSet FOLLOW_STRING_in_val733 = new BitSet(new ulong[]{0x0000000820000000UL});
+    public static readonly BitSet FOLLOW_NUM_in_val736 = new BitSet(new ulong[]{0x0000000820400000UL});
+    public static readonly BitSet FOLLOW_UNIT_in_val738 = new BitSet(new ulong[]{0x0000000820000000UL});
+    public static readonly BitSet FOLLOW_35_in_val745 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_IDENT_in_val750 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_STRING_in_val755 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_NUM_in_val761 = new BitSet(new ulong[]{0x0000000000400002UL});
+    public static readonly BitSet FOLLOW_UNIT_in_val763 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_COLOR_in_val770 = new BitSet(new ulong[]{0x0000000000000002UL});
 
 }

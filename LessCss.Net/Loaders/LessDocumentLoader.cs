@@ -1,4 +1,4 @@
-using System.Linq;
+using System.Collections.Generic;
 using Antlr.Runtime;
 using Antlr.Runtime.Tree;
 using LessCss.Expression;
@@ -72,18 +72,11 @@ namespace LessCss.Loaders
 					case "RULE":
 						rule.Rules.Add(ParseRule(child));
 						break;
-					case "SELECTORGROUP":
-						foreach (BaseTree selectorChild in child.Children)
-						{
-							rule.Selectors.Add(ParseSelector(selectorChild));
-						}
+					case "SELECTOR":
+						rule.Selectors.Add(ParseSelector(child));
 						break;
 					case "MIXIN":
-						foreach (BaseTree selectorgroup in child.Children)
-						{
-							foreach (BaseTree selector in selectorgroup.Children)
-								rule.Mixins.Add(ParseSelector(selector));
-						}
+						rule.Mixins.Add(ParseSelector(child));
 						break;
 				}
 			}
@@ -92,9 +85,24 @@ namespace LessCss.Loaders
 
 		private StyleSelector ParseSelector(BaseTree child)
 		{
-			var tree = child;
-			var tokens = tree.Children.Cast<BaseTree>().Select(c => c.Text).ToArray();
-			return new StyleSelector { Name = string.Join(" ", tokens) };
+			var selectors = new List<string>();
+			foreach (BaseTree selector in child.Children)
+			{
+				switch(selector.Text)
+				{
+					case "CLASS":
+						selectors.Add("." + selector.GetChild(0).Text);
+						break;
+					case "ID":
+						selectors.Add("#" + selector.GetChild(0).Text);
+						break;
+					case "TAG":
+						selectors.Add(selector.GetChild(0).Text);
+						break;
+
+				}
+			}
+			return new StyleSelector { Name = string.Join(" ", selectors.ToArray()) };
 		}
 
 		private StyleProperty ParseProperty(ITree child)
