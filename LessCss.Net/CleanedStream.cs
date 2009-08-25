@@ -73,24 +73,30 @@ namespace LessCss
             public void SplitChunks()
             {
                 int currentIndex = 0;
-                int nextSemicolon = FindNextSemicolonIndex(currentIndex);
-                int nextOpeningBrace = FindNextOpeningBrace(currentIndex);
-                if ((nextOpeningBrace != -1) && (nextOpeningBrace < nextSemicolon))
+                while (currentIndex < input.Length)
                 {
-                    //Brace block ahead
-                    int nextClosingBrace = FindNextClosingBrace(currentIndex);
-                    var textBeforeBrace = input.Substring(currentIndex, nextOpeningBrace);
-                    var braceContent = input.Substring(nextOpeningBrace + 1, nextClosingBrace - nextOpeningBrace - 1);
-                    sb.Append(RemoveLeadingAndTrailingWhiteSpace(textBeforeBrace));
-                    sb.Append("{");
-                    CleanBraceContent(braceContent);
-                    sb.Append("}");
-                }
-                else if (nextSemicolon != -1)
-                {
-                    //Variable block (.a = 1;)
-                    string declaration = input.Substring(currentIndex, nextSemicolon);
-                    FormatDeclaration(declaration);
+                    int nextSemicolon = FindNextSemicolonIndex(currentIndex);
+                    int nextOpeningBrace = FindNextOpeningBrace(currentIndex);
+                    if ((nextOpeningBrace != -1) && (nextOpeningBrace < nextSemicolon))
+                    {
+                        //Brace block ahead
+                        int nextClosingBrace = FindNextClosingBrace(currentIndex);
+                        var textBeforeBrace = input.Substring(currentIndex, nextOpeningBrace - currentIndex);
+                        var braceContent = input.Substring(nextOpeningBrace + 1, nextClosingBrace - nextOpeningBrace - 1);
+                        sb.Append(RemoveLeadingAndTrailingWhiteSpace(textBeforeBrace));
+                        sb.Append("{");
+                        CleanBraceContent(braceContent);
+                        sb.Append("}");
+                        currentIndex = nextClosingBrace + 1;
+                    }
+                    else if (nextSemicolon != -1)
+                    {
+                        //Variable block (.a = 1;)
+                        int length = nextSemicolon - currentIndex;
+                        string declaration = input.Substring(currentIndex, length);
+                        FormatDeclaration(declaration);
+                        currentIndex = nextSemicolon + 1;
+                    }
                 }
             }
 
@@ -135,22 +141,22 @@ namespace LessCss
 
     public class Preprocessor
     {
-        private readonly StreamReader reader;
+        private string input;
         private readonly char[] output;
 
-        public Preprocessor(StreamReader reader)
+        public Preprocessor(string input)
         {
-            this.reader = reader;
+            this.input = input;
             output = CleanStream().ToCharArray();
         }
 
         private string CleanStream()
         {
-            string input = reader.ReadToEnd();
             input = WhiteSpaceFilter.ConvertToUnix(input);
             input = WhiteSpaceFilter.RemoveComments(input);
             input = WhiteSpaceFilter.RemoveMultipleWhiteSpaces(input);
             input = WhiteSpaceFilter.RemoveLeadingAndTrailingWhiteSpace(input);
+            input = WhiteSpaceFilter.RemoveNewLines(input);
             input = WhiteSpaceFilter.RemoveExtendedComments(input);
             input = WhiteSpaceFilter.RemoveWhitespaces(input);
 
