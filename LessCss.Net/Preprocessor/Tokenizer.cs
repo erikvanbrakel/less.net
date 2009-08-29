@@ -8,7 +8,7 @@ namespace LessCss.Preprocessor
     public class Tokenizer
     {
         private IExpressionBuilder expressionBuilder = new ExpressionBuilder();
-
+        private IDescriptorBuilder descriptorBuilder = new DescriptorBuilder();
         public IExpressionBuilder ExpressionBuilder
         {
             get { return expressionBuilder; }
@@ -21,27 +21,29 @@ namespace LessCss.Preprocessor
             char[] array = input.ToCharArray();
 
             IList<char> buffer = new List<char>();
-            foreach(char c in array)
+            foreach (char c in array)
             {
-                if (c == '{')
+                switch (c)
                 {
-                    var builder = new StringBuilder();
-                    builder.Append(buffer);
-                    var childLevel = new TreeLevel(builder.ToString(), currentLevel);
-                    currentLevel.AppendChild(childLevel);
-                    buffer = new List<char>();
-                    currentLevel = childLevel;
+                    case '{':
+                        string descriptor = descriptorBuilder.BuildDescriptor(buffer.ToArray());
+                        
+                        var childLevel = new TreeLevel(descriptor, currentLevel);
+                        currentLevel.AppendChild(childLevel);
+                        buffer = new List<char>();
+                        currentLevel = childLevel;
+                        break;
+                    case ';':
+                        currentLevel.AppendExpression(ExpressionBuilder.BuildExpression(buffer.ToArray()));
+                        buffer = new List<char>();
+                        break;
+                    case '}':
+                        currentLevel = currentLevel.Parent;
+                        break;
+                    default:
+                        buffer.Add(c);
+                        break;
                 }
-                if (c == ';')
-                {
-                    currentLevel.AppendExpression(ExpressionBuilder.BuildExpression(buffer.ToArray()));
-                    buffer = new List<char>();
-                }
-                if (c == '}')
-                {
-                    currentLevel = currentLevel.Parent;
-                }
-                buffer.Add(c);
             }
 
             return currentLevel;
@@ -57,7 +59,6 @@ namespace LessCss.Preprocessor
     {
         public ExpressionBuilder()
         {
-            
         }
 
         public IExpression BuildExpression(char[] input)
@@ -69,5 +70,5 @@ namespace LessCss.Preprocessor
             string[] strings = s.Split(':');
             return new StyleExpression(strings[0], strings[1]);
         }
-}
+    }
 }

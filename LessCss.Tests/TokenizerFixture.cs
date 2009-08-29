@@ -53,6 +53,37 @@ namespace LessCss.Tests
             Assert.AreEqual(1, tree.Children.First().Children.Count());
         }
 
+        [Test]
+        public void CanHandleNestedChildExpressions()
+        {
+            var input = "#namespace { .borders { border-style: dotted; } }";
+            ITreeLevel tree = BuildTree(input);
+
+            Assert.AreEqual(1, tree
+                .Children.First()
+                    .Children.First().Expressions.Count());
+        }
+
+        [Test]
+        public void RootNodeIsCalledROOT()
+        {
+            var input = "";
+            ITreeLevel tree = BuildTree(input);
+
+            Assert.AreEqual("ROOT", tree.Descriptor);
+        }
+
+        [Test]
+        public void NestedChildNodeDescriptorMatchesCSSDescriptor()
+        {
+            var input = ".a { .b { x:b; } }";
+            ITreeLevel tree = BuildTree(input);
+
+            Assert.AreEqual(".b", tree
+                .Children.First()
+                    .Children.First().Descriptor);
+        }
+
         private ITreeLevel BuildTree(string input)
         {
             var tokenizer = new Tokenizer();
