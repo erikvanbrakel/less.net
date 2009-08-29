@@ -55,14 +55,10 @@ namespace LessCss.Preprocessor
                         currentNode = currentNode.Parent;
                         break;
                     case '"':
-                        buffer.Add(c);
-                        escapeCharacter = '"';
-                        escaped = true;
-                        break;
                     case '\'':
                         buffer.Add(c);
                         escaped = true;
-                        escapeCharacter = '\'';
+                        escapeCharacter = c;
                         break;
                     default:
                         buffer.Add(c);
