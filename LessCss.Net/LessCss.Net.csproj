@@ -66,6 +66,7 @@
     <Compile Include="Preprocessor\Processor.cs" />
     <Compile Include="Preprocessor\StyleExpression.cs" />
     <Compile Include="Preprocessor\Tokenizer.cs" />
+    <Compile Include="Preprocessor\TreeCompiler.cs" />
     <Compile Include="Preprocessor\TreeNode.cs" />
     <Compile Include="StyleDocument.cs" />
     <Compile Include="Expression\StyleExpression.cs" />

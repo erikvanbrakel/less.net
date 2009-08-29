@@ -19,7 +19,10 @@ namespace LessCss.Preprocessor
             input = WhiteSpaceFilter.RemoveLeadingAndTrailingWhiteSpace(input);
             input = WhiteSpaceFilter.RemoveNewLines(input);
             input = WhiteSpaceFilter.RemoveExtendedComments(input);
-
+            var tokenizer = new Tokenizer();
+            ITreeNode tree = tokenizer.BuildTree(input);
+            var compiler = new TreeCompiler();
+            input = compiler.CompileTree(tree);
             return input;
         }
 
