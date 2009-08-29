@@ -14,6 +14,30 @@
     <mkdir dir="build" />
   </target>
  
+  <target name="compile.minifier" depends="clean,init" description="Compiles minifier library">
+	<csc target="library" output="build\${project::get-name()}.Minifier.dll" debug="${debug}">
+		<sources>
+			<include name="LessCss.Net.Minifier\**\*.cs" />
+		</sources>
+	</csc>
+  </target>
+  
+  <target name="copy-tests" depends="clean,init" description="Copies test framework assemblies to the output directory">
+	<copy file="Dependencies\nunit.framework.dll" tofile="build\nunit.framework.dll" />
+  </target>
+  
+  <target name="compile.minifier.test" depends="compile.minifier,copy-tests" description="Builds the minifier test project">
+	<csc target="library" output="build\${project::get-name()}.Minifier.Tests.dll" debug="${debug}">
+		<sources>
+			<include name="LessCss.Net.Minifier.Tests\**\*.cs" />
+		</sources>
+		<references>
+			<include name="build\${project::get-name()}.Minifier.dll" />
+			<include name="Dependencies\nunit.framework.dll" />
+		</references>
+	</csc>
+  </target>
+   
   <target name="compile" depends="clean,init" description="Compiles the application">
     <asminfo output="AssemblyInfo.cs" language="CSharp">
       <imports>
@@ -24,16 +48,16 @@
       <attributes>
         <attribute type="AssemblyVersionAttribute" value="${buildNumber}" />
         <attribute type="AssemblyTitleAttribute" value="Less.Net" />
-        <attribute type="AssemblyCopyrightAttribute" value="Copyright © Erik van Brakel 2009" />
+        <attribute type="AssemblyCopyrightAttribute" value="Copyright © Less.Net 2009" />
       </attributes>
     </asminfo>
     <copy file="acknowledgements.txt" tofile="build\acknowledgements.txt" />
     
     <csc target="library" output="build\${project::get-name()}.dll" debug="${debug}">
       <sources>
-        <include name="src\LessCss.Net\**\*.cs" />
+        <include name="LessCss.Net\**\*.cs" />
         <include name="AssemblyInfo.cs" />
-        <exclude name="src\**\AssemblyInfo.cs" />
+        <exclude name="LessCss.Net\**\AssemblyInfo.cs" />
       </sources>
       <references>
         <include name="dependencies\Antlr3.Runtime.dll" />
