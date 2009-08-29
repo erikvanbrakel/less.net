@@ -18,16 +18,18 @@ namespace LessCss.Preprocessor
 {
     public class Processor
     {
+        private ITreeCompiler compiler = new TreeCompiler();
+        private ITokenizer tokenizer = new Tokenizer();
         private string input;
         private readonly char[] output;
 
         public Processor(string input)
         {
             this.input = input;
-            output = CleanStream().ToCharArray();
+            output = CleanInput().ToCharArray();
         }
 
-        private string CleanStream()
+        private string CleanInput()
         {
             input = WhiteSpaceFilter.ConvertToUnix(input);
             input = WhiteSpaceFilter.RemoveComments(input);
@@ -35,9 +37,8 @@ namespace LessCss.Preprocessor
             input = WhiteSpaceFilter.RemoveLeadingAndTrailingWhiteSpace(input);
             input = WhiteSpaceFilter.RemoveNewLines(input);
             input = WhiteSpaceFilter.RemoveExtendedComments(input);
-            var tokenizer = new Tokenizer();
+
             ITreeNode tree = tokenizer.BuildTree(input);
-            var compiler = new TreeCompiler();
             input = compiler.CompileTree(tree);
             return input;
         }
@@ -45,6 +46,18 @@ namespace LessCss.Preprocessor
         public char[] Output
         {
             get { return output; }
+        }
+
+        public ITreeCompiler Compiler
+        {
+            get { return compiler; }
+            set { compiler = value; }
+        }
+
+        public ITokenizer Tokenizer
+        {
+            get { return tokenizer; }
+            set { tokenizer = value; }
         }
     }
 }

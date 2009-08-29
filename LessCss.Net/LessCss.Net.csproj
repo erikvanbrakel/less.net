@@ -57,6 +57,8 @@
     <Compile Include="Preprocessor\IDescriptorBuilder.cs" />
     <Compile Include="Preprocessor\IExpression.cs" />
     <Compile Include="Preprocessor\IExpressionBuilder.cs" />
+    <Compile Include="Preprocessor\ITokenizer.cs" />
+    <Compile Include="Preprocessor\ITreeCompiler.cs" />
     <Compile Include="Preprocessor\ITreeNode.cs" />
     <Compile Include="lesscssLexer.cs" />
     <Compile Include="lesscssParser.cs" />

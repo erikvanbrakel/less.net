@@ -19,7 +19,7 @@ namespace LessCss.Preprocessor
     using System.Collections.Generic;
     using System.Linq;
 
-    public class Tokenizer
+    public class Tokenizer : ITokenizer
     {
         private IExpressionBuilder expressionBuilder = new ExpressionBuilder();
         private IDescriptorBuilder descriptorBuilder = new DescriptorBuilder();

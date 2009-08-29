@@ -18,7 +18,7 @@ namespace LessCss.Preprocessor
 {
     using System.Text;
 
-    public class TreeCompiler
+    public class TreeCompiler : ITreeCompiler
     {
         public string CompileTree(ITreeNode rootNode)
         {
