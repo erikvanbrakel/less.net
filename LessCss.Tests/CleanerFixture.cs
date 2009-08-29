@@ -133,7 +133,7 @@ namespace LessCss.Tests
   font-family: @fonts;
 }";
             string desiredOutput =
-                @"@a:2;@x:@a*@a;@y:@x+1;@z:@x*2+@y;.variables{width:@z+1cm;}@b:@a*10;@c:#888;@fonts:""Trebuchet MS"", Verdana, sans-serif;.variables{height:@b+@x+0px;color:@c;font-family:@fonts;}";
+                @".variables{width:@z + 1cm;}.variables{height:@b + @x + 0px;color:@c;font-family:@fonts;}@a:2;@x:@a * @a;@y:@x + 1;@z:@x * 2 + @y;@b:@a * 10;@c:#888;@fonts:""Trebuchet MS"", Verdana, sans-serif;";
             var preprocessor = new Processor(input);
             char[] output = preprocessor.Output;
             Console.WriteLine(output);
