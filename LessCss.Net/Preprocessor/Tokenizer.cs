@@ -26,13 +26,22 @@ namespace LessCss.Preprocessor
             char[] array = input.ToCharArray();
 
             IList<char> buffer = new List<char>();
+            bool escaped = false;
+            char escapeCharacter = '0';
             foreach (char c in array)
             {
+                if (escaped)
+                {
+                    buffer.Add(c);
+                    escaped = (c != escapeCharacter);
+                    continue;
+                }
+
                 switch (c)
                 {
                     case '{':
                         string descriptor = DescriptorBuilder.BuildDescriptor(buffer.ToArray());
-                        
+                            
                         var childLevel = new TreeLevel(descriptor, currentLevel);
                         currentLevel.AppendChild(childLevel);
                         buffer = new List<char>();
@@ -44,6 +53,16 @@ namespace LessCss.Preprocessor
                         break;
                     case '}':
                         currentLevel = currentLevel.Parent;
+                        break;
+                    case '"':
+                        buffer.Add(c);
+                        escapeCharacter = '"';
+                        escaped = true;
+                        break;
+                    case '\'':
+                        buffer.Add(c);
+                        escaped = true;
+                        escapeCharacter = '\'';
                         break;
                     default:
                         buffer.Add(c);

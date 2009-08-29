@@ -84,6 +84,37 @@ namespace LessCss.Tests
                     .Children.First().Descriptor);
         }
 
+        [Test]
+        public void CanHandleBracesInStrings()
+        {
+            var input = ".a { background: \"{\"; }";
+            ITreeLevel tree = BuildTree(input);
+
+            Assert.AreEqual("\"{\"", tree
+                .Children.First()
+                    .Expressions.First()
+                        .Expression.Value);
+        }
+
+        [Test]
+        public void CanHandleSingleQuoteStrings()
+        {
+            var input = "background: '{';";
+            ITreeLevel tree = BuildTree(input);
+
+            Assert.AreEqual("'{'", tree.Expressions.First()
+                .Expression.Value);
+        }
+
+        [Test]
+        public void CanHandleComplexStrings()
+        {
+            var input = "content: \"#*%:&^,)!.(~*})\";";
+            ITreeLevel tree = BuildTree(input);
+
+            Assert.AreEqual("\"#*%:&^,)!.(~*})\"", tree.Expressions.First().Expression.Value);
+        }
+
         private ITreeLevel BuildTree(string input)
         {
             var tokenizer = new Tokenizer();
