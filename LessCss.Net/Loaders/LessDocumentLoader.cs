@@ -5,7 +5,8 @@ using LessCss.Expression;
 
 namespace LessCss.Loaders
 {
-	public class LessDocumentLoader : IDocumentLoader
+    
+    public class LessDocumentLoader : IDocumentLoader
 	{
 		public StyleDocument LoadFromString(string input)
 		{

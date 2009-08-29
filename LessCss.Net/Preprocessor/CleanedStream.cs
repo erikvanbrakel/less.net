@@ -1,4 +1,4 @@
-namespace LessCss
+namespace LessCss.Preprocessor
 {
     using System;
     using System.IO;
@@ -136,36 +136,6 @@ namespace LessCss
             {
                 return input.IndexOf('}', startIndex);
             }
-        }
-    }
-
-    public class Preprocessor
-    {
-        private string input;
-        private readonly char[] output;
-
-        public Preprocessor(string input)
-        {
-            this.input = input;
-            output = CleanStream().ToCharArray();
-        }
-
-        private string CleanStream()
-        {
-            input = WhiteSpaceFilter.ConvertToUnix(input);
-            input = WhiteSpaceFilter.RemoveComments(input);
-            input = WhiteSpaceFilter.RemoveMultipleWhiteSpaces(input);
-            input = WhiteSpaceFilter.RemoveLeadingAndTrailingWhiteSpace(input);
-            input = WhiteSpaceFilter.RemoveNewLines(input);
-            input = WhiteSpaceFilter.RemoveExtendedComments(input);
-            input = WhiteSpaceFilter.RemoveWhitespaces(input);
-
-            return input;
-        }
-
-        public char[] Output
-        {
-            get { return output; }
         }
     }
 }

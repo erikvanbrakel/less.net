@@ -18,7 +18,7 @@ using LessCss.Expression;
 
 namespace LessCss
 {
-	public class StyleVariable
+    public class StyleVariable
 	{
 		public string Name;
 		public StyleExpression Value;

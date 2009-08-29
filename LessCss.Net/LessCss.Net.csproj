@@ -46,18 +46,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CleanedStream.cs" />
+    <Compile Include="Preprocessor\CleanedStream.cs" />
     <Compile Include="Expression\AddExpression.cs" />
     <Compile Include="Expression\CompoundStyleExpression.cs" />
     <Compile Include="Expression\ConstantExpression.cs" />
     <Compile Include="Expression\DivisionExpression.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Helpers\PrettyPrintHelper.cs" />
+    <Compile Include="Preprocessor\IExpression.cs" />
+    <Compile Include="Preprocessor\ITreeLevel.cs" />
     <Compile Include="lesscssLexer.cs" />
     <Compile Include="lesscssParser.cs" />
     <Compile Include="Expression\MultiplyExpression.cs" />
     <Compile Include="Loaders\IDocumentLoader.cs" />
     <Compile Include="Loaders\LessDocumentLoader.cs" />
+    <Compile Include="Preprocessor\Processor.cs" />
+    <Compile Include="Preprocessor\Tokenizer.cs" />
     <Compile Include="StyleDocument.cs" />
     <Compile Include="Expression\StyleExpression.cs" />
     <Compile Include="StyleProperty.cs" />
