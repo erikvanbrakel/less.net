@@ -1,3 +1,19 @@
+/*
+ * Copyright 2009 Less.Net
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *  
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 namespace LessCss.Tests
 {
     using System;
@@ -9,7 +25,7 @@ namespace LessCss.Tests
     public class CleanerFixture
     {
         public const string css =
-@"#sidebar h1 ul li
+            @"#sidebar h1 ul li
 {
   height : 100px ; // 24px
   color: #fffff ;
@@ -43,7 +59,7 @@ namespace LessCss.Tests
         public void CanTrimEndOfLineComment()
         {
             string desiredOutput = WhiteSpaceFilter.ConvertToUnix(
-@"#sidebar h1 ul li
+                @"#sidebar h1 ul li
 {
   height : 100px ; 
   color: #fffff ;
@@ -61,14 +77,14 @@ namespace LessCss.Tests
         public void CanRemoveExtendedComment()
         {
             string input =
-@"#sidebar h1 ul li
+                @"#sidebar h1 ul li
 {
   /*height : 100px ; 
   color: #fffff ;*/
   font-family: @fonts;
 }";
             string desiredOutput = 
-@"#sidebar h1 ul li
+                @"#sidebar h1 ul li
 {
   
   font-family: @fonts;
