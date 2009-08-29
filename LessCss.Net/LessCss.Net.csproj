@@ -57,7 +57,7 @@
     <Compile Include="Preprocessor\IDescriptorBuilder.cs" />
     <Compile Include="Preprocessor\IExpression.cs" />
     <Compile Include="Preprocessor\IExpressionBuilder.cs" />
-    <Compile Include="Preprocessor\ITreeLevel.cs" />
+    <Compile Include="Preprocessor\ITreeNode.cs" />
     <Compile Include="lesscssLexer.cs" />
     <Compile Include="lesscssParser.cs" />
     <Compile Include="Expression\MultiplyExpression.cs" />
@@ -66,6 +66,7 @@
     <Compile Include="Preprocessor\Processor.cs" />
     <Compile Include="Preprocessor\StyleExpression.cs" />
     <Compile Include="Preprocessor\Tokenizer.cs" />
+    <Compile Include="Preprocessor\TreeNode.cs" />
     <Compile Include="StyleDocument.cs" />
     <Compile Include="Expression\StyleExpression.cs" />
     <Compile Include="StyleProperty.cs" />

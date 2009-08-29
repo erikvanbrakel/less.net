@@ -11,7 +11,7 @@ namespace LessCss.Tests
         public void AppendsExpressionToCurrentLevel()
         {
             var input = "background: black;";
-            ITreeLevel tree = BuildTree(input);;
+            ITreeNode tree = BuildTree(input);;
 
             Assert.AreEqual(1, tree.Expressions.Count());
         }
@@ -20,7 +20,7 @@ namespace LessCss.Tests
         public void AppendsSubNodesToCurrentLevel()
         {
             var input = ".a { background: black; }";
-            ITreeLevel tree = BuildTree(input);;
+            ITreeNode tree = BuildTree(input);;
 
             Assert.AreEqual(1, tree.Children.Count());
         }
@@ -30,7 +30,7 @@ namespace LessCss.Tests
         {
             var input = ".a { background: black; } .b {b:black;}";
 
-            ITreeLevel tree = BuildTree(input);;
+            ITreeNode tree = BuildTree(input);;
             Assert.AreEqual(2, tree.Children.Count());
         }
 
@@ -39,7 +39,7 @@ namespace LessCss.Tests
         {
             var input = "@y: @x + 1;@z: @x * 2 + @y;";
 
-            ITreeLevel tree = BuildTree(input);;
+            ITreeNode tree = BuildTree(input);;
             Assert.AreEqual(2, tree.Expressions.Count());
         }
 
@@ -47,7 +47,7 @@ namespace LessCss.Tests
         public void CanHandleNestedChildren()
         {
             var input = "#namespace { .borders { border-style: dotted; } }";
-            ITreeLevel tree = BuildTree(input);
+            ITreeNode tree = BuildTree(input);
 
             Assert.AreEqual(1, tree.Children.Count());
             Assert.AreEqual(1, tree.Children.First().Children.Count());
@@ -57,7 +57,7 @@ namespace LessCss.Tests
         public void CanHandleNestedChildExpressions()
         {
             var input = "#namespace { .borders { border-style: dotted; } }";
-            ITreeLevel tree = BuildTree(input);
+            ITreeNode tree = BuildTree(input);
 
             Assert.AreEqual(1, tree
                 .Children.First()
@@ -68,7 +68,7 @@ namespace LessCss.Tests
         public void RootNodeIsCalledROOT()
         {
             var input = "";
-            ITreeLevel tree = BuildTree(input);
+            ITreeNode tree = BuildTree(input);
 
             Assert.AreEqual("ROOT", tree.Descriptor);
         }
@@ -77,7 +77,7 @@ namespace LessCss.Tests
         public void NestedChildNodeDescriptorMatchesCSSDescriptor()
         {
             var input = ".a { .b { x:b; } }";
-            ITreeLevel tree = BuildTree(input);
+            ITreeNode tree = BuildTree(input);
 
             Assert.AreEqual(".b", tree
                 .Children.First()
@@ -88,7 +88,7 @@ namespace LessCss.Tests
         public void CanHandleBracesInStrings()
         {
             var input = ".a { background: \"{\"; }";
-            ITreeLevel tree = BuildTree(input);
+            ITreeNode tree = BuildTree(input);
 
             Assert.AreEqual("\"{\"", tree
                 .Children.First()
@@ -100,7 +100,7 @@ namespace LessCss.Tests
         public void CanHandleSingleQuoteStrings()
         {
             var input = "background: '{';";
-            ITreeLevel tree = BuildTree(input);
+            ITreeNode tree = BuildTree(input);
 
             Assert.AreEqual("'{'", tree.Expressions.First()
                 .Expression.Value);
@@ -110,12 +110,12 @@ namespace LessCss.Tests
         public void CanHandleComplexStrings()
         {
             var input = "content: \"#*%:&^,)!.(~*})\";";
-            ITreeLevel tree = BuildTree(input);
+            ITreeNode tree = BuildTree(input);
 
             Assert.AreEqual("\"#*%:&^,)!.(~*})\"", tree.Expressions.First().Expression.Value);
         }
 
-        private ITreeLevel BuildTree(string input)
+        private ITreeNode BuildTree(string input)
         {
             var tokenizer = new Tokenizer();
             return tokenizer.BuildTree(input);;

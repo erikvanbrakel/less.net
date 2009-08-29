@@ -20,9 +20,9 @@ namespace LessCss.Preprocessor
             set { descriptorBuilder = value; }
         }
 
-        public ITreeLevel BuildTree(string input)
+        public ITreeNode BuildTree(string input)
         {
-            ITreeLevel currentLevel = new TreeLevel("ROOT", null);
+            ITreeNode currentNode = new TreeNode("ROOT", null);
             char[] array = input.ToCharArray();
 
             IList<char> buffer = new List<char>();
@@ -42,17 +42,17 @@ namespace LessCss.Preprocessor
                     case '{':
                         string descriptor = DescriptorBuilder.BuildDescriptor(buffer.ToArray());
                             
-                        var childLevel = new TreeLevel(descriptor, currentLevel);
-                        currentLevel.AppendChild(childLevel);
+                        var childLevel = new TreeNode(descriptor, currentNode);
+                        currentNode.AppendChild(childLevel);
                         buffer = new List<char>();
-                        currentLevel = childLevel;
+                        currentNode = childLevel;
                         break;
                     case ';':
-                        currentLevel.AppendExpression(ExpressionBuilder.BuildExpression(buffer.ToArray()));
+                        currentNode.AppendExpression(ExpressionBuilder.BuildExpression(buffer.ToArray()));
                         buffer = new List<char>();
                         break;
                     case '}':
-                        currentLevel = currentLevel.Parent;
+                        currentNode = currentNode.Parent;
                         break;
                     case '"':
                         buffer.Add(c);
@@ -70,7 +70,7 @@ namespace LessCss.Preprocessor
                 }
             }
 
-            return currentLevel;
+            return currentNode;
         }
     }
 }
