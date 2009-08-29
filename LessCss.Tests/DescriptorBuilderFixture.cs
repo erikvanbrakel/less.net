@@ -10,10 +10,14 @@ namespace LessCss.Tests
         public void DescriptorBuilderTrimsWhiteSpaces()
         {
             var input = ".a ";
-            var builder = new DescriptorBuilder();
-            string descriptor = builder.BuildDescriptor(input.ToCharArray());
+            string descriptor = BuildDescription(input);
 
             Assert.AreEqual(".a", descriptor);
+        }
+
+        private string BuildDescription(string input)
+        {
+            return new DescriptorBuilder().BuildDescriptor(input.ToCharArray());
         }
     }
 }
