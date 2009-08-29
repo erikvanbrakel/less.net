@@ -111,57 +111,6 @@ namespace LessCss.Tests
         }
 
         [Test]
-        public void CanRemoveUnnecessaryWhitespacesWithinBraces()
-        {
-            string input = WhiteSpaceFilter.RemoveNewLines(
-@"#sidebar h1 ul li
-{
-height : 100px ;
-color: #fffff ;
-font-family: @fonts;
-}");
-            string desiredOutput = WhiteSpaceFilter.RemoveNewLines(
-@"#sidebar h1 ul li
-{
-height:100px;
-color:#fffff;
-font-family:@fonts;
-}");
-            Console.WriteLine(input);
-            var output = WhiteSpaceFilter.RemoveWhitespaces(input);
-            Console.WriteLine(output);
-            
-            Assert.AreEqual(desiredOutput, output);
-        }
-
-        [Test]
-        public void CanRemoveUnnecessaryWhitespacesFromVariableDeclarations()
-        {
-            string input = ".a = 3 ;";
-            string desiredOutput = ".a=3;";
-
-            var output = WhiteSpaceFilter.RemoveWhitespaces(input);
-            Console.WriteLine(output);
-            Assert.AreEqual(desiredOutput, output);
-        }
-
-        [Test]
-        public void CanRemoveUnnecessaryWhitespacesFromComplexVariables()
-        {
-            string input = WhiteSpaceFilter.RemoveNewLines(
-@".variables {
-height: @b + @x + 0px;
-color: @c;
-font-family: @fonts;
-}");
-            string desiredOutput = ".variables{height:@b+@x+0px;color:@c;font-family:@fonts;}";
-            Console.WriteLine(input);
-            var output = WhiteSpaceFilter.RemoveWhitespaces(input);
-            Console.WriteLine(output);
-            Assert.AreEqual(desiredOutput, output);
-        }
-
-        [Test]
         public void ExtendedTest()
         {
             string input =

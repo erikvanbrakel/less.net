@@ -19,7 +19,6 @@ namespace LessCss.Preprocessor
             input = WhiteSpaceFilter.RemoveLeadingAndTrailingWhiteSpace(input);
             input = WhiteSpaceFilter.RemoveNewLines(input);
             input = WhiteSpaceFilter.RemoveExtendedComments(input);
-            input = WhiteSpaceFilter.RemoveWhitespaces(input);
 
             return input;
         }
