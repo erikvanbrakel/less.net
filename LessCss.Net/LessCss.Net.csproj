@@ -53,8 +53,10 @@
     <Compile Include="Expression\DivisionExpression.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Helpers\PrettyPrintHelper.cs" />
+    <Compile Include="Preprocessor\ExpressionBuilder.cs" />
     <Compile Include="Preprocessor\IDescriptorBuilder.cs" />
     <Compile Include="Preprocessor\IExpression.cs" />
+    <Compile Include="Preprocessor\IExpressionBuilder.cs" />
     <Compile Include="Preprocessor\ITreeLevel.cs" />
     <Compile Include="lesscssLexer.cs" />
     <Compile Include="lesscssParser.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Loaders\IDocumentLoader.cs" />
     <Compile Include="Loaders\LessDocumentLoader.cs" />
     <Compile Include="Preprocessor\Processor.cs" />
+    <Compile Include="Preprocessor\StyleExpression.cs" />
     <Compile Include="Preprocessor\Tokenizer.cs" />
     <Compile Include="StyleDocument.cs" />
     <Compile Include="Expression\StyleExpression.cs" />

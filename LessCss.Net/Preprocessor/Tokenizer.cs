@@ -1,18 +1,23 @@
 namespace LessCss.Preprocessor
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
 
     public class Tokenizer
     {
         private IExpressionBuilder expressionBuilder = new ExpressionBuilder();
         private IDescriptorBuilder descriptorBuilder = new DescriptorBuilder();
+
         public IExpressionBuilder ExpressionBuilder
         {
             get { return expressionBuilder; }
             set { expressionBuilder = value; }
+        }
+
+        public IDescriptorBuilder DescriptorBuilder
+        {
+            get { return descriptorBuilder; }
+            set { descriptorBuilder = value; }
         }
 
         public ITreeLevel BuildTree(string input)
@@ -26,7 +31,7 @@ namespace LessCss.Preprocessor
                 switch (c)
                 {
                     case '{':
-                        string descriptor = descriptorBuilder.BuildDescriptor(buffer.ToArray());
+                        string descriptor = DescriptorBuilder.BuildDescriptor(buffer.ToArray());
                         
                         var childLevel = new TreeLevel(descriptor, currentLevel);
                         currentLevel.AppendChild(childLevel);
@@ -47,28 +52,6 @@ namespace LessCss.Preprocessor
             }
 
             return currentLevel;
-        }
-    }
-
-    public interface IExpressionBuilder
-    {
-        IExpression BuildExpression(char[] input);
-    }
-
-    public class ExpressionBuilder : IExpressionBuilder
-    {
-        public ExpressionBuilder()
-        {
-        }
-
-        public IExpression BuildExpression(char[] input)
-        {
-            StringBuilder builder = new StringBuilder();
-            builder.Append(input);
-            string s = builder.ToString();
-
-            string[] strings = s.Split(':');
-            return new StyleExpression(strings[0], strings[1]);
         }
     }
 }
