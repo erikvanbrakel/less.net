@@ -7,6 +7,7 @@ namespace LessCss.Preprocessor
     {
         IEnumerable<ITreeLevel> Children { get; }
         IEnumerable<IExpression> Expressions { get; }
+        ITreeLevel Parent { get; }
 
         void AppendExpression(IExpression expression);
         void AppendChild(ITreeLevel child);
@@ -15,9 +16,10 @@ namespace LessCss.Preprocessor
 
     public class TreeLevel : ITreeLevel
     {
-        public TreeLevel(string descriptor)
+        public TreeLevel(string descriptor, ITreeLevel parent)
         {
             Descriptor = descriptor;
+            Parent = parent;
         }
         private IList<IExpression> expressions = new List<IExpression>();
         private IList<ITreeLevel> children = new List<ITreeLevel>();
@@ -31,6 +33,8 @@ namespace LessCss.Preprocessor
         {
             get { return expressions; }
         }
+
+        public ITreeLevel Parent { get; private set; }
 
         public string Descriptor { get; private set; }
 

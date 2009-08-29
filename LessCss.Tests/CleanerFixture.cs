@@ -3,6 +3,7 @@ namespace LessCss.Tests
     using System;
     using System.IO;
     using NUnit.Framework;
+    using Preprocessor;
 
     [TestFixture]
     public class CleanerFixture
@@ -184,7 +185,7 @@ font-family: @fonts;
 }";
             string desiredOutput =
                 @"@a:2;@x:@a*@a;@y:@x+1;@z:@x*2+@y;.variables{width:@z+1cm;}@b:@a*10;@c:#888;@fonts:""Trebuchet MS"", Verdana, sans-serif;.variables{height:@b+@x+0px;color:@c;font-family:@fonts;}";
-            var preprocessor = new Preprocessor(input);
+            var preprocessor = new Processor(input);
             char[] output = preprocessor.Output;
             Console.WriteLine(output);
 

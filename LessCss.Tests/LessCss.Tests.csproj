@@ -60,6 +60,7 @@
     <Compile Include="StyleNumberTest.Mul.cs" />
     <Compile Include="StyleNumberTest.Add.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TokenizerFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LessCss.Net\LessCss.Net.csproj">
