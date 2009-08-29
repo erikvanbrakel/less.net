@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="CleanerFixture.cs" />
     <Compile Include="DescriptorBuilderFixture.cs" />
+    <Compile Include="ExpressionBuilderFixture.cs" />
     <Compile Include="StyleNumberTest.cs" />
     <Compile Include="StyleNumberTest.Div.cs" />
     <Compile Include="StyleNumberTest.Sub.cs" />

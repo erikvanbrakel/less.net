@@ -7,11 +7,23 @@ namespace LessCss.Preprocessor
         public IExpression BuildExpression(char[] input)
         {
             var builder = new StringBuilder();
-            builder.Append(input);
-            var expressionText = builder.ToString();
+            bool completedDescriptor = false;
+            string descriptor = null;
+            foreach (char c in input)
+            {
+                if (!completedDescriptor && c == ':')
+                {
+                    completedDescriptor = true;
+                    descriptor = builder.ToString();
+                    builder = new StringBuilder();
+                    continue;
+                }
+                builder.Append(c);
+            }
+            
+            var value = builder.ToString();
 
-            string[] sub = expressionText.Split(':');
-            return new StyleExpression(sub[0].Trim(), sub[1].Trim());
+            return new StyleExpression(descriptor.Trim(), value.Trim());
         }
     }
 }
