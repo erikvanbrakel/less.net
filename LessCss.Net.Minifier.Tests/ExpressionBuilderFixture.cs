@@ -67,6 +67,15 @@ namespace LessCss.Tests
             Assert.AreEqual("'a b'+3;", expression.Expression.Value);
         }
 
+        [Test]
+        public void CanHandleValuesWithSpaces()
+        {
+            var input = "outline: 1px solid red;";
+            var expression = BuildExpression(input);
+
+            Assert.AreEqual("1px solid red;", expression.Expression.Value);
+        }
+
         private IExpression BuildExpression(string input)
         {
             return new ExpressionBuilder().BuildExpression(input.ToCharArray());

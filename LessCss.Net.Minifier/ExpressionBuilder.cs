@@ -27,8 +27,9 @@ namespace LessCss.Net.Minifier
             string descriptor = null;
             bool escaped = false;
             char escapeChar = '0';
-            foreach (char c in input)
+            for (int index = 0; index < input.Length; index++)
             {
+                char c = input[index];
                 if (!completedDescriptor && c == ':')
                 {
                     completedDescriptor = true;
@@ -43,19 +44,54 @@ namespace LessCss.Net.Minifier
                 }
                 else
                 {
-                    if (c == '\'' || c == '"')
+                    switch(c)
                     {
-                        escaped = true;
-                        escapeChar = c;
+                        case '\'':
+                        case '"':
+                            escaped = true;
+                            escapeChar = c;
+                            break;
+                        case ' ':
+                            if (IsFollowedByOperator(index, input)) continue;
+                            if (IsPrecededByOperator(index, input)) continue;
+                            break;
                     }
-                    if (c != ' ')
-                        builder.Append(c);
+                    builder.Append(c);
                 }
             }
             
-            var value = builder.ToString();
+            var value = builder.ToString().Trim();
 
             return new StyleExpression(descriptor.Trim(), value.Trim());
+        }
+
+        private bool IsFollowedByOperator(int startIndex, char[] characters)
+        {
+            for (int index = startIndex; index < characters.Length; index++ )
+            {
+                char c = characters[index];
+                if (c == ' ') continue;
+                
+                return IsOperator(c);
+            }
+            return false;
+        }
+
+        private bool IsOperator(char c)
+        {
+            return (c == '-' || c == '+' || c == '*' || c == '/' || c == ',');
+        }
+
+        private bool IsPrecededByOperator(int startIndex, char[] characters)
+        {
+            for (int index = startIndex; index > 0; index--)
+            {
+                char c = characters[index];
+                if (c == ' ') continue;
+
+                return IsOperator(c);
+            }
+            return false;
         }
     }
 }

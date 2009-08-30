@@ -157,5 +157,22 @@ namespace LessCss.Tests
 
             Assert.AreEqual(desiredOutput, output);
         }
+
+        [Test]
+        public void CanHandleDescriptorAndOpeningBraceInDifferentLines()
+        {
+            string input = @"#a
+{
+outline: 1px solid red;
+}";
+            string desiredOutput = "#a{outline:1px solid red;}";
+            var processor = new Processor(input);
+            char[] output = processor.Output;
+
+            Console.WriteLine(desiredOutput);
+            Console.WriteLine(output);
+
+            Assert.AreEqual(desiredOutput, output);
+        }
     }
 }
