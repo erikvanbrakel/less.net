@@ -11,28 +11,6 @@ namespace LessCss.Expression
 			return "";
 		}
 
-		public static StyleExpression ParseExpression(ITree node)
-		{
-			var text = node.Text;
-			switch (text)
-			{
-				case "+":
-					return new AddExpression(ParseExpression(node.GetChild(0)), ParseExpression(node.GetChild(1)));
-				case "*":
-					return new MultiplyExpression(ParseExpression(node.GetChild(0)), ParseExpression(node.GetChild(1)));
-				case "/":
-					return new DivisionExpression(ParseExpression(node.GetChild(0)), ParseExpression(node.GetChild(1)));
-				case "-":
-					return new SubtractExpression(ParseExpression(node.GetChild(0)), ParseExpression(node.GetChild(1)));
-				case "CONSTANT":
-					return new ConstantExpression(node);
-				case "VAR":
-					return new VarExpression(node.GetChild(0).Text);
-				default:
-					return new ConstantExpression();
-			}
-		}
-
 		public virtual StyleExpression Reduce(List<StyleVariable> variables)
 		{
 			return this;

@@ -115,7 +115,7 @@ namespace LessCss.Loaders
 				var node = child.GetChild(i);
 				if (node.Text == "EXPR")
 				{
-					property.Values.Add(StyleExpression.ParseExpression(node.GetChild(0)));
+					property.Values.Add(ParseExpression(node.GetChild(0)));
 				}
 				else
 				{
@@ -124,6 +124,28 @@ namespace LessCss.Loaders
 			}
 
 			return property;
+		}
+
+		private StyleExpression ParseExpression(ITree tree)
+		{
+			var text = tree.Text;
+			switch (text)
+			{
+				case "+":
+					return new AddExpression(ParseExpression(tree.GetChild(0)), ParseExpression(tree.GetChild(1)));
+				case "*":
+					return new MultiplyExpression(ParseExpression(tree.GetChild(0)), ParseExpression(tree.GetChild(1)));
+				case "/":
+					return new DivisionExpression(ParseExpression(tree.GetChild(0)), ParseExpression(tree.GetChild(1)));
+				case "-":
+					return new SubtractExpression(ParseExpression(tree.GetChild(0)), ParseExpression(tree.GetChild(1)));
+				case "CONSTANT":
+					return new ConstantExpression(tree);
+				case "VAR":
+					return new VarExpression(tree.GetChild(0).Text);
+				default:
+					return new ConstantExpression();
+			}
 		}
 	}
 }
