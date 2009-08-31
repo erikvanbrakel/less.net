@@ -53,7 +53,7 @@ namespace LessCss.Loaders
 					variable.Value = new LiteralExpression(tree.GetChild(1));
 					break;
 				default:
-					variable.Value = StyleExpression.ParseExpression(tree.GetChild(1).GetChild(0));
+					variable.Value = ParseExpression(tree.GetChild(1).GetChild(0));
 					break;
 			}
 			return variable;
