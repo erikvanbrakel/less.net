@@ -20,7 +20,7 @@ using LessCss.Expression;
 
 namespace LessCss
 {
-	public class StyleProperty
+    public class StyleProperty
 	{
 		public string Name = string.Empty;
 		public List<StyleExpression> Values = new List<StyleExpression>();

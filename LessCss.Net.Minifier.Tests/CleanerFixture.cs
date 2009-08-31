@@ -1,14 +1,31 @@
+/*
+ * Copyright 2009 Less.Net
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *  
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 namespace LessCss.Tests
 {
     using System;
     using System.IO;
+    using Net.Minifier;
     using NUnit.Framework;
 
     [TestFixture]
     public class CleanerFixture
     {
         public const string css =
-@"#sidebar h1 ul li
+            @"#sidebar h1 ul li
 {
   height : 100px ; // 24px
   color: #fffff ;
@@ -42,7 +59,7 @@ namespace LessCss.Tests
         public void CanTrimEndOfLineComment()
         {
             string desiredOutput = WhiteSpaceFilter.ConvertToUnix(
-@"#sidebar h1 ul li
+                @"#sidebar h1 ul li
 {
   height : 100px ; 
   color: #fffff ;
@@ -60,14 +77,14 @@ namespace LessCss.Tests
         public void CanRemoveExtendedComment()
         {
             string input =
-@"#sidebar h1 ul li
+                @"#sidebar h1 ul li
 {
   /*height : 100px ; 
   color: #fffff ;*/
   font-family: @fonts;
 }";
             string desiredOutput = 
-@"#sidebar h1 ul li
+                @"#sidebar h1 ul li
 {
   
   font-family: @fonts;
@@ -110,57 +127,6 @@ namespace LessCss.Tests
         }
 
         [Test]
-        public void CanRemoveUnnecessaryWhitespacesWithinBraces()
-        {
-            string input = WhiteSpaceFilter.RemoveNewLines(
-@"#sidebar h1 ul li
-{
-height : 100px ;
-color: #fffff ;
-font-family: @fonts;
-}");
-            string desiredOutput = WhiteSpaceFilter.RemoveNewLines(
-@"#sidebar h1 ul li
-{
-height:100px;
-color:#fffff;
-font-family:@fonts;
-}");
-            Console.WriteLine(input);
-            var output = WhiteSpaceFilter.RemoveWhitespaces(input);
-            Console.WriteLine(output);
-            
-            Assert.AreEqual(desiredOutput, output);
-        }
-
-        [Test]
-        public void CanRemoveUnnecessaryWhitespacesFromVariableDeclarations()
-        {
-            string input = ".a = 3 ;";
-            string desiredOutput = ".a=3;";
-
-            var output = WhiteSpaceFilter.RemoveWhitespaces(input);
-            Console.WriteLine(output);
-            Assert.AreEqual(desiredOutput, output);
-        }
-
-        [Test]
-        public void CanRemoveUnnecessaryWhitespacesFromComplexVariables()
-        {
-            string input = WhiteSpaceFilter.RemoveNewLines(
-@".variables {
-height: @b + @x + 0px;
-color: @c;
-font-family: @fonts;
-}");
-            string desiredOutput = ".variables{height:@b+@x+0px;color:@c;font-family:@fonts;}";
-            Console.WriteLine(input);
-            var output = WhiteSpaceFilter.RemoveWhitespaces(input);
-            Console.WriteLine(output);
-            Assert.AreEqual(desiredOutput, output);
-        }
-
-        [Test]
         public void ExtendedTest()
         {
             string input =
@@ -183,9 +149,27 @@ font-family: @fonts;
   font-family: @fonts;
 }";
             string desiredOutput =
-                @"@a:2;@x:@a*@a;@y:@x+1;@z:@x*2+@y;.variables{width:@z+1cm;}@b:@a*10;@c:#888;@fonts:""Trebuchet MS"", Verdana, sans-serif;.variables{height:@b+@x+0px;color:@c;font-family:@fonts;}";
-            var preprocessor = new Preprocessor(input);
+                @".variables{width:@z+1cm;}.variables{height:@b+@x+0px;color:@c;font-family:@fonts;}@a:2;@x:@a*@a;@y:@x+1;@z:@x*2+@y;@b:@a*10;@c:#888;@fonts:""Trebuchet MS"",Verdana,sans-serif;";
+            var preprocessor = new Processor(input);
             char[] output = preprocessor.Output;
+            Console.WriteLine(desiredOutput);
+            Console.WriteLine(output);
+
+            Assert.AreEqual(desiredOutput, output);
+        }
+
+        [Test]
+        public void CanHandleDescriptorAndOpeningBraceInDifferentLines()
+        {
+            string input = @"#a
+{
+outline: 1px solid red;
+}";
+            string desiredOutput = "#a{outline:1px solid red;}";
+            var processor = new Processor(input);
+            char[] output = processor.Output;
+
+            Console.WriteLine(desiredOutput);
             Console.WriteLine(output);
 
             Assert.AreEqual(desiredOutput, output);

@@ -5,15 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5A7B0F49-D30C-451F-A368-95C56FE73C63}</ProjectGuid>
+    <ProjectGuid>{7D3ED10D-B8B9-4A11-BADF-9E40753767A1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LessCss</RootNamespace>
-    <AssemblyName>LessCss.Net</AssemblyName>
+    <RootNamespace>LessCss.Net.Minifier</RootNamespace>
+    <AssemblyName>LessCss.Net.Minifier</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>
-    </StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,41 +31,34 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime, Version=3.1.3.42154, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\Antlr3.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Expression\AddExpression.cs" />
-    <Compile Include="Expression\CompoundStyleExpression.cs" />
-    <Compile Include="Expression\ConstantExpression.cs" />
-    <Compile Include="Expression\DivisionExpression.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="Helpers\PrettyPrintHelper.cs" />
-    <Compile Include="lesscssLexer.cs" />
-    <Compile Include="lesscssParser.cs" />
-    <Compile Include="Expression\MultiplyExpression.cs" />
-    <Compile Include="Loaders\IDocumentLoader.cs" />
-    <Compile Include="Loaders\LessDocumentLoader.cs" />
-    <Compile Include="StyleDocument.cs" />
-    <Compile Include="Expression\StyleExpression.cs" />
-    <Compile Include="StyleProperty.cs" />
-    <Compile Include="StyleRule.cs" />
-    <Compile Include="StyleSelector.cs" />
-    <Compile Include="StyleValue.cs" />
-    <Compile Include="StyleVariable.cs" />
+    <Compile Include="CleanedStream.cs" />
+    <Compile Include="ExpressionBuilder.cs" />
+    <Compile Include="IDescriptorBuilder.cs" />
+    <Compile Include="IExpression.cs" />
+    <Compile Include="IExpressionBuilder.cs" />
+    <Compile Include="ITokenizer.cs" />
+    <Compile Include="ITreeCompiler.cs" />
+    <Compile Include="ITreeNode.cs" />
+    <Compile Include="Processor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Expression\SubtractExpression.cs" />
-    <Compile Include="Expression\VarExpression.cs" />
-    <Compile Include="Web\LessCssHttpHandler.cs" />
+    <Compile Include="StyleExpression.cs" />
+    <Compile Include="Tokenizer.cs" />
+    <Compile Include="TreeCompiler.cs" />
+    <Compile Include="TreeNode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
