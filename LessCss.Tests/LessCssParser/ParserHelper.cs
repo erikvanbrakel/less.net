@@ -6,10 +6,10 @@ namespace LessCss.Tests.LessCssParser
 {
 	internal static class ParserHelper
 	{
-		public static ITree GetTree(this string input, Func<lesscssParser, ParserRuleReturnScope> func)
+		public static string GetStringTree(this string input, Func<lesscssParser, ParserRuleReturnScope> func)
 		{
 			var parser = CreateParser(input);
-			return func(parser).Tree as ITree;
+			return ((ITree) func(parser).Tree).ToStringTree();
 		}
 
 		private static lesscssParser CreateParser(string input)

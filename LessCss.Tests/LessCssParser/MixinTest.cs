@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace LessCss.Tests.LessCssParser
 {
@@ -12,9 +8,7 @@ namespace LessCss.Tests.LessCssParser
 		[Test]
 		public void Parser_SimpleMixin_CorrectAST()
 		{
-			var result = "a;"
-				.GetTree(p => p.mixin())
-				.ToStringTree();
+			var result = "a;".GetStringTree(p => p.mixin());
 
 			result.Should().Be.EqualTo("MIXIN (SELECTOR (TAG a))");
 		}

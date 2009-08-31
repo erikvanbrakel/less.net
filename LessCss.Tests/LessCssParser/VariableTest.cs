@@ -8,9 +8,7 @@ namespace LessCss.Tests.LessCssParser
 		[Test]
 		public void Parser_Variable_CorrectAST()
 		{
-			var result = "@varname:11"
-				.GetTree(p => p.variable())
-				.ToStringTree();
+			var result = "@varname:11".GetStringTree(p => p.variable());
 
 			result.Should().Be.EqualTo("(VAR varname (EXPR (CONSTANT 11)))");
 		}

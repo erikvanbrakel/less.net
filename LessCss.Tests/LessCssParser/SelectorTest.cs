@@ -8,9 +8,7 @@ namespace LessCss.Tests.LessCssParser
 		[Test]
 		public void Parser_SimpleSelector_CorrectAST()
 		{
-			var result = "body"
-				.GetTree(p => p.selectors())
-				.ToStringTree();
+			var result = "body".GetStringTree(p => p.selectors());
 
 			result.Should().Be.EqualTo("(SELECTOR (TAG body))");
 		}
@@ -18,9 +16,7 @@ namespace LessCss.Tests.LessCssParser
 		[Test]
 		public void Parser_CompoundSelectorGroups_CorrectAST()
 		{
-			var result = "body .a #id, .class #id span"
-				.GetTree(p => p.selectors())
-				.ToStringTree();
+			var result = "body .a #id, .class #id span".GetStringTree(p => p.selectors());
 
 			result.Should().Be.EqualTo("(SELECTOR (TAG body) (CLASS a) (ID id)) (SELECTOR (CLASS class) (ID id) (TAG span))");
 		}
@@ -28,9 +24,7 @@ namespace LessCss.Tests.LessCssParser
 		[Test]
 		public void Parser_CompoundSelector_CorrectAST()
 		{
-			var result = "body .a #id"
-				.GetTree(p => p.selectors())
-				.ToStringTree();
+			var result = "body .a #id".GetStringTree(p => p.selectors());
 
 			result.Should().Be.EqualTo("(SELECTOR (TAG body) (CLASS a) (ID id))");
 		}
